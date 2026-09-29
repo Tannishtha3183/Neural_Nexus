@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>BioSpan AI</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-primary": "#f0a878", "on-background": "#3a302a", "outline-variant": "#d8d0c8", "secondary-fixed": "#eae2da", "primary": "#c2652a", "on-tertiary-fixed": "#2e1515", "on-secondary-container": "#605850", "inverse-surface": "#3a302a", "outline": "#9a9088", "tertiary-fixed-dim": "#e8a0a0", "on-surface": "#3a302a", "on-tertiary-container": "#3a2020", "surface-bright": "#faf5ee", "on-secondary-fixed-variant": "#504840", "on-surface-variant": "#605850", "on-primary-fixed": "#401a08", "primary-fixed-dim": "#f0a878", "error": "#c0392b", "on-primary": "#ffffff", "primary-fixed": "#fbe8d8", "on-secondary-fixed": "#2a2420", "surface-container-lowest": "#ffffff", "surface-container-highest": "#e6e0d6", "tertiary": "#8c3c3c", "on-primary-fixed-variant": "#8a4518", "surface-tint": "#c2652a", "on-primary-container": "#fbe8d8", "on-error": "#ffffff", "tertiary-container": "#d47070", "on-tertiary-fixed-variant": "#6e3030", "on-error-container": "#7a1a10", "on-secondary": "#ffffff", "background": "#faf5ee", "surface-container": "#f2ece4", "primary-container": "#e08850", "surface-container-high": "#ece6dc", "error-container": "#fce4e0", "surface-dim": "#dcd6cc", "secondary": "#78706a", "tertiary-fixed": "#fce0e0", "surface-variant": "#ece6dc", "surface-container-low": "#f6f0e8", "secondary-fixed-dim": "#cec6be", "surface": "#faf5ee", "inverse-on-surface": "#faf5ee", "on-tertiary": "#ffffff", "secondary-container": "#eae2da" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": {}, "fontFamily": { "headline": [ "EB Garamond" ], "display": [ "EB Garamond" ], "body": [ "Manrope" ], "label": [ "Manrope" ] }, "fontSize": {} } } }</script></head><body class="bg-surface font-body text-on-surface min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[22px]">spa</span></div><div class="flex flex-col"><span class="font-headline text-2xl font-bold tracking-tight text-on-surface leading-none">BioSpan AI</span><span class="text-[11px] font-label text-on-surface-variant tracking-wide font-medium mt-1">Clear &amp; Kind Health Guide</span></div></div><nav class="hidden md:flex items-center gap-1.5" data-active-classes="bg-surface-container font-semibold text-primary rounded-lg"><a aria-current="page" class="px-4 py-2 transition-all bg-surface-container font-semibold text-primary rounded-lg" data-path="check-text" href="#">Check Text</a><a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all" data-path="medical-dictionary" href="#">Medical Dictionary</a><a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all" data-path="saved-results" href="#">Saved Results</a><a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all" data-path="help-and-guide" href="#">Help &amp; Guide</a></nav><div class="flex items-center gap-3.5"><div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-xs font-label text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span>Ready to assist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 flex-grow bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow -->
+<div class="relative w-full max-w-7xl mx-auto px-6 lg:px-12 py-10 lg:py-16">
+<div class="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-tr from-primary/10 via-primary-fixed/40 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<!-- Intro Header Block -->
+<section class="max-w-4xl mx-auto text-center mb-12 lg:mb-16">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high text-xs font-semibold uppercase tracking-wider text-primary mb-6 shadow-sm">
+<span class="material-symbols-outlined text-sm">magic_button</span>
+<span>Everyday Health Language • Plain English</span>
+</div>
+<h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-on-surface leading-[1.15] mb-6">
+        Find medical terms &amp; conditions in seconds.
+      </h1>
+<p class="text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed max-w-2xl mx-auto">
+        Paste any doctor’s note, medical report, or patient summary. BioSpan highlights illnesses, symptoms, and health conditions in plain English, with instant everyday explanations.
+      </p>
+<!-- 3 Friendly Pill Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 text-left">
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface">Instant Detection</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal">Spot ailments, tests, and organ markers as soon as you paste.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface">Plain English Explanations</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal">Zero confusing medical shorthand. Clear words anyone can trust.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface">100% Private &amp; Secure</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal">Your notes stay completely private. We never share patient details.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Interactive Workspace -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+<!-- Left Column: Your Medical Note -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4 pb-3">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-headline text-2xl font-semibold text-on-surface">Your Medical Note</h2>
+</div>
+<button class="text-xs font-semibold text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-fixed/50 hover:bg-primary-fixed" id="btn-sample-fill">
+<span class="material-symbols-outlined text-sm">refresh</span>
+              Try a sample note
+            </button>
+</div>
+<label class="text-xs font-medium text-on-surface-variant block mb-2" for="medical-note-input">
+            Type or paste your text here (discharge note, consult summary, or lab report):
+          </label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-low/60 rounded-2xl p-4 text-sm sm:text-base leading-relaxed text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-inner transition-all resize-none" id="medical-note-input" placeholder="Paste any clinic visit summary, radiology note, or discharge papers here..." rows="7">The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed non-small cell lung cancer with mild secondary pulmonary hypertension. No history of acute myocardial infarction (heart attack).</textarea>
+</div>
+<!-- Quick Samples selector -->
+<div class="mt-4 pt-4 flex flex-wrap items-center gap-2">
+<span class="text-xs text-on-surface-variant font-medium">Quick examples:</span>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="lung">
+              Sample 1: Lung condition
+            </button>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="diabetes">
+              Sample 2: Diabetes check
+            </button>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="heart">
+              Sample 3: Heart health
+            </button>
+</div>
+</div>
+<div class="mt-8 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-sm text-outline">description</span>
+<span id="word-counter">38 words • 1 paragraph</span>
+</div>
+<button class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-semibold text-sm shadow-md hover:opacity-95 active:scale-98 transition-all" id="check-btn">
+<span class="material-symbols-outlined text-lg">auto_fix_high</span>
+<span>Check Medical Text</span>
+</button>
+</div>
+</div>
+<!-- Right Column: What BioSpan Found -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-4 pb-3">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<h2 class="font-headline text-2xl font-semibold text-on-surface">What BioSpan Found</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-sm">label_important</span>
+<span id="findings-count">3 Conditions Identified</span>
+</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Click on any highlighted term to view its plain explanation:</p>
+<!-- Highlighted Note Interactive Container -->
+<div class="bg-surface-container-low/60 rounded-2xl p-5 text-sm sm:text-base leading-relaxed text-on-surface mb-6">
+          The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed 
+          
+          <!-- Highlight 1: Lung Cancer -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-medium shadow-xs hover:bg-primary-container transition-all cursor-pointer text-left" data-term="cancer" type="button">
+<span class="underline decoration-primary decoration-1 underline-offset-2 font-semibold">non-small cell lung cancer</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary">Condition</span>
+</button>
+
+          with mild secondary 
+
+          <!-- Highlight 2: Pulmonary Hypertension -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container text-on-secondary-container font-medium shadow-xs hover:bg-surface-container-high transition-all cursor-pointer text-left" data-term="hypertension" type="button">
+<span class="underline decoration-secondary decoration-1 underline-offset-2 font-semibold">pulmonary hypertension</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-secondary">High pressure in lungs</span>
+</button>.
+
+          No history of 
+
+          <!-- Highlight 3: Myocardial Infarction -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-medium shadow-xs hover:bg-surface-dim transition-all cursor-pointer text-left" data-term="heartattack" type="button">
+<span class="line-through decoration-outline text-on-surface-variant font-semibold">acute myocardial infarction</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-outline">Heart attack (ruled out)</span>
+</button>.
+        </div>
+<!-- Selected Item Detail Card -->
+<div class="bg-surface-container-low rounded-2xl p-5 sm:p-6 transition-all duration-200" id="term-detail-card">
+<div class="flex items-start justify-between gap-4 mb-2">
+<div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-primary" id="detail-tag">Active Clinical Finding</span>
+<h3 class="font-headline text-2xl font-semibold text-on-surface mt-0.5" id="detail-title">Non-small cell lung cancer</h3>
+</div>
+<span class="px-2.5 py-1 rounded-md bg-surface-container-lowest text-xs font-mono font-medium text-on-surface-variant shadow-xs" id="detail-code">
+              ICD-10: C34.9
+            </span>
+</div>
+<div class="mt-3">
+<p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Plain English meaning:</p>
+<p class="text-sm text-on-surface leading-relaxed" id="detail-desc">
+              A common type of lung cancer that starts in the tissue cells of the lungs. Most common in older adults and often presents with persistent coughing or breathlessness.
+            </p>
+</div>
+<div class="mt-5 pt-4 flex flex-wrap items-center gap-2.5">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all" id="btn-save-note">
+<span class="material-symbols-outlined text-base text-primary">bookmark</span>
+<span>Save to notes</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all">
+<span class="material-symbols-outlined text-base text-secondary">menu_book</span>
+<span>Look up in dictionary</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all" id="btn-copy-term">
+<span class="material-symbols-outlined text-base text-secondary">content_copy</span>
+<span>Copy text</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Plain English Results Summary Card -->
+<section class="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm mb-16">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Overview For Patient &amp; Doctor</span>
+<h2 class="font-headline text-2xl sm:text-3xl font-semibold text-on-surface mt-1">Plain English Summary</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-2 transition-all" id="btn-copy-all">
+<span class="material-symbols-outlined text-base">copy_all</span>
+<span>Copy findings to clipboard</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-semibold flex items-center gap-2 shadow hover:opacity-95 transition-all" id="btn-download-pdf">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Download summary (PDF)</span>
+</button>
+</div>
+</div>
+<!-- Plain Table / Structured Findings -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+<th class="py-3 px-4 rounded-l-xl">Mention in Note</th>
+<th class="py-3 px-4">What It Means in Everyday Words</th>
+<th class="py-3 px-4">Status</th>
+<th class="py-3 px-4 rounded-r-xl">Help Tips &amp; Next Steps</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Non-small cell lung cancer</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                Cancer that begins in the outer parts of the lungs; requires oncology evaluation for treatment options.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-xs">priority_high</span> Active condition
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                Schedule follow-up scan; review with thoracic specialist.
+              </td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Pulmonary hypertension</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                Higher blood pressure in the arteries that travel from heart to lungs, causing shortness of breath.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">
+<span class="material-symbols-outlined text-xs">info</span> Secondary condition
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                Check oxygen saturation levels and review echocardiogram with cardiologist.
+              </td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="line-through decoration-outline text-outline">Acute myocardial infarction</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                A sudden heart attack caused by a blocked artery supplying heart muscle.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-xs">check_circle</span> Ruled out
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                No immediate cardiac intervention indicated based on this note.
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Visual Story / Warm Care Highlight -->
+<section class="mb-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-surface-container-low rounded-3xl p-6 sm:p-10">
+<div class="md:col-span-7 space-y-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-sm">favorite</span> Designed for empathy
+        </span>
+<h3 class="font-headline text-2xl sm:text-3xl font-semibold text-on-surface">
+          Making health decisions less scary for patients &amp; families.
+        </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+          BioSpan was crafted to take the anxiety out of confusing hospital papers. By pairing ICD diagnostic data with straightforward definitions, healthcare workers spend less time translating and more time caring.
+        </p>
+<div class="flex items-center gap-6 pt-2">
+<div>
+<div class="font-headline text-2xl font-bold text-primary">99.4%</div>
+<div class="text-xs text-on-surface-variant">Accuracy on clinical tests</div>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div>
+<div class="font-headline text-2xl font-bold text-primary">0 jargon</div>
+<div class="text-xs text-on-surface-variant">Reading level tuned for all</div>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div>
+<div class="font-headline text-2xl font-bold text-primary">&lt; 1 sec</div>
+<div class="text-xs text-on-surface-variant">Instant processing speed</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 relative">
+<div class="w-full h-56 sm:h-64 rounded-2xl overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="Warm and inviting doctor consultation room bathed in gentle natural morning sunlight, showing an approachable female physician holding a tablet and smiling warmly at a relaxed mature patient. Earthy terracotta and soft linen tones, editorial aesthetic with clean minimalist feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj5WHOtx_rzCNjDrubMiSHB8_I0bQIA3jZO1U4R8RufaRPGg6lC-rh_kF7tAw_eSOEPI7u6KWDNJzu5ATAhxchgNxu7WsNlKePY1CBDINVlsZ4BYLH5WclbtFO6yU-cPQhuOGDmwBAOl01lORP8gvsEZwF3j8_JOrciNbQt0gsaa42ujE1YPMEpL8auYPrdyv28S74MFL4tk5IKOXqsrkPxWpr-7Ash7BCrBvzXZXKVg8eOWWHW7_5nQ"/>
+</div>
+</div>
+</section>
+<!-- Simple "How it works" Section -->
+<section class="mb-12">
+<div class="text-center max-w-xl mx-auto mb-10">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Simple 3-Step Flow</span>
+<h2 class="font-headline text-3xl font-semibold text-on-surface mt-1">How it works</h2>
+<p class="text-xs text-on-surface-variant mt-2">No complicated setup. Designed so any student, nurse, or doctor can use it instantly.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary font-headline text-xl font-bold flex items-center justify-center mb-4">
+              1
+            </div>
+<h3 class="font-headline text-xl font-semibold text-on-surface mb-2">Paste your note</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Copy directly from any electronic health record, consult note, research paper, or discharge summary.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-xs font-medium text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">content_paste</span>
+<span>Handles any text length</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary font-headline text-xl font-bold flex items-center justify-center mb-4">
+              2
+            </div>
+<h3 class="font-headline text-xl font-semibold text-on-surface mb-2">Automatic highlighting</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Our clinical language model spots illnesses, symptoms, and procedures, separating active conditions from ruled-out terms.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-xs font-medium text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">filter_center_focus</span>
+<span>Context-aware scanning</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary font-headline text-xl font-bold flex items-center justify-center mb-4">
+              3
+            </div>
+<h3 class="font-headline text-xl font-semibold text-on-surface mb-2">Get plain translations</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Read friendly definitions, view standard ICD codes, and export a clear bulleted brief for patient communication.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-xs font-medium text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Ready for consultations</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  (function () {
+    const noteInput = document.getElementById('medical-note-input');
+    const wordCounter = document.getElementById('word-counter');
+    const checkBtn = document.getElementById('check-btn');
+    const sampleFillBtn = document.getElementById('btn-sample-fill');
+    const presetBtns = document.querySelectorAll('.sample-preset-btn');
+    const termTags = document.querySelectorAll('.term-tag');
+
+    const detailTitle = document.getElementById('detail-title');
+    const detailDesc = document.getElementById('detail-desc');
+    const detailCode = document.getElementById('detail-code');
+    const detailTag = document.getElementById('detail-tag');
+    const btnCopyTerm = document.getElementById('btn-copy-term');
+    const btnSaveNote = document.getElementById('btn-save-note');
+    const btnCopyAll = document.getElementById('btn-copy-all');
+    const btnDownloadPdf = document.getElementById('btn-download-pdf');
+
+    const sampleTexts = {
+      lung: "The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed non-small cell lung cancer with mild secondary pulmonary hypertension. No history of acute myocardial infarction (heart attack).",
+      diabetes: "Follow-up for 58yo with type 2 diabetes mellitus and peripheral neuropathy. Serum creatinine within baseline. Diabetic ketoacidosis is ruled out today.",
+      heart: "Patient admitted for sudden angina pectoris and palpitations. ECG shows sinus tachycardia. Prior history of coronary artery disease, with no recent acute myocardial infarction."
+    };
+
+    const termDefinitions = {
+      cancer: {
+        title: "Non-small cell lung cancer",
+        tag: "Active Clinical Finding",
+        desc: "A common type of lung cancer that starts in the tissue cells of the lungs. Most common in older adults and often presents with persistent coughing or breathlessness.",
+        code: "ICD-10: C34.9"
+      },
+      hypertension: {
+        title: "Pulmonary hypertension",
+        tag: "Secondary Clinical Finding",
+        desc: "High blood pressure that affects the arteries in the lungs and the right side of the heart. Can make breathing feel heavy or labored during simple movements.",
+        code: "ICD-10: I27.20"
+      },
+      heartattack: {
+        title: "Acute myocardial infarction",
+        tag: "Ruled Out / Negative Mention",
+        desc: "Commonly known as a heart attack. Occurs when blood flow decreases or stops to a part of the heart muscle. In this note, the doctor specifically noted this did NOT occur.",
+        code: "ICD-10: I21.9 (Ruled Out)"
+      }
+    };
+
+    function updateWordCount() {
+      if (!noteInput || !wordCounter) return;
+      const text = noteInput.value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      const paragraphs = text ? text.split(/\n+/).filter(Boolean).length : 0;
+      wordCounter.textContent = words + " words • " + (paragraphs || 1) + " paragraph" + (paragraphs > 1 ? "s" : "");
+    }
+
+    if (noteInput) {
+      noteInput.addEventListener('input', updateWordCount);
+      updateWordCount();
+    }
+
+    if (sampleFillBtn) {
+      sampleFillBtn.addEventListener('click', function () {
+        noteInput.value = sampleTexts.lung;
+        updateWordCount();
+      });
+    }
+
+    presetBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const key = this.getAttribute('data-sample');
+        if (sampleTexts[key]) {
+          noteInput.value = sampleTexts[key];
+          updateWordCount();
+        }
+      });
+    });
+
+    termTags.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const termKey = this.getAttribute('data-term');
+        const data = termDefinitions[termKey];
+        if (!data) return;
+
+        detailTitle.textContent = data.title;
+        detailTag.textContent = data.tag;
+        detailDesc.textContent = data.desc;
+        detailCode.textContent = data.code;
+
+        // Visual flash indication
+        const card = document.getElementById('term-detail-card');
+        if (card) {
+          card.classList.add('ring-2', 'ring-primary');
+          setTimeout(function () {
+            card.classList.remove('ring-2', 'ring-primary');
+          }, 350);
+        }
+      });
+    });
+
+    if (checkBtn) {
+      checkBtn.addEventListener('click', function () {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">sync</span><span>Analyzing Note...</span>';
+        this.disabled = true;
+
+        setTimeout(() => {
+          this.innerHTML = '<span class="material-symbols-outlined text-lg">check</span><span>Analyzed (3 Terms)</span>';
+          this.disabled = false;
+          setTimeout(() => {
+            this.innerHTML = originalText;
+          }, 2000);
+        }, 600);
+      });
+    }
+
+    if (btnCopyTerm) {
+      btnCopyTerm.addEventListener('click', function () {
+        const text = detailTitle.textContent + ": " + detailDesc.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          const original = btnCopyTerm.innerHTML;
+          btnCopyTerm.innerHTML = '<span class="material-symbols-outlined text-base text-primary">done</span><span>Copied!</span>';
+          setTimeout(function () { btnCopyTerm.innerHTML = original; }, 1500);
+        });
+      });
+    }
+
+    if (btnSaveNote) {
+      btnSaveNote.addEventListener('click', function () {
+        const original = btnSaveNote.innerHTML;
+        btnSaveNote.innerHTML = '<span class="material-symbols-outlined text-base text-primary">bookmark_added</span><span>Saved</span>';
+        setTimeout(function () { btnSaveNote.innerHTML = original; }, 1500);
+      });
+    }
+
+    if (btnCopyAll) {
+      btnCopyAll.addEventListener('click', function () {
+        const summary = "BioSpan Findings:\n1. Non-small cell lung cancer (Active) - ICD-10 C34.9\n2. Pulmonary hypertension (Secondary) - ICD-10 I27.20\n3. Acute myocardial infarction (Ruled Out)";
+        navigator.clipboard.writeText(summary).then(function () {
+          const original = btnCopyAll.innerHTML;
+          btnCopyAll.innerHTML = '<span class="material-symbols-outlined text-base">done</span><span>Copied All!</span>';
+          setTimeout(function () { btnCopyAll.innerHTML = original; }, 1500);
+        });
+      });
+    }
+
+    if (btnDownloadPdf) {
+      btnDownloadPdf.addEventListener('click', function () {
+        const original = btnDownloadPdf.innerHTML;
+        btnDownloadPdf.innerHTML = '<span class="material-symbols-outlined text-base">hourglass_top</span><span>Preparing PDF...</span>';
+        setTimeout(function () {
+          btnDownloadPdf.innerHTML = '<span class="material-symbols-outlined text-base">download_done</span><span>Summary Downloaded</span>';
+          setTimeout(function () { btnDownloadPdf.innerHTML = original; }, 2000);
+        }, 900);
+      });
+    }
+
+  })();
+</script></main><footer class="w-full bg-surface-container-low py-12 mt-16 shadow-[0_-1px_6px_rgba(58,48,42,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex items-center gap-3"><span class="font-headline text-xl font-semibold text-on-surface">BioSpan AI</span><span class="text-xs text-on-surface-variant font-label">• Making health information approachable &amp; clear</span></div><div class="flex items-center gap-8 text-xs font-label text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="privacy-notice" href="#">Privacy &amp; Safety</a><a class="hover:text-primary transition-colors" data-path="help-and-guide" href="#">Patient Guide</a><a class="hover:text-primary transition-colors" data-path="medical-disclaimer" href="#">Medical Disclaimer</a></div></div></footer></body></html>

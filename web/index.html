@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>BioSpan AI</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-primary": "#f0a878", "on-background": "#3a302a", "outline-variant": "#d8d0c8", "secondary-fixed": "#eae2da", "primary": "#c2652a", "on-tertiary-fixed": "#2e1515", "on-secondary-container": "#605850", "inverse-surface": "#3a302a", "outline": "#9a9088", "tertiary-fixed-dim": "#e8a0a0", "on-surface": "#3a302a", "on-tertiary-container": "#3a2020", "surface-bright": "#faf5ee", "on-secondary-fixed-variant": "#504840", "on-surface-variant": "#605850", "on-primary-fixed": "#401a08", "primary-fixed-dim": "#f0a878", "error": "#c0392b", "on-primary": "#ffffff", "primary-fixed": "#fbe8d8", "on-secondary-fixed": "#2a2420", "surface-container-lowest": "#ffffff", "surface-container-highest": "#e6e0d6", "tertiary": "#8c3c3c", "on-primary-fixed-variant": "#8a4518", "surface-tint": "#c2652a", "on-primary-container": "#fbe8d8", "on-error": "#ffffff", "tertiary-container": "#d47070", "on-tertiary-fixed-variant": "#6e3030", "on-error-container": "#7a1a10", "on-secondary": "#ffffff", "background": "#faf5ee", "surface-container": "#f2ece4", "primary-container": "#e08850", "surface-container-high": "#ece6dc", "error-container": "#fce4e0", "surface-dim": "#dcd6cc", "secondary": "#78706a", "tertiary-fixed": "#fce0e0", "surface-variant": "#ece6dc", "surface-container-low": "#f6f0e8", "secondary-fixed-dim": "#cec6be", "surface": "#faf5ee", "inverse-on-surface": "#faf5ee", "on-tertiary": "#ffffff", "secondary-container": "#eae2da" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": {}, "fontFamily": { "headline": [ "EB Garamond" ], "display": [ "EB Garamond" ], "body": [ "Manrope" ], "label": [ "Manrope" ] }, "fontSize": {} } } }</script></head><body class="bg-surface font-body text-on-surface min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[22px]">spa</span></div><div class="flex flex-col"><span class="font-headline text-2xl font-bold tracking-tight text-on-surface leading-none">BioSpan AI</span><span class="text-[11px] font-label text-on-surface-variant tracking-wide font-medium mt-1">Clear &amp; Kind Health Guide</span></div></div><nav class="hidden md:flex items-center gap-1.5" data-active-classes="bg-surface-container font-semibold text-primary rounded-lg">
+  <a aria-current="page" class="nav-link px-4 py-2 transition-all bg-surface-container font-semibold text-primary rounded-lg text-sm" data-path="check-text" href="#check-text" data-i18n="nav_check_text">Check Text</a>
+  <a class="nav-link px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all" data-path="medical-dictionary" href="#medical-dictionary" data-i18n="nav_medical_dictionary">Medical Dictionary</a>
+  <a class="nav-link px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all flex items-center gap-1" data-path="saved-results" href="#saved-results">
+    <span data-i18n="nav_saved_results">Saved Results</span>
+    <span id="nav-saved-count" class="ml-1 px-1.5 py-0.5 rounded-full bg-primary-fixed text-primary text-[10px] font-bold">3</span>
+  </a>
+  <a class="nav-link px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-all" data-path="help-and-guide" href="#help-and-guide" data-i18n="nav_help_guide">Help &amp; Guide</a>
+</nav><div class="flex items-center gap-3.5 relative"><div class="relative"><button id="btn-language-selector" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-xs font-label text-on-surface-variant transition-all cursor-pointer border border-outline-variant/30 shadow-2xs" title="Select Indian Language / भाषा चुनें"><span class="material-symbols-outlined text-[16px] text-primary">translate</span><span id="current-lang-label" class="font-semibold text-on-surface">English</span><span class="material-symbols-outlined text-[14px] text-outline">expand_more</span></button><div id="language-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-surface-container-lowest rounded-2xl shadow-[0_12px_40px_rgba(58,48,42,0.14)] border border-outline-variant/40 p-2 z-50 max-h-80 overflow-y-auto"><div class="px-3 py-1.5 text-[10px] uppercase font-bold tracking-wider text-outline border-b border-outline-variant/20 mb-1">Select Language • भाषा</div><div class="space-y-0.5" id="language-options"></div></div></div><button id="btn-system-telemetry" type="button" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-xs font-label text-on-surface-variant transition-all cursor-pointer border border-outline-variant/30 shadow-2xs" title="View Real-Time BioBERT Model Telemetry &amp; System Health"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span data-i18n="status_ready">Ready to assist</span><span class="material-symbols-outlined text-[15px] text-outline">tune</span></button><div class="relative"><button id="btn-clinician-menu" type="button" class="w-8 h-8 rounded-full bg-primary hover:bg-primary-container flex items-center justify-center shadow-sm cursor-pointer transition-all focus:ring-2 focus:ring-primary/40" title="Clinician Profile &amp; Workspace Actions"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></button><div id="clinician-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-surface-container-lowest rounded-2xl shadow-[0_12px_40px_rgba(58,48,42,0.12)] border border-outline-variant/40 p-3 z-50 transition-all"><div class="p-3 bg-surface-container-low rounded-xl mb-2 flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs">MD</div><div class="flex flex-col"><span class="text-xs font-bold text-on-surface">Dr. Physician, MD</span><span class="text-[10px] text-on-surface-variant">Internal Medicine &amp; Oncology</span><span class="text-[10px] text-primary font-semibold">Station #402 &bull; Active EHR</span></div></div><div class="space-y-1">
+  <button id="menu-btn-new-note" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-primary">edit_document</span>
+    <span data-i18n="menu_new_note">New Patient Consult Note</span>
+  </button>
+  <button id="menu-btn-load-oncology" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-secondary">science</span>
+    <span data-i18n="menu_load_onco">Load Oncology Case</span>
+  </button>
+  <button id="menu-btn-load-neuro" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-secondary">psychology</span>
+    <span data-i18n="menu_load_neuro">Load Neurology Case</span>
+  </button>
+  <button id="menu-btn-print" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-secondary">print</span>
+    <span data-i18n="menu_print">Print Clinical Brief (PDF)</span>
+  </button>
+  <button id="menu-btn-dictionary" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-secondary">menu_book</span>
+    <span data-i18n="menu_dict">Browse ICD-10 Dictionary</span>
+  </button>
+  <button id="menu-btn-telemetry" type="button" class="w-full px-3 py-2 text-left rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-2.5 transition-all">
+    <span class="material-symbols-outlined text-base text-primary">speed</span>
+    <span data-i18n="menu_telemetry">Neural Engine Diagnostics</span>
+  </button>
+</div></div></div></div></div></header><main class="w-full pt-20 flex-grow bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow -->
+<div class="relative w-full max-w-7xl mx-auto px-6 lg:px-12 py-10 lg:py-16">
+<div class="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-tr from-primary/10 via-primary-fixed/40 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<!-- Intro Header Block -->
+<section class="max-w-4xl mx-auto text-center mb-12 lg:mb-16">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high text-xs font-semibold uppercase tracking-wider text-primary mb-6 shadow-sm">
+<span class="material-symbols-outlined text-sm">magic_button</span>
+<span data-i18n="hero_badge">Everyday Health Language • Plain English</span>
+</div>
+<h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-on-surface leading-[1.15] mb-6" data-i18n="hero_title">
+        Find medical terms &amp; conditions in seconds.
+      </h1>
+<p class="text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed max-w-2xl mx-auto" data-i18n="hero_desc">
+        Paste any doctor’s note, medical report, or patient summary. BioSpan highlights illnesses, symptoms, and health conditions in plain English, with instant everyday explanations.
+      </p>
+<!-- 3 Friendly Pill Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 text-left">
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface" data-i18n="card_detection_title">Instant Detection</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal" data-i18n="card_detection_desc">Spot ailments, tests, and organ markers as soon as you paste.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface" data-i18n="card_plain_title">Plain English Explanations</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal" data-i18n="card_plain_desc">Zero confusing medical shorthand. Clear words anyone can trust.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur rounded-2xl p-5 shadow-sm hover:shadow transition-all flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface" data-i18n="card_privacy_title">100% Private &amp; Secure</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-normal" data-i18n="card_privacy_desc">Your notes stay completely private. We never share patient details.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Interactive Workspace -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16" id="check-text-section">
+<!-- Left Column: Your Medical Note -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4 pb-3 flex-wrap gap-2">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-headline text-2xl font-semibold text-on-surface" data-i18n="heading_medical_note">Your Medical Note</h2>
+</div>
+<div class="flex items-center gap-2">
+<label for="report-file-input" class="text-xs font-semibold text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer shadow-2xs border border-outline-variant/30" title="Upload clinical report in PDF or Word (.pdf, .docx, .doc, .txt)">
+<span class="material-symbols-outlined text-sm text-primary">upload_file</span>
+<span data-i18n="btn_upload_report">Upload PDF / Word</span>
+<input type="file" id="report-file-input" accept=".pdf,.docx,.doc,.txt" class="hidden">
+</label>
+<button class="text-xs font-semibold text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-fixed/50 hover:bg-primary-fixed cursor-pointer" id="btn-sample-fill">
+<span class="material-symbols-outlined text-sm">refresh</span>
+<span data-i18n="btn_sample_note">Try a sample note</span>
+</button>
+</div>
+</div>
+<label class="text-xs font-medium text-on-surface-variant block mb-2" for="medical-note-input" data-i18n="input_label">
+            Type or paste your text here (discharge note, consult summary, or lab report):
+          </label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-low/60 rounded-2xl p-4 text-sm sm:text-base leading-relaxed text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-inner transition-all resize-none" id="medical-note-input" placeholder="Paste any clinic visit summary, radiology note, or discharge papers here, or drop a PDF/Word file..." rows="7" data-i18n-placeholder="input_placeholder">The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed non-small cell lung cancer with mild secondary pulmonary hypertension. No history of acute myocardial infarction (heart attack).</textarea>
+<div id="file-upload-indicator" class="hidden mt-2 p-2.5 rounded-xl bg-primary-fixed/40 border border-primary/20 text-xs text-on-surface flex items-center justify-between">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary text-base">description</span>
+    <span id="file-upload-name" class="font-semibold text-on-surface">report.pdf</span>
+    <span id="file-upload-size" class="text-on-surface-variant text-[11px]">(24 KB)</span>
+  </div>
+  <span id="file-upload-status" class="text-[11px] font-semibold text-primary">Extracted &amp; Analyzed</span>
+</div>
+</div>
+<!-- Quick Samples selector -->
+<div class="mt-4 pt-4 flex flex-wrap items-center gap-2">
+<span class="text-xs text-on-surface-variant font-medium" data-i18n="sample_prefix">Quick examples:</span>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="lung" data-i18n="sample_lung">
+              Sample 1: Lung condition
+            </button>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="diabetes" data-i18n="sample_diabetes">
+              Sample 2: Diabetes check
+            </button>
+<button class="sample-preset-btn px-3 py-1 text-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95" data-sample="heart" data-i18n="sample_heart">
+              Sample 3: Heart health
+            </button>
+</div>
+</div>
+<div class="mt-8 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-sm text-outline">description</span>
+<span id="word-counter">34 words • 1 paragraph</span>
+</div>
+<button class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-semibold text-sm shadow-md hover:opacity-95 active:scale-98 transition-all cursor-pointer" id="check-btn">
+<span class="material-symbols-outlined text-lg">auto_fix_high</span>
+<span data-i18n="btn_check_text">Check Medical Text</span>
+</button>
+</div>
+</div>
+<!-- Right Column: What BioSpan Found -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-4 pb-3 border-b border-outline-variant/20 flex-wrap gap-2">
+  <div class="flex items-center gap-2">
+    <span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+    <h2 class="font-headline text-2xl font-semibold text-on-surface" data-i18n="heading_findings">What BioSpan Found</h2>
+    <!-- DROPDOWN ARROW FOR WHAT BIOSPAN FOUND -->
+    <button id="btn-toggle-findings-collapse" type="button" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-all cursor-pointer" title="Expand / Collapse findings panel" aria-label="Toggle findings panel">
+      <span class="material-symbols-outlined text-xl transition-transform duration-300" id="findings-collapse-arrow">expand_more</span>
+    </button>
+  </div>
+  <div class="flex items-center gap-2">
+    <!-- JUMP TO FINDING DROPDOWN SELECTOR WITH ARROW -->
+    <div class="relative inline-block" id="findings-dropdown-container">
+      <button id="btn-findings-dropdown-select" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-xs font-semibold text-on-surface border border-outline-variant/40 shadow-2xs transition-all cursor-pointer" title="Browse detected conditions">
+        <span class="material-symbols-outlined text-[15px] text-primary">bookmark</span>
+        <span id="findings-dropdown-active-label" data-i18n="findings_select_label">Jump to Finding</span>
+        <span class="material-symbols-outlined text-[15px] text-outline transition-transform duration-200" id="findings-quick-select-arrow">arrow_drop_down</span>
+      </button>
+      <div id="findings-dropdown-menu" class="hidden absolute right-0 mt-1.5 w-64 bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 p-2 z-30 max-h-60 overflow-y-auto space-y-1">
+        <!-- populated dynamically with each detected condition -->
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed-variant">
+      <span class="material-symbols-outlined text-sm">label_important</span>
+      <span id="findings-count">3 Conditions Identified</span>
+    </span>
+  </div>
+</div>
+<!-- Collapsible Body controlled by dropdown arrow -->
+<div id="findings-collapsible-body" class="transition-all duration-300">
+<p class="text-xs text-on-surface-variant mb-3 mt-1" data-i18n="findings_help">Click on any highlighted term to view its plain explanation:</p>
+<!-- Highlighted Note Interactive Container -->
+<div class="bg-surface-container-low/60 rounded-2xl p-5 text-sm sm:text-base leading-relaxed text-on-surface mb-6" id="highlighted-note-box">
+          The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed 
+          
+          <!-- Highlight 1: Lung Cancer -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-medium shadow-xs hover:bg-primary-container transition-all cursor-pointer text-left" data-term="cancer" type="button">
+<span class="underline decoration-primary decoration-1 underline-offset-2 font-semibold">non-small cell lung cancer</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary">Condition</span>
+</button>
+
+          with mild secondary 
+
+          <!-- Highlight 2: Pulmonary Hypertension -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container text-on-secondary-container font-medium shadow-xs hover:bg-surface-container-high transition-all cursor-pointer text-left" data-term="hypertension" type="button">
+<span class="underline decoration-secondary decoration-1 underline-offset-2 font-semibold">pulmonary hypertension</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-secondary">High pressure in lungs</span>
+</button>.
+
+          No history of 
+
+          <!-- Highlight 3: Myocardial Infarction -->
+<button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-medium shadow-xs hover:bg-surface-dim transition-all cursor-pointer text-left" data-term="heartattack" type="button">
+<span class="line-through decoration-outline text-on-surface-variant font-semibold">acute myocardial infarction</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-outline">Heart attack (ruled out)</span>
+</button>.
+        </div>
+<!-- Selected Item Detail Card -->
+<div class="bg-surface-container-low rounded-2xl p-5 sm:p-6 transition-all duration-200" id="term-detail-card">
+<div class="flex items-start justify-between gap-4 mb-2">
+<div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-primary" id="detail-tag">Active Clinical Finding</span>
+<h3 class="font-headline text-2xl font-semibold text-on-surface mt-0.5" id="detail-title">Non-small cell lung cancer</h3>
+</div>
+<span class="px-2.5 py-1 rounded-md bg-surface-container-lowest text-xs font-mono font-medium text-on-surface-variant shadow-xs" id="detail-code">
+              ICD-10: C34.9
+            </span>
+</div>
+<div class="mt-3">
+<p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1" data-i18n="label_plain_meaning">Plain English meaning:</p>
+<p class="text-sm text-on-surface leading-relaxed" id="detail-desc">
+              A common type of lung cancer that starts in the tissue cells of the lungs. Most common in older adults and often presents with persistent coughing or breathlessness.
+            </p>
+</div>
+<div class="mt-5 pt-4 flex flex-wrap items-center gap-2.5">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all cursor-pointer" id="btn-save-note">
+<span class="material-symbols-outlined text-base text-primary">bookmark</span>
+<span data-i18n="btn_save_note">Save to notes</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all cursor-pointer" id="btn-open-dictionary">
+<span class="material-symbols-outlined text-base text-secondary">menu_book</span>
+<span data-i18n="btn_look_up_dictionary">Look up in dictionary</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-xs font-semibold text-on-surface flex items-center gap-1.5 shadow-sm transition-all cursor-pointer" id="btn-copy-term">
+<span class="material-symbols-outlined text-base text-secondary">content_copy</span>
+<span data-i18n="btn_copy_text">Copy text</span>
+</button>
+</div>
+</div>
+</div><!-- /findings-collapsible-body -->
+</div><!-- /right column -->
+</section>
+<!-- Plain English Results Summary Card -->
+<section class="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm mb-16">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<span class="text-xs font-bold uppercase tracking-wider text-primary" data-i18n="label_summary_overview">Overview For Patient &amp; Doctor</span>
+<h2 class="font-headline text-2xl sm:text-3xl font-semibold text-on-surface mt-1" data-i18n="summary_heading">Plain English Summary</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer" id="btn-copy-all">
+<span class="material-symbols-outlined text-base">copy_all</span>
+<span data-i18n="btn_copy_findings">Copy findings to clipboard</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-semibold flex items-center gap-2 shadow hover:opacity-95 transition-all cursor-pointer" id="btn-download-pdf">
+<span class="material-symbols-outlined text-base">download</span>
+<span data-i18n="btn_download_pdf">Download summary (PDF)</span>
+</button>
+</div>
+</div>
+<!-- Plain Table / Structured Findings -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+<th class="py-3 px-4 rounded-l-xl" data-i18n="th_mention">Mention in Note</th>
+<th class="py-3 px-4" data-i18n="th_meaning">What It Means in Everyday Words</th>
+<th class="py-3 px-4" data-i18n="th_status">Status</th>
+<th class="py-3 px-4 rounded-r-xl" data-i18n="th_next_steps">Help Tips &amp; Next Steps</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface" id="findings-table-body">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Non-small cell lung cancer</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                Cancer that begins in the outer parts of the lungs; requires oncology evaluation for treatment options.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-xs">priority_high</span> Active condition
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                Schedule follow-up scan; review with thoracic specialist.
+              </td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Pulmonary hypertension</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                Higher blood pressure in the arteries that travel from heart to lungs, causing shortness of breath.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">
+<span class="material-symbols-outlined text-xs">info</span> Secondary condition
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                Check oxygen saturation levels and review echocardiogram with cardiologist.
+              </td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-4 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="line-through decoration-outline text-outline">Acute myocardial infarction</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                A sudden heart attack caused by a blocked artery supplying heart muscle.
+              </td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-xs">check_circle</span> Ruled out
+                </span>
+</td>
+<td class="py-4 px-4 text-xs text-on-surface-variant">
+                No immediate cardiac intervention indicated based on this note.
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- DYNAMIC CLINICAL RECOMMENDATIONS & NEXT STEPS SECTION   -->
+<!-- (Generated in real time on the basis of active context) -->
+<!-- ======================================================== -->
+<section id="clinical-recommendations-section" class="mb-16 bg-surface-container-low rounded-3xl p-6 sm:p-10 shadow-sm border border-outline-variant/30">
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-outline-variant/30">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary-fixed text-on-primary-fixed-variant mb-2">
+        <span class="material-symbols-outlined text-sm">psychology_alt</span>
+        <span data-i18n="rec_badge">Clinical Suggestions &amp; Next Steps</span>
+      </div>
+      <h2 class="font-headline text-2xl sm:text-3xl font-semibold text-on-surface" data-i18n="rec_title">
+        Contextual Recommendations &amp; Care Guidance
+      </h2>
+      <p class="text-xs sm:text-sm text-on-surface-variant max-w-2xl mt-1 leading-relaxed" data-i18n="rec_desc">
+        Dynamic clinical advice, prioritized diagnostic steps, and precautions generated automatically on the basis of the patient's note.
+      </p>
+    </div>
+    
+    <!-- Action controls: Audio Reader & Copy Plan -->
+    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+      <button id="btn-speak-recommendations" type="button" class="px-4 py-2.5 rounded-xl bg-primary text-on-primary text-xs font-semibold hover:opacity-95 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs">
+        <span class="material-symbols-outlined text-base">volume_up</span>
+        <span id="btn-speak-rec-label" data-i18n="btn_listen_recommendations">Listen to Recommendations</span>
+      </button>
+      <button id="btn-copy-recommendations" type="button" class="px-4 py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer border border-outline-variant/30">
+        <span class="material-symbols-outlined text-base text-primary">content_copy</span>
+        <span id="btn-copy-rec-label" data-i18n="btn_copy_recommendations">Copy Action Plan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Dynamic context banner indicating what triggered the recommendations -->
+  <div class="mt-4 py-2.5 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex flex-wrap items-center justify-between gap-2 text-xs">
+    <div class="flex items-center gap-2 text-on-surface">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span class="font-semibold" data-i18n="rec_trigger_label">Current Report Context:</span>
+      <span id="rec-context-summary" class="font-mono text-primary font-medium">Non-small cell lung cancer • Pulmonary hypertension</span>
+    </div>
+    <span class="text-[11px] text-on-surface-variant" id="rec-timestamp">Updated dynamically for this report</span>
+  </div>
+
+  <!-- 4 Actionable Recommendation Category Cards (Populated Dynamically) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6" id="recommendation-cards-container">
+    <!-- Populated dynamically by updateClinicalRecommendations() based on detected entities & text -->
+  </div>
+
+  <!-- Clinical Safety & Caution Note -->
+  <div class="mt-6 p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+    <div class="flex items-center gap-2 text-primary font-bold">
+      <span class="material-symbols-outlined text-lg">medical_information</span>
+      <span data-i18n="rec_disclaimer_title">Physician Advisory</span>
+    </div>
+    <div class="text-[11px] text-on-surface-variant" data-i18n="rec_disclaimer_body">
+      BioSpan suggestions are assistive clinical heuristics derived from ICD-10 ontologies and guidelines. Always correlate with clinical judgement and patient vitals.
+    </div>
+  </div>
+</section>
+
+<!-- Modal Container for Medical Dictionary & Guides -->
+<div id="dictionary-modal" class="fixed inset-0 z-50 bg-[#3a302a]/30 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-200">
+  <div id="modal-box" class="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-[0_16px_50px_rgba(58,48,42,0.14)] border border-outline-variant/40 flex flex-col">
+    <div class="flex items-center justify-between pb-4 border-b border-outline-variant/30 mb-3 shrink-0">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-primary" id="modal-indicator"></span>
+        <div>
+          <h3 class="font-headline text-2xl font-semibold text-on-surface" id="modal-title" data-i18n="modal_dict_title">Clinical Medical Dictionary</h3>
+          <p class="text-xs text-on-surface-variant" id="modal-subtitle" data-i18n="modal_dict_subtitle">Browse ICD-10 standardized diagnostic codes and insert into active clinical note.</p>
+        </div>
+      </div>
+      <button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors cursor-pointer" onclick="closeModal()" title="Close dialog">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    <div class="mb-3 shrink-0" id="modal-search-wrapper">
+      <input type="text" id="modal-search" class="w-full bg-surface-container-low/70 rounded-xl px-4 py-2.5 text-sm text-on-surface border border-outline-variant/40 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline" placeholder="Search conditions, ICD-10 codes, or synonyms..." data-i18n-placeholder="modal_dict_search_ph">
+      <div id="modal-category-filters" class="flex flex-wrap items-center gap-1.5 mt-2.5">
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-all cursor-pointer" data-category="all" data-i18n="cat_all">All Specialties</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="malignant" data-i18n="cat_onco">Oncology</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="circulatory" data-i18n="cat_cardio">Cardiology</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="respiratory" data-i18n="cat_pulmo">Pulmonology</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="nervous" data-i18n="cat_neuro">Neurology</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="endocrine" data-i18n="cat_endo">Endocrine</button>
+        <button class="cat-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all cursor-pointer" data-category="symptoms" data-i18n="cat_symptoms">Symptoms &amp; Signs</button>
+      </div>
+    </div>
+    <div id="modal-content" class="space-y-3 flex-grow overflow-y-auto pr-1">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<script>
+  (function () {
+    // ==========================================
+    // MULTILINGUAL (13 INDIAN LANGUAGES) SYSTEM
+    // ==========================================
+    const INDIAN_LANGUAGES = [{"code": "en", "name": "English", "native": "English", "voice_lang": "en-IN"}, {"code": "hi", "name": "Hindi", "native": "हिन्दी", "voice_lang": "hi-IN"}, {"code": "bn", "name": "Bengali", "native": "বাংলা", "voice_lang": "bn-IN"}, {"code": "te", "name": "Telugu", "native": "తెలుగు", "voice_lang": "te-IN"}, {"code": "ta", "name": "Tamil", "native": "தமிழ்", "voice_lang": "ta-IN"}, {"code": "mr", "name": "Marathi", "native": "मराठी", "voice_lang": "mr-IN"}, {"code": "gu", "name": "Gujarati", "native": "ગુજરાતી", "voice_lang": "gu-IN"}, {"code": "kn", "name": "Kannada", "native": "ಕನ್ನಡ", "voice_lang": "kn-IN"}, {"code": "ml", "name": "Malayalam", "native": "മലയാളം", "voice_lang": "ml-IN"}, {"code": "pa", "name": "Punjabi", "native": "ਪੰਜਾਬੀ", "voice_lang": "pa-IN"}, {"code": "or", "name": "Odia", "native": "ଓଡ଼ିଆ", "voice_lang": "or-IN"}, {"code": "as", "name": "Assamese", "native": "অসমীয়া", "voice_lang": "as-IN"}, {"code": "ur", "name": "Urdu", "native": "اردو", "voice_lang": "ur-IN"}];
+    const I18N = {"en": {"hero_badge": "Everyday Health Language • Plain English", "hero_title": "Find medical terms & conditions in seconds.", "hero_desc": "Paste any doctor's note, medical report, or patient summary. BioSpan highlights illnesses, symptoms, and health conditions in plain English, with instant everyday explanations.", "card_detection_title": "Instant Detection", "card_detection_desc": "Spot ailments, tests, and organ markers as soon as you paste.", "card_plain_title": "Plain English Explanations", "card_plain_desc": "Zero confusing medical shorthand. Clear words anyone can trust.", "card_privacy_title": "100% Private & Secure", "card_privacy_desc": "Your notes stay completely private. We never share patient details.", "heading_medical_note": "Your Medical Note", "btn_upload_report": "Upload PDF / Word", "btn_sample_note": "Try a sample note", "input_label": "Type or paste your text here (discharge note, consult summary, or lab report):", "input_placeholder": "Paste any clinic visit summary, radiology note, or discharge papers here, or drop a PDF/Word file...", "sample_prefix": "Quick examples:", "sample_lung": "Sample 1: Lung condition", "sample_diabetes": "Sample 2: Diabetes check", "sample_heart": "Sample 3: Heart health", "btn_check_text": "Check Medical Text", "heading_findings": "What BioSpan Found", "findings_help": "Click on any highlighted term to view its plain explanation:", "label_plain_meaning": "Plain English meaning:", "btn_save_note": "Save to notes", "btn_look_up_dictionary": "Look up in dictionary", "btn_copy_text": "Copy text", "label_summary_overview": "Overview For Patient & Doctor", "summary_heading": "Plain English Summary", "btn_copy_findings": "Copy findings to clipboard", "btn_download_pdf": "Download summary (PDF)", "th_mention": "Mention in Note", "th_meaning": "What It Means in Everyday Words", "th_status": "Status", "th_next_steps": "Help Tips & Next Steps", "status_ready": "Ready to assist", "conditions_identified": "Conditions Identified", "condition_identified": "Condition Identified", "status_active": "Active condition", "status_ruled_out": "Ruled out", "status_secondary": "Secondary condition", "detail_tag_active": "Active Clinical Finding", "detail_tag_secondary": "Secondary Clinical Finding", "detail_tag_ruled_out": "Ruled Out / Negative Mention", "tip_active": "Schedule clinical follow-up; review with attending physician.", "tip_ruled_out": "Condition ruled out in clinical history; no immediate intervention indicated.", "tip_secondary": "Monitor clinical signs; review relevant diagnostic labs with specialist.", "file_extracting": "Extracting & analyzing...", "file_success": "Extracted & Analyzed", "file_error": "Upload or extraction failed", "copy_success": "Copied to clipboard!", "analyzing_btn": "Analyzing with BioBERT...", "btn_analyzed": "Analyzed", "terms": "Terms", "term": "Term", "nav_check_text": "Check Text", "nav_medical_dictionary": "Medical Dictionary", "nav_saved_results": "Saved Results", "nav_help_guide": "Help & Guide", "menu_new_note": "New Patient Consult Note", "menu_load_onco": "Load Oncology Case", "menu_load_neuro": "Load Neurology Case", "menu_print": "Print Clinical Brief (PDF)", "menu_dict": "Browse ICD-10 Dictionary", "menu_telemetry": "Neural Engine Diagnostics", "modal_dict_title": "Clinical Medical Dictionary", "modal_dict_subtitle": "Browse ICD-10 standardized diagnostic codes and insert into active clinical note.", "modal_dict_search_ph": "Search conditions, ICD-10 codes, or synonyms...", "cat_all": "All Specialties", "cat_onco": "Oncology", "cat_cardio": "Cardiology", "cat_pulmo": "Pulmonology", "cat_neuro": "Neurology", "cat_endo": "Endocrine", "cat_symptoms": "Symptoms & Signs", "btn_insert_note": "Insert into note", "btn_copy_code": "Copy Code", "btn_listen_explanation": "Listen to Patient Explanation", "btn_listen_sub": "Reads out findings in chosen language using speech synthesizer", "btn_stop_speech": "Stop Audio", "footer_brand_sub": "Making health information approachable & clear", "footer_privacy": "Privacy & Safety", "footer_patient_guide": "Patient Guide", "footer_disclaimer": "Medical Disclaimer", "modal_saved_title": "Saved Patient Consultations & EHR Spans", "modal_saved_subtitle": "Manage previously analyzed patient encounters and instantly reload them into the workspace.", "label_stored_encounters": "Stored encounters", "btn_clear_all_notes": "Clear all notes", "btn_load_case": "Load Case", "modal_help_title": "BioSpan AI Clinical Architecture & User Guide", "modal_help_subtitle": "How our BioBERT neural model, First-Subword Alignment, and Deterministic BIO-Sanitizer work together.", "modal_telemetry_title": "BioBERT Neural Engine Diagnostics & Telemetry", "modal_telemetry_subtitle": "Live system inspection showing model weights, hardware device, tokenizer vocabulary, and memory utilization.", "rec_badge": "Clinical Suggestions & Next Steps", "rec_title": "Contextual Recommendations & Care Guidance", "rec_desc": "Dynamic clinical advice, prioritized diagnostic steps, and precautions generated automatically on the basis of the patient's note.", "rec_trigger_label": "Current Report Context:", "btn_listen_recommendations": "Listen to Recommendations", "btn_copy_recommendations": "Copy Action Plan", "rec_card_immediate": "Immediate Actions (What To Do Now)", "rec_card_diagnostic": "Recommended Investigations (What Can Be Done Next)", "rec_card_medication": "Care Management & Safety Precautions", "rec_card_monitoring": "Patient Follow-up & Red Flags", "rec_disclaimer_title": "Physician Advisory", "rec_disclaimer_body": "BioSpan suggestions are assistive clinical heuristics derived from ICD-10 ontologies and guidelines. Always correlate with clinical judgement and patient vitals.", "findings_select_label": "Jump to Finding", "findings_toggle_title": "Expand / Collapse findings panel", "all_findings": "All Identified Findings", "no_findings": "No conditions identified"}, "hi": {"hero_badge": "रोजमर्रा की स्वास्थ्य भाषा • सरल भाषा", "hero_title": "सेकंडों में चिकित्सीय शब्द और स्थितियां खोजें।", "hero_desc": "किसी भी डॉक्टर का पर्चा, मेडिकल रिपोर्ट या डिस्चार्ज समरी पेस्ट या अपलोड करें। BioSpan बीमारियों और लक्षणों को पहचानकर सरल भाषा में समझाता है।", "card_detection_title": "तत्काल पहचान", "card_detection_desc": "पेस्ट करते ही बीमारियों, परीक्षणों और अंगों के मार्कर को तुरंत पहचानें।", "card_plain_title": "सरल भाषा में व्याख्या", "card_plain_desc": "कठिन मेडिकल शब्दों के बिना, स्पष्ट और समझने योग्य व्याख्या।", "card_privacy_title": "100% निजी और सुरक्षित", "card_privacy_desc": "आपकी रिपोर्ट पूरी तरह गोपनीय रहती है। डेटा कभी साझा नहीं किया जाता।", "heading_medical_note": "आपकी मेडिकल रिपोर्ट / नोट", "btn_upload_report": "PDF / Word फ़ाइल अपलोड करें", "btn_sample_note": "नमूना नोट आज़माएं", "input_label": "अपना मेडिकल टेक्स्ट यहाँ लिखें या पेस्ट करें (डिस्चार्ज नोट, पर्चा या लैब रिपोर्ट):", "input_placeholder": "क्लीनिक पर्चा, रेडियोलॉजी नोट या डिस्चार्ज समरी यहाँ पेस्ट करें, या PDF/Word फ़ाइल ड्रॉप करें...", "sample_prefix": "त्वरित उदाहरण:", "sample_lung": "नमूना 1: फेफड़ों की स्थिति", "sample_diabetes": "नमूना 2: मधुमेह की जाँच", "sample_heart": "नमूना 3: हृदय स्वास्थ्य", "btn_check_text": "मेडिकल टेक्स्ट का विश्लेषण करें", "heading_findings": "BioSpan द्वारा पहचाने गए परिणाम", "findings_help": "सरल व्याख्या देखने के लिए किसी भी हाइलाइट किए गए शब्द पर क्लिक करें:", "label_plain_meaning": "सरल शब्दों में अर्थ:", "btn_save_note": "नोट्स में सहेजें", "btn_look_up_dictionary": "डिक्शनरी में देखें", "btn_copy_text": "टेक्स्ट कॉपी करें", "label_summary_overview": "मरीज़ और डॉक्टर के लिए अवलोकन", "summary_heading": "सरल भाषा में सारांश", "btn_copy_findings": "परिणाम क्लिपबोर्ड पर कॉपी करें", "btn_download_pdf": "सारांश PDF डाउनलोड करें", "th_mention": "रिपोर्ट में उल्लेख", "th_meaning": "सरल शब्दों में इसका अर्थ", "th_status": "स्थिति", "th_next_steps": "सुझाव व अगले कदम", "status_ready": "सहायता के लिए तैयार", "conditions_identified": "स्थितियां पहचानी गईं", "condition_identified": "स्थिति पहचानी गई", "status_active": "सक्रिय स्थिति", "status_ruled_out": "खारिज / अनुपस्थित", "status_secondary": "माध्यमिक स्थिति", "detail_tag_active": "सक्रिय नैदानिक निष्कर्ष", "detail_tag_secondary": "द्वितीयक नैदानिक निष्कर्ष", "detail_tag_ruled_out": "खारिज / नकारात्मक उल्लेख", "tip_active": "चिकित्सकीय परामर्श लें और डॉक्टर से समीक्षा करवाएं।", "tip_ruled_out": "इतिहास में स्थिति खारिज की गई; तत्काल हस्तक्षेप की आवश्यकता नहीं है।", "tip_secondary": "लक्षणों पर नज़र रखें और विशेषज्ञ के साथ लैब रिपोर्ट की समीक्षा करें।", "file_extracting": "दस्तावेज़ से टेक्स्ट निकाल रहे हैं...", "file_success": "सफलतापूर्वक निकाला और विश्लेषित किया", "file_error": "फ़ाइल पढ़ने में त्रुटि", "copy_success": "क्लिपबोर्ड पर कॉपी किया गया!", "analyzing_btn": "BioBERT से विश्लेषण हो रहा है...", "btn_analyzed": "विश्लेषण पूर्ण", "terms": "शब्द", "term": "शब्द", "nav_check_text": "टेक्स्ट जाँचें", "nav_medical_dictionary": "मेडिकल डिक्शनरी", "nav_saved_results": "सहेजे गए परिणाम", "nav_help_guide": "सहायता एवं मार्गदर्शिका", "menu_new_note": "नया मरीज़ परामर्श नोट", "menu_load_onco": "ऑन्कोलॉजी केस लोड करें", "menu_load_neuro": "न्यूरोलॉजी केस लोड करें", "menu_print": "क्लीनिकल रिपोर्ट प्रिंट करें (PDF)", "menu_dict": "ICD-10 डिक्शनरी देखें", "menu_telemetry": "न्यूरल इंजन डायग्नोस्टिक्स", "modal_dict_title": "नैदानिक मेडिकल डिक्शनरी", "modal_dict_subtitle": "प्रमाणित ICD-10 कोड खोजें और सीधे अपने नोट में शामिल करें।", "modal_dict_search_ph": "बीमारी का नाम, ICD-10 कोड या लक्षण खोजें...", "cat_all": "सभी विभाग", "cat_onco": "कैंसर (ऑन्कोलॉजी)", "cat_cardio": "हृदय रोग (कार्डियोलॉजी)", "cat_pulmo": "श्वसन रोग (पल्मोनोलॉजी)", "cat_neuro": "तंत्रिका रोग (न्यूरोलॉजी)", "cat_endo": "एंडोक्राइन व हार्मोन", "cat_symptoms": "लक्षण व संकेत", "btn_insert_note": "नोट में जोड़ें", "btn_copy_code": "कोड कॉपी करें", "btn_listen_explanation": "सरल भाषा में व्याख्या सुनें", "btn_listen_sub": "चुनी हुई भारतीय भाषा में रोगी व्याख्या जोर से बोलकर सुनाएं", "btn_stop_speech": "आवाज़ बंद करें", "footer_brand_sub": "स्वास्थ्य संबंधी जानकारी को सरल और सुलभ बनाना", "footer_privacy": "गोपनीयता और सुरक्षा", "footer_patient_guide": "मरीज़ मार्गदर्शिका", "footer_disclaimer": "चिकित्सा अस्वीकरण", "modal_saved_title": "सहेजे गए रोगी परामर्श एवं EHR रिकॉर्ड", "modal_saved_subtitle": "पहले विश्लेषित किए गए मामलों को प्रबंधित करें और वर्कस्पेस में पुनः खोलें।", "label_stored_encounters": "सहेजे गए रिकॉर्ड", "btn_clear_all_notes": "सभी नोट साफ़ करें", "btn_load_case": "केस लोड करें", "modal_help_title": "BioSpan AI आर्किटेक्चर एवं मार्गदर्शिका", "modal_help_subtitle": "BioBERT मॉडल, सबवर्ड अलाइनमेंट और BIO सैनिटाइज़र की संपूर्ण कार्यप्रणाली।", "modal_telemetry_title": "BioBERT न्यूरल इंजन डायग्नोस्टिक्स एवं टेलीमेट्री", "modal_telemetry_subtitle": "मॉडल वेट्स, हार्डवेयर डिवाइस, टोकनाइज़र और मेमोरी का लाइव निरीक्षण।", "rec_badge": "नैदानिक सुझाव एवं अगले कदम", "rec_title": "प्रासंगिक सिफारिशें एवं देखभाल मार्गदर्शन", "rec_desc": "मरीज़ के नोट के आधार पर स्वचालित रूप से तैयार किए गए व्यावहारिक नैदानिक सुझाव, अनुशंसित जांच और सावधानियां।", "rec_trigger_label": "वर्तमान रिपोर्ट संदर्भ:", "btn_listen_recommendations": "सुझाव बोलकर सुनें", "btn_copy_recommendations": "कार्ययोजना कॉपी करें", "rec_card_immediate": "तत्काल कदम (अभी क्या करना है)", "rec_card_diagnostic": "अनुशंसित जांच एवं परीक्षण (आगे क्या किया जा सकता है)", "rec_card_medication": "उपचार प्रबंधन एवं सुरक्षा सावधानियां", "rec_card_monitoring": "रोगी निगरानी एवं खतरे के लक्षण (Red Flags)", "rec_disclaimer_title": "चिकित्सकीय परामर्श सूचना", "rec_disclaimer_body": "BioSpan के सुझाव ICD-10 दिशानिर्देशों पर आधारित सहायक नैदानिक संकेत हैं। कृपया हमेशा डॉक्टर के व्यक्तिगत निर्णय और मरीज़ के महत्वपूर्ण संकेतों (Vitals) से पुष्टि करें।", "findings_select_label": "पहचानी गई बीमारी चुनें", "findings_toggle_title": "निष्कर्ष पैनल खोलें / समेटें", "all_findings": "सभी पहचानी गई स्थितियां", "no_findings": "कोई स्थिति नहीं पहचानी गई"}, "bn": {"hero_badge": "দৈনন্দিন স্বাস্থ্য ভাষা • সহজ ভাষা", "hero_title": "কয়েক সেকেন্ডে চিকিৎসার পরিভাষা ও রোগ শনাক্ত করুন।", "hero_desc": "যেকোনো ডাক্তারের প্রেসক্রিপশন, রিপোর্ট বা রোগীর সারাংশ পেস্ট বা আপলোড করুন। BioSpan সহজে রোগ ও লক্ষণ শনাক্ত করে।", "card_detection_title": "তাত্ক্ষণিক শনাক্তকরণ", "card_detection_desc": "পেস্ট করার সাথে সাথে রোগ ও অঙ্গের নির্দেশকগুলো শনাক্ত করুন।", "card_plain_title": "সহজ ভাষায় ব্যাখ্যা", "card_plain_desc": "জটিল ডাক্তারি পরিভাষা ছাড়া পরিষ্কার ও সহজ ব্যাখ্যা।", "card_privacy_title": "১০০% ব্যক্তিগত ও নিরাপদ", "card_privacy_desc": "আপনার নোট সম্পূর্ণ গোপন থাকে। আমরা রোগীর তথ্য কারো সাথে ভাগ করি না।", "heading_medical_note": "আপনার মেডিকেল নোট", "btn_upload_report": "PDF / Word আপলোড করুন", "btn_sample_note": "নমুনা নোট দেখুন", "input_label": "এখানে আপনার নোট লিখুন বা পেস্ট করুন (প্রেসক্রিপশন বা ল্যাব রিপোর্ট):", "input_placeholder": "যেকোনো প্রেসক্রিপশন বা রিপোর্ট পেস্ট করুন অথবা PDF/Word ফাইল ড্রপ করুন...", "sample_prefix": "দ্রুত উদাহরণ:", "sample_lung": "নমুনা ১: ফুসফুসের অবস্থা", "sample_diabetes": "নমুনা ২: ডায়াবেটিস পরীক্ষা", "sample_heart": "নমুনা ৩: হৃদযন্ত্রের স্বাস্থ্য", "btn_check_text": "মেডিকেল টেক্সট বিশ্লেষণ করুন", "heading_findings": "BioSpan যা শনাক্ত করেছে", "findings_help": "সহজ ব্যাখ্যা দেখতে চিহ্নিত শব্দের উপর ক্লিক করুন:", "label_plain_meaning": "সহজ ভাষায় অর্থ:", "btn_save_note": "নোটে সংরক্ষণ করুন", "btn_look_up_dictionary": "অভিধানে দেখুন", "btn_copy_text": "কপি করুন", "label_summary_overview": "রোগী ও চিকিৎসকের সারসংক্ষেপ", "summary_heading": "সহজ ভাষার সারাংশ", "btn_copy_findings": "ফলাফল কপি করুন", "btn_download_pdf": "PDF সারাংশ ডাউনলোড করুন", "th_mention": "নোটের উল্লেখ", "th_meaning": "সহজ কথায় এর অর্থ", "th_status": "অবস্থা", "th_next_steps": "পরামর্শ ও পরবর্তী পদক্ষেপ", "status_ready": "সহায়তার জন্য প্রস্তুত", "conditions_identified": "রোগ শনাক্ত হয়েছে", "condition_identified": "রোগ শনাক্ত হয়েছে", "status_active": "সক্রিয় অবস্থা", "status_ruled_out": "বাতিল / অনুপস্থিত", "status_secondary": "গৌণ অবস্থা", "detail_tag_active": "সক্রিয় ক্লিনিক্যাল ফলাফল", "detail_tag_secondary": "গৌণ ক্লিনিক্যাল ফলাফল", "detail_tag_ruled_out": "বাতিল / অনুপস্থিত উল্লেখ", "tip_active": "ডাক্তারের পরামর্শ নিন এবং ফলো-আপ শিডিউল করুন।", "tip_ruled_out": "ইতিহাসে রোগটি অনুপস্থিত প্রমাণিত হয়েছে; তাৎক্ষণিক চিকিৎসার প্রয়োজন নেই।", "tip_secondary": "লক্ষণ পর্যবেক্ষণ করুন এবং বিশেষজ্ঞের সাথে রিপোর্ট পর্যালোচনা করুন।", "file_extracting": "নথি থেকে টেক্সট বের করা হচ্ছে...", "file_success": "সফলভাবে নিষ্কাশিত ও বিশ্লেষিত", "file_error": "ফাইল পড়া ব্যর্থ হয়েছে", "copy_success": "ক্লিপবোর্ডে কপি করা হয়েছে!", "analyzing_btn": "BioBERT বিশ্লেষণ করছে...", "btn_analyzed": "বিশ্লেষিত", "terms": "শব্দ", "term": "শব্দ", "nav_check_text": "টেক্সট পরীক্ষা", "nav_medical_dictionary": "মেডিকেল অভিধান", "nav_saved_results": "সংরক্ষিত ফলাফল", "nav_help_guide": "সহায়তা ও নির্দেশিকা", "menu_new_note": "নতুন রোগীর নোট", "menu_load_onco": "অনকোলজি কেস লোড করুন", "menu_load_neuro": "নিউরোলজি কেস লোড করুন", "menu_print": "ক্লিনিক্যাল রিপোর্ট প্রিন্ট (PDF)", "menu_dict": "ICD-10 অভিধান দেখুন", "menu_telemetry": "নিউরাল ইঞ্জিন ডায়াগনস্টিক", "modal_dict_title": "ক্লিনিক্যাল মেডিকেল অভিধান", "modal_dict_subtitle": "ICD-10 কোড ব্রাউজ করুন এবং প্রেসক্রিপশনে যুক্ত করুন।", "modal_dict_search_ph": "রোগের নাম বা ICD-10 কোড খুঁজুন...", "cat_all": "সকল বিভাগ", "cat_onco": "অনকোলজি", "cat_cardio": "কার্ডিওলজি", "cat_pulmo": "পালমোনোলজি", "cat_neuro": "নিউরোলজি", "cat_endo": "এন্ডোক্রাইন", "cat_symptoms": "লক্ষণসমূহ", "btn_insert_note": "নোটে যোগ করুন", "btn_copy_code": "কোড কপি করুন", "btn_listen_explanation": "সহজ ভাষায় ব্যাখ্যা শুনুন", "btn_listen_sub": "নির্বাচিত ভারতীয় ভাষায় রোগীর ব্যাখ্যা জোরে শুনুন", "btn_stop_speech": "অডিও বন্ধ করুন", "footer_brand_sub": "স্বাস্থ্য তথ্যকে সহজ ও স্পষ্ট করে তোলা", "footer_privacy": "গোপনীয়তা ও নিরাপত্তা", "footer_patient_guide": "রোগীর নির্দেশিকা", "footer_disclaimer": "মেডিকেল ডিসক্লেইমার", "modal_saved_title": "সংরক্ষিত রোগীর পরামর্শ ও EHR রেকর্ড", "modal_saved_subtitle": "পূর্বে সংরক্ষিত প্রেসক্রিপশন পরিচালনা করুন এবং পুনরায় খুলুন।", "label_stored_encounters": "সংরক্ষিত রেকর্ড", "btn_clear_all_notes": "সব মুছুন", "btn_load_case": "কেস লোড করুন", "modal_help_title": "BioSpan AI আর্কিটেকচার ও নির্দেশিকা", "modal_help_subtitle": "BioBERT মডেল ও সাবওয়ার্ড অ্যালাইনমেন্ট কীভাবে কাজ করে।", "modal_telemetry_title": "BioBERT নিউরাল ইঞ্জিন ডায়াগনস্টিক", "modal_telemetry_subtitle": "মডেল ওয়েট, মেমরি ও টোকেনাইজার লাইভ পরিদর্শন।", "rec_badge": "ক্লিনিক্যাল পরামর্শ ও পরবর্তী পদক্ষেপ", "rec_title": "প্রাসঙ্গিক সুপারিশ ও চিকিৎসা নির্দেশনা", "rec_desc": "রোগীর রিপোর্টের উপর ভিত্তি করে স্বয়ংক্রিয়ভাবে তৈরি ক্লিনিক্যাল পরামর্শ, প্রস্তাবিত পরীক্ষা এবং সতর্কতা।", "rec_trigger_label": "বর্তমান রিপোর্টের প্রসঙ্গ:", "btn_listen_recommendations": "পরামর্শ শুনুন", "btn_copy_recommendations": "কর্মপরিকল্পনা কপি করুন", "rec_card_immediate": "জরুরি পদক্ষেপ (এখন কী করণীয়)", "rec_card_diagnostic": "প্রস্তাবিত পরীক্ষা ও নিরীক্ষা (পরবর্তীতে কী করা যেতে পারে)", "rec_card_medication": "চিকিৎসা ব্যবস্থাপনা ও নিরাপত্তা সতর্কতা", "rec_card_monitoring": "রোগী পর্যবেক্ষণ ও বিপদ সংকেত (Red Flags)", "rec_disclaimer_title": "চিকিৎসক পরামর্শ বিজ্ঞপ্তি", "rec_disclaimer_body": "BioSpan পরামর্শগুলো ICD-10 নির্দেশিকা ভিত্তিক সহায়ক ক্লিনিক্যাল ইঙ্গিত। সর্বদা ডাক্তারের সিদ্ধান্ত ও রোগীর লক্ষণের সাথে মিলিয়ে নিন।", "findings_select_label": "শনাক্তকৃত রোগ বেছে নিন", "findings_toggle_title": "প্যানেল খুলুন / বন্ধ করুন", "all_findings": "সকল শনাক্তকৃত রোগ", "no_findings": "কোনো রোগ শনাক্ত হয়নি"}, "te": {"hero_badge": "రోజువారీ ఆరోగ్య భాష • సరళమైన భాష", "hero_title": "కొద్ది సెకన్లలో వైద్య పదాలు మరియు వ్యాధులను గుర్తించండి.", "hero_desc": "ఏదైనా వైద్యుల చీటీ లేదా మెడికల్ రిపోర్ట్‌ను ఇక్కడ పేస్ట్ లేదా అప్‌లోడ్ చేయండి. BioSpan వ్యాధులను గుర్తించి సులభంగా వివరిస్తుంది.", "card_detection_title": "తక్షణ గుర్తింపు", "card_detection_desc": "మీరు పేస్ట్ చేసిన వెంటనే అనారోగ్యాలను మరియు పరీక్షలను గుర్తిస్తుంది.", "card_plain_title": "సరళమైన వివరణలు", "card_plain_desc": "సంక్లిష్టమైన వైద్య పదాలు లేకుండా ఎవరైనా అర్థం చేసుకునే వివరణ.", "card_privacy_title": "100% ప్రైవేట్ & సురక్షితం", "card_privacy_desc": "మీ డేటా పూర్తి గోప్యంగా ఉంటుంది. మేము ఎవరితోనూ పంచుకోము.", "heading_medical_note": "మీ మెడికల్ నోట్", "btn_upload_report": "PDF / Word అప్‌లోడ్ చేయండి", "btn_sample_note": "నమూనా నోట్ చూడండి", "input_label": "మీ రిపోర్ట్ లేదా నోట్‌ను ఇక్కడ పేస్ట్ చేయండి లేదా టైప్ చేయండి:", "input_placeholder": "డిశ్చార్జ్ నోట్ లేదా ల్యాబ్ రిపోర్ట్ పేస్ట్ చేయండి లేదా PDF/Word ఫైల్ డ్రాప్ చేయండి...", "sample_prefix": "ఉదాహరణలు:", "sample_lung": "నమూనా 1: ఊపిరితిత్తుల స్థితి", "sample_diabetes": "నమూనా 2: మధుమేహం తనిఖీ", "sample_heart": "నమూనా 3: గుండె ఆరోగ్యం", "btn_check_text": "మెడికల్ టెక్స్ట్ విశ్లేషించండి", "heading_findings": "BioSpan గుర్తించిన ఫలితాలు", "findings_help": "వివరణ చూడటానికి హైలైట్ చేసిన పదంపై క్లిక్ చేయండి:", "label_plain_meaning": "సాధారణ మాటల్లో అర్థం:", "btn_save_note": "సేవ్ చేయండి", "btn_look_up_dictionary": "డిక్షనరీలో చూడండి", "btn_copy_text": "కాపీ చేయండి", "label_summary_overview": "రోగి & వైద్యుల సమాచారం", "summary_heading": "సరళమైన భాషా సారాంశం", "btn_copy_findings": "ఫలితాలను కాపీ చేయండి", "btn_download_pdf": "PDF సారాంశాన్ని డౌన్‌లోడ్ చేయండి", "th_mention": "రిపోర్టులో పేర్కొన్న అంశం", "th_meaning": "సాధారణ మాటల్లో దీని అర్థం", "th_status": "స్థితి", "th_next_steps": "సలహాలు & తదుపరి చర్యలు", "status_ready": "సహాయం చేయడానికి సిద్ధం", "conditions_identified": "పరిస్థితులు గుర్తించబడ్డాయి", "condition_identified": "పరిస్థితి గుర్తించబడింది", "status_active": "యాక్టివ్ వ్యాధి", "status_ruled_out": "తోసిపుచ్చబడింది", "status_secondary": "ద్వితీయ పరిస్థితి", "detail_tag_active": "యాక్టివ్ క్లినికల్ ఫలితం", "detail_tag_secondary": "ద్వితీయ క్లినికల్ ఫలితం", "detail_tag_ruled_out": "నెగటివ్ / తోసిపుచ్చబడిన అంశం", "tip_active": "వైద్యుడిని సంప్రదించి తదుపరి పరీక్షలు చేయించుకోండి.", "tip_ruled_out": "గత చరిత్రలో ఈ వ్యాధి లేదు; తక్షణ చికిత్స అవసరం లేదు.", "tip_secondary": "లక్షణాలను గమనించండి మరియు నిపుణులతో ల్యాబ్ రిపోర్టులను సమీక్షించండి.", "file_extracting": "పత్రం నుండి టెక్స్ట్ సేకరిస్తోంది...", "file_success": "విజయవంతంగా సంగ్రహించబడింది & విశ్లేషించబడింది", "file_error": "ఫైల్ చదవడంలో లోపం", "copy_success": "క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది!", "analyzing_btn": "BioBERT విశ్లేషిస్తోంది...", "btn_analyzed": "విశ్లేషించబడింది", "terms": "పదాలు", "term": "పదం", "nav_check_text": "టెక్స్ట్ తనిఖీ", "nav_medical_dictionary": "మెడికల్ డిక్షనరీ", "nav_saved_results": "సేవ్ చేసిన ఫలితాలు", "nav_help_guide": "సహాయం & గైడ్", "menu_new_note": "కొత్త రోగి నోట్", "menu_load_onco": "ఆంకాలజీ కేస్ లోడ్ చేయండి", "menu_load_neuro": "న్యూరాలజీ కేస్ లోడ్ చేయండి", "menu_print": "క్లినికల్ రిపోర్ట్ ప్రింట్ (PDF)", "menu_dict": "ICD-10 డిక్షనరీ బ్రౌజ్ చేయండి", "menu_telemetry": "న్యూరల్ ఇంజిన్ డయాగ్నస్టిక్స్", "modal_dict_title": "క్లినికల్ మెడికల్ డిక్షనరీ", "modal_dict_subtitle": "ICD-10 వ్యాధి కోడ్‌లను శోధించండి మరియు మీ నోట్‌లో చేర్చండి.", "modal_dict_search_ph": "వ్యాధి లేదా ICD-10 కోడ్ శోధించండి...", "cat_all": "అన్ని విభాగాలు", "cat_onco": "ఆంకాలజీ", "cat_cardio": "కార్డియాలజీ", "cat_pulmo": "పల్మోనాలజీ", "cat_neuro": "న్యూరాలజీ", "cat_endo": "ఎండోక్రైన్", "cat_symptoms": "లక్షణాలు", "btn_insert_note": "నోట్‌లో చేర్చండి", "btn_copy_code": "కోడ్ కాపీ చేయండి", "btn_listen_explanation": "వ్యాధి వివరణ వినండి", "btn_listen_sub": "ఎంచుకున్న భారతీయ భాషలో రోగి వివరణను వినండి", "btn_stop_speech": "ఆడియో ఆపండి", "footer_brand_sub": "ఆరోగ్య సమాచారాన్ని సులభతరం చేయడం", "footer_privacy": "గోప్యత & భద్రత", "footer_patient_guide": "రోగి గైడ్", "footer_disclaimer": "వైద్య నిరాకరణ", "modal_saved_title": "సేవ్ చేసిన రోగి సంప్రదింపులు", "modal_saved_subtitle": "గతంలో విశ్లేషించిన కేసులను నిర్వహించండి.", "label_stored_encounters": "సేవ్ చేసిన రికార్డులు", "btn_clear_all_notes": "అన్నీ తొలగించండి", "btn_load_case": "కేస్ లోడ్ చేయండి", "modal_help_title": "BioSpan AI గైడ్", "modal_help_subtitle": "BioBERT మోడల్ మరియు అలైన్‌మెంట్ పనితీరు.", "modal_telemetry_title": "సిస్టమ్ టెలిమెట్రీ", "modal_telemetry_subtitle": "మోడల్ పారామితులు మరియు మెమరీ వినియోగం.", "rec_badge": "క్లినికల్ సూచనలు & తదుపరి దశలు", "rec_title": "సందర్భోచిత సిఫార్సులు & సంరక్షణ మార్గదర్శకత్వం", "rec_desc": "రోగి నివేదిక ఆధారంగా స్వయంచాలకంగా రూపొందించబడిన క్లినికల్ సలహాలు, సిఫార్సు చేయబడిన పరీక్షలు మరియు జాగ్రత్తలు.", "rec_trigger_label": "ప్రస్తుత నివేదిక సందర్భం:", "btn_listen_recommendations": "సిఫార్సులు వినండి", "btn_copy_recommendations": "కార్యాచరణ ప్రణాళిక కాపీ చేయండి", "rec_card_immediate": "తక్షణ చర్యలు (ఇప్పుడు ఏమి చేయాలి)", "rec_card_diagnostic": "సిఫార్సు చేయబడిన పరీక్షలు (తదుపరి ఏమి చేయవచ్చు)", "rec_card_medication": "సంరక్షణ నిర్వహణ & భద్రతా జాగ్రత్తలు", "rec_card_monitoring": "రోగి పర్యవేక్షణ & ప్రమాద సంకేతాలు (Red Flags)", "rec_disclaimer_title": "వైద్య సలహా సూచన", "rec_disclaimer_body": "BioSpan సూచనలు ICD-10 మార్గదర్శకాల ఆధారంగా రూపొందించబడిన సహాయక క్లినికల్ సూచనలు. ఎల్లప్పుడూ వైద్యుల నిర్ణయంతో సరిచూసుకోండి.", "findings_select_label": "గుర్తించిన వ్యాధిని ఎంచుకోండి", "findings_toggle_title": "ఫ్యానెల్ తెరవండి / మూసివేయండి", "all_findings": "గుర్తించిన అన్ని వ్యాధులు", "no_findings": "ఏ వ్యాధులు గుర్తించబడలేదు"}, "ta": {"hero_badge": "தினசரி சுகாதார மொழி • எளிய விளக்கம்", "hero_title": "நொடிகளில் மருத்துவ சொற்களையும் நோய்களையும் கண்டறியவும்.", "hero_desc": "மருத்துவர் குறிப்பு அல்லது அறிக்கையை பதிவேற்றவும். BioSpan நோய்களையும் அறிகுறிகளையும் எளிய தமிழில் விளக்குகிறது.", "card_detection_title": "உடனடி கண்டறிதல்", "card_detection_desc": "மருத்துவ சொற்கள் மற்றும் உறுப்பு அறிகுறிகளை உடனே கண்டறியும்.", "card_plain_title": "எளிய தமிழ் விளக்கம்", "card_plain_desc": "குழப்பமான மருத்துவ கலைச்சொற்கள் இல்லாத எளிய விளக்கம்.", "card_privacy_title": "100% தனிப்பட்ட & பாதுகாப்பானது", "card_privacy_desc": "உங்கள் தகவல்கள் முற்றிலும் பாதுகாப்பானது. பகிரப்படாது.", "heading_medical_note": "உங்கள் மருத்துவ குறிப்பு", "btn_upload_report": "PDF / Word பதிவேற்றவும்", "btn_sample_note": "மாதிரி குறிப்பை முயற்சிக்கவும்", "input_label": "உங்கள் மருத்துவ உரையை இங்கே உள்ளிடவும் அல்லது ஒட்டவும்:", "input_placeholder": "மருத்துவ அறிக்கை அல்லது டிஸ்சார்ஜ் சுருக்கத்தை இங்கே ஒட்டவும் அல்லது PDF/Word கோப்பை இடவும்...", "sample_prefix": "மாதிரிகள்:", "sample_lung": "மாதிரி 1: நுரையீரல் நிலை", "sample_diabetes": "மாதிரி 2: நீரிழிவு பரிசோதனை", "sample_heart": "மாதிரி 3: இதய நலம்", "btn_check_text": "மருத்துவ உரையை ஆராய்க", "heading_findings": "BioSpan கண்டறிந்தவை", "findings_help": "எளிய விளக்கத்தைக் காண அடிக்கோடிட்ட சொல்லைக் கிளிக் செய்யவும்:", "label_plain_meaning": "எளிய விளக்கம்:", "btn_save_note": "குறிப்புகளில் சேமிக்கவும்", "btn_look_up_dictionary": "அகராதியில் தேடவும்", "btn_copy_text": "உரையை நகலெடுக்கவும்", "label_summary_overview": "நோயாளி & மருத்துவருக்கான கண்ணோட்டம்", "summary_heading": "எளிய மொழி சுருக்கம்", "btn_copy_findings": "முடிவுகளை நகலெடுக்கவும்", "btn_download_pdf": "PDF சுருக்கத்தைப் பதிவிறக்கவும்", "th_mention": "குறிப்பில் உள்ள சொல்", "th_meaning": "எளிய வார்த்தைகளில் விளக்கம்", "th_status": "நிலை", "th_next_steps": "ஆலோசனைகள் & அடுத்த படிகள்", "status_ready": "உதவ தயார்", "conditions_identified": "நோய்கள் கண்டறியப்பட்டன", "condition_identified": "நோய் கண்டறியப்பட்டது", "status_active": "செயலில் உள்ள நிலை", "status_ruled_out": "நிராகரிக்கப்பட்டது", "status_secondary": "இரண்டாம் நிலை நிலைமை", "detail_tag_active": "செயலில் உள்ள மருத்துவக் கண்டுபிடிப்பு", "detail_tag_secondary": "இரண்டாம் நிலை மருத்துவக் கண்டுபிடிப்பு", "detail_tag_ruled_out": "நிராகரிக்கப்பட்ட / இல்லாத நிலை", "tip_active": "மருத்துவ ஆலோசனையை திட்டமிட்டு மருத்துவரிடம் விவாதிக்கவும்.", "tip_ruled_out": "வரலாற்றில் இந்நோய் இல்லை என உறுதிப்படுத்தப்பட்டுள்ளது.", "tip_secondary": "அறிகுறிகளைக் கண்காணித்து மருத்துவருடன் பரிசோதனைகளை மறுஆய்வு செய்யவும்.", "file_extracting": "ஆவணத்திலிருந்து உரை எடுக்கப்படுகிறது...", "file_success": "வெற்றிகரமாக பிரித்தெடுக்கப்பட்டு ஆராயப்பட்டது", "file_error": "கோப்பைப் படிப்பதில் பிழை", "copy_success": "நகலெடுக்கப்பட்டது!", "analyzing_btn": "BioBERT ஆராய்கிறது...", "btn_analyzed": "ஆராயப்பட்டது", "terms": "சொற்கள்", "term": "சொல்", "nav_check_text": "உரை ஆய்வு", "nav_medical_dictionary": "மருத்துவ அகராதி", "nav_saved_results": "சேமித்த முடிவுகள்", "nav_help_guide": "உதவி & வழிகாட்டி", "menu_new_note": "புதிய நோயாளி குறிப்பு", "menu_load_onco": "புற்றுநோய் வழக்கு ஏற்றவும்", "menu_load_neuro": "நரம்பியல் வழக்கு ஏற்றவும்", "menu_print": "மருத்துவ அறிக்கை அச்சிடுக (PDF)", "menu_dict": "ICD-10 அகராதியை காண்க", "menu_telemetry": "நரம்பியல் இயந்திர ஆய்வு", "modal_dict_title": "மருத்துவ அகராதி", "modal_dict_subtitle": "ICD-10 குறியீடுகளைத் தேடி குறிப்பில் சேர்க்கவும்.", "modal_dict_search_ph": "நோய் பெயர் அல்லது குறியீட்டைத் தேடுக...", "cat_all": "அனைத்து துறைகள்", "cat_onco": "புற்றுநோயியல்", "cat_cardio": "இதயவியல்", "cat_pulmo": "சுவாசவியல்", "cat_neuro": "நரம்பியல்", "cat_endo": "நாளமில்லா சுரப்பிகள்", "cat_symptoms": "அறிகுறிகள்", "btn_insert_note": "குறிப்பில் சேர்க்க", "btn_copy_code": "குறியீட்டை நகலெடு", "btn_listen_explanation": "விளக்கத்தைக் கேளுங்கள்", "btn_listen_sub": "தேர்ந்தெடுக்கப்பட்ட இந்திய மொழியில் விளக்கத்தைக் கேளுங்கள்", "btn_stop_speech": "ஒலியை நிறுத்து", "footer_brand_sub": "சுகாதாரத் தகவலை எளிமையாக்குதல்", "footer_privacy": "தனியுரிமை & பாதுகாப்பு", "footer_patient_guide": "நோயாளி வழிகாட்டி", "footer_disclaimer": "மருத்துவ மறுப்பு", "modal_saved_title": "சேமிக்கப்பட்ட ஆலோசனைகள்", "modal_saved_subtitle": "முந்தைய மருத்துவ பதிவுகளை நிர்வகிக்கவும்.", "label_stored_encounters": "சேமிக்கப்பட்ட பதிவுகள்", "btn_clear_all_notes": "அனைத்தையும் அழி", "btn_load_case": "ஏற்றுக", "modal_help_title": "BioSpan AI வழிகாட்டி", "modal_help_subtitle": "BioBERT நரம்பியல் மாதிரி இயக்க முறை.", "modal_telemetry_title": "இயந்திர அளவீடுகள்", "modal_telemetry_subtitle": "நினைவகம் மற்றும் மாதிரி நிலை.", "rec_badge": "மருத்துவ பரிந்துரைகள் & அடுத்த படிகள்", "rec_title": "சூழ்நிலை சார்ந்த பரிந்துரைகள் & சிகிச்சை வழிகாட்டல்", "rec_desc": "நோயாளி அறிக்கையின் அடிப்படையில் தானாக உருவாக்கப்பட்ட மருத்துவ ஆலோசனைகள், பரிந்துரைக்கப்பட்ட சோதனைகள் மற்றும் முன்னெச்சரிக்கைகள்.", "rec_trigger_label": "தற்போதைய அறிக்கை சூழல்:", "btn_listen_recommendations": "பரிந்துரைகளைக் கேளுங்கள்", "btn_copy_recommendations": "செயல் திட்டத்தை நகலெடு", "rec_card_immediate": "உடனடி நடவடிக்கைகள் (இப்போது என்ன செய்ய வேண்டும்)", "rec_card_diagnostic": "பரிந்துரைக்கப்பட்ட சோதனைகள் (அடுத்து என்ன செய்யலாம்)", "rec_card_medication": "சிகிச்சை மேலாண்மை & பாதுகாப்பு முன்னெச்சரிக்கைகள்", "rec_card_monitoring": "நோயாளி கண்காணிப்பு & ஆபத்து அறிகுறிகள் (Red Flags)", "rec_disclaimer_title": "மருத்துவ ஆலோசனை அறிவிப்பு", "rec_disclaimer_body": "BioSpan பரிந்துரைகள் ICD-10 வழிகாட்டுதல்களை அடிப்படையாகக் கொண்ட மருத்துவ குறிப்புகள். எப்போதும் மருத்துவரின் முடிவோடு ஒப்பிட்டுப் பார்க்கவும்.", "findings_select_label": "கண்டறியப்பட்ட நோயைத் தேர்ந்தெடு", "findings_toggle_title": "பேனலை திற / மூடு", "all_findings": "கண்டறியப்பட்ட அனைத்து நிலைகளும்", "no_findings": "எந்த நோயும் கண்டறியப்படவில்லை"}, "mr": {"hero_badge": "दैनंदिन आरोग्य भाषा • सोपी भाषा", "hero_title": "काही सेकंदात वैद्यकीय संज्ञा आणि आजार शोधा.", "hero_desc": "कोणतीही वैद्यकीय तपासणी किंवा डॉक्टरांची नोंद येथे पेस्ट किंवा अपलोड करा. BioSpan आजार व लक्षणे सोप्या भाषेत स्पष्ट करतो.", "card_detection_title": "त्वरित शोध", "card_detection_desc": "मजकूर पेस्ट करताच आजार आणि लक्षणांचा त्वरित शोध.", "card_plain_title": "सोप्या भाषेतील स्पष्टीकरण", "card_plain_desc": "कोणत्याही गुंतागुंतीच्या वैद्यकीय शब्दांशिवाय स्पष्ट माहिती.", "card_privacy_title": "100% खाजगी आणि सुरक्षित", "card_privacy_desc": "तुमचा डेटा पूर्णपणे सुरक्षित आणि गोपनीय राहतो.", "heading_medical_note": "तुमची वैद्यकीय नोंद", "btn_upload_report": "PDF / Word अपलोड करा", "btn_sample_note": "नमुना नोंद पहा", "input_label": "येथे वैद्यकीय अहवाल किंवा डॉक्टरांची नोंद पेस्ट करा:", "input_placeholder": "डिस्चार्ज नोट किंवा लॅब रिपोर्ट येथे पेस्ट करा किंवा PDF/Word फाइल ड्रॉप करा...", "sample_prefix": "उदाहरणे:", "sample_lung": "नमुना 1: फुफ्फुसांचा आजार", "sample_diabetes": "नमुना 2: मधुमेह तपासणी", "sample_heart": "नमुना 3: हृदय आरोग्य", "btn_check_text": "वैद्यकीय मजकूर तपासा", "heading_findings": "BioSpan ला आढळलेले निष्कर्ष", "findings_help": "सोपे स्पष्टीकरण पाहण्यासाठी हायलाइट केलेल्या शब्दावर क्लिक करा:", "label_plain_meaning": "सोप्या शब्दांत अर्थ:", "btn_save_note": "नोंदीमध्ये जतन करा", "btn_look_up_dictionary": "शब्दकोशात शोधा", "btn_copy_text": "मजकूर कॉपी करा", "label_summary_overview": "रुग्ण आणि डॉक्टरांसाठी सारांश", "summary_heading": "सोप्या भाषेतील सारांश", "btn_copy_findings": "निष्कर्ष कॉपी करा", "btn_download_pdf": "PDF सारांश डाउनलोड करा", "th_mention": "नोंदीतील उल्लेख", "th_meaning": "साध्या शब्दांत याचा अर्थ", "th_status": "स्थिती", "th_next_steps": "सल्ले आणि पुढील पावले", "status_ready": "मदतीसाठी सज्ज", "conditions_identified": "स्थिती आढळल्या", "condition_identified": "स्थिती आढळली", "status_active": "सक्रिय स्थिती", "status_ruled_out": "वगळलेले / उपस्थित नाही", "status_secondary": "दुय्यम स्थिती", "detail_tag_active": "सक्रिय वैद्यकीय निष्कर्ष", "detail_tag_secondary": "दुय्यम वैद्यकीय निष्कर्ष", "detail_tag_ruled_out": "नाकारलेला उल्लेख", "tip_active": "वैद्यकीय सल्ला घ्या आणि डॉक्टरांशी चर्चा करा.", "tip_ruled_out": "इतिहासात ही स्थिती नाकारली गेली आहे; त्वरित हस्तक्षेपाची गरज नाही.", "tip_secondary": "लक्षणांवर लक्ष ठेवा आणि तज्ञांशी लॅब रिपोर्ट्स तपासा.", "file_extracting": "दस्तऐवजातून मजकूर काढत आहे...", "file_success": "यशस्वीरित्या काढले आणि तपासले", "file_error": "फाइल वाचताना त्रुटी", "copy_success": "क्लिपबोर्डवर कॉपी केले!", "analyzing_btn": "BioBERT तपासणी करत आहे...", "btn_analyzed": "तपासले", "terms": "संज्ञा", "term": "संज्ञा", "nav_check_text": "मजकूर तपासा", "nav_medical_dictionary": "वैद्यकीय शब्दकोश", "nav_saved_results": "जतन केलेले निकाल", "nav_help_guide": "मदत आणि मार्गदर्शक", "menu_new_note": "नवीन रुग्ण तपासणी नोंद", "menu_load_onco": "कर्करोग केस लोड करा", "menu_load_neuro": "मज्जासंस्था केस लोड करा", "menu_print": "वैद्यकीय अहवाल मुद्रित करा (PDF)", "menu_dict": "ICD-10 शब्दकोश पहा", "menu_telemetry": "न्यूरल इंजिन डायग्नोस्टिक्स", "modal_dict_title": "क्लिनिकल वैद्यकीय शब्दकोश", "modal_dict_subtitle": "मानक ICD-10 कोड शोधा आणि थेट नोंदीत जोडा.", "modal_dict_search_ph": "आजार किंवा ICD-10 कोड शोधा...", "cat_all": "सर्व विभाग", "cat_onco": "ऑन्कोलॉजी (कर्करोग)", "cat_cardio": "कार्डिओलॉजी (हृदयरोग)", "cat_pulmo": "पल्मोनोलॉजी (श्वसनरोग)", "cat_neuro": "न्यूरोलॉजी (मज्जासंस्था)", "cat_endo": "एंडोक्राइन", "cat_symptoms": "लक्षणे", "btn_insert_note": "नोंदीत समाविष्ट करा", "btn_copy_code": "कोड कॉपी करा", "btn_listen_explanation": "सोप्या भाषेत स्पष्टीकरण ऐका", "btn_listen_sub": "निवडलेल्या भारतीय भाषेत रुग्णाचे स्पष्टीकरण ऐका", "btn_stop_speech": "ऑडिओ थांबवा", "footer_brand_sub": "आरोग्य माहिती सोपी आणि स्पष्ट करणे", "footer_privacy": "गोपनीयता आणि सुरक्षा", "footer_patient_guide": "रुग्ण मार्गदर्शिका", "footer_disclaimer": "वैद्यकीय अस्वीकरण", "modal_saved_title": "जतन केलेले रुग्ण सल्लामसलत", "modal_saved_subtitle": "पूर्वी विश्लेषित केलेल्या नोंदी व्यवस्थापित करा.", "label_stored_encounters": "जतन केलेले रेकॉर्ड", "btn_clear_all_notes": "सर्व साफ करा", "btn_load_case": "केस उघडा", "modal_help_title": "BioSpan AI मार्गदर्शक", "modal_help_subtitle": "BioBERT मॉडेल आणि BIO सॅनिटायझर कार्यप्रणाली.", "modal_telemetry_title": "न्यूरल इंजिन टेलिमेट्री", "modal_telemetry_subtitle": "हार्डवेअर आणि मेमरी स्थिती.", "rec_badge": "वैद्यकीय शिफारसी आणि पुढील पावले", "rec_title": "संदर्भानुसार शिफारसी आणि काळजी मार्गदर्शन", "rec_desc": "रुग्णाच्या अहवालाच्या आधारे स्वयंचलितपणे तयार केलेल्या व्यावहारिक वैद्यकीय शिफारसी, तपासण्या आणि खबरदारी.", "rec_trigger_label": "सध्याचा अहवाल संदर्भ:", "btn_listen_recommendations": "शिफारसी ऐका", "btn_copy_recommendations": "कृती आराखडा कॉपी करा", "rec_card_immediate": "तातडीची पावले (आता काय करावे)", "rec_card_diagnostic": "शिफारस केलेल्या तपासण्या (पुढे काय करता येईल)", "rec_card_medication": "काळजी व्यवस्थापन आणि सुरक्षा खबरदारी", "rec_card_monitoring": "रुग्ण निरीक्षण आणि धोक्याचे इशारे (Red Flags)", "rec_disclaimer_title": "वैद्यकीय सल्लागार सूचना", "rec_disclaimer_body": "BioSpan च्या शिफारसी ICD-10 मार्गदर्शक तत्त्वांवर आधारित सहाय्यक वैद्यकीय संकेत आहेत. नेहमी डॉक्टरांच्या निर्णयाशी जुळवून घ्या.", "findings_select_label": "आढळलेला आजार निवडा", "findings_toggle_title": "पॅनेल उघडा / बंद करा", "all_findings": "सर्व आढळलेले निष्कर्ष", "no_findings": "कोणताही आजार आढळला नाही"}, "gu": {"hero_badge": "રોજિંદી આરોગ્ય ભાષા • સરળ ભાષા", "hero_title": "સેકન્ડોમાં તબીબી શબ્દો અને રોગો શોધો.", "hero_desc": "કોઈપણ ડૉક્ટરની ચિઠ્ઠી અથવા રિપોર્ટ પેસ્ટ કે અપલોડ કરો. BioSpan રોગો અને લક્ષણોને સરળ ભાષામાં સમજાવે છે.", "card_detection_title": "ત્વરિત તપાસ", "card_detection_desc": "પેસ્ટ કરતાં જ રોગો અને લક્ષણોની તાત્કાલિક તપાસ.", "card_plain_title": "સરળ ભાષામાં સમજૂતી", "card_plain_desc": "અઘરા તબીબી શબ્દો વિના સરળ અને સ્પષ્ટ સમજૂતી.", "card_privacy_title": "100% ખાનગી અને સુરક્ષિત", "card_privacy_desc": "તમારી માહિતી સંપૂર્ણ ગોપનીય રહે છે.", "heading_medical_note": "તમારી મેડિકલ નોંધ", "btn_upload_report": "PDF / Word અપલોડ કરો", "btn_sample_note": "નમૂના નોંધ જુઓ", "input_label": "તમારી તબીબી નોંધ અહીં પેસ્ટ કરો અથવા લખો:", "input_placeholder": "ડિસ્ચાર્જ નોટ અથવા લેબ રિપોર્ટ અહીં પેસ્ટ કરો અથવા PDF/Word ફાઇલ મૂકો...", "sample_prefix": "ઉદાહરણો:", "sample_lung": "નમૂનો 1: ફેફસાંની સ્થિતિ", "sample_diabetes": "નમૂનો 2: ડાયાબિટીસ તપાસ", "sample_heart": "નમૂનો 3: હૃદયનું સ્વાસ્થ્ય", "btn_check_text": "મેડિકલ લખાણ તપાસો", "heading_findings": "BioSpan દ્વારા મળેલા પરિણામો", "findings_help": "સરળ સમજૂતી જોવા માટે હાઇલાઇટ કરેલા શબ્દ પર ક્લિક કરો:", "label_plain_meaning": "સરળ શબ્દોમાં અર્થ:", "btn_save_note": "નોંધ સાચવો", "btn_look_up_dictionary": "શબ્દકોશમાં જુઓ", "btn_copy_text": "લખાણ કૉપિ કરો", "label_summary_overview": "દર્દી અને ડૉક્ટર માટે વિહંગાવલોકન", "summary_heading": "સરળ ભાષામાં સારાંશ", "btn_copy_findings": "પરિણામો કૉપિ કરો", "btn_download_pdf": "PDF સારાંશ ડાઉનલોડ કરો", "th_mention": "નોંધમાં ઉલ્લેખ", "th_meaning": "સરળ શબ્દોમાં આનો અર્થ", "th_status": "સ્થિતિ", "th_next_steps": "સલાહ અને આગળનાં પગલાં", "status_ready": "સહાય માટે તૈયાર", "conditions_identified": "સ્થિતિઓ ઓળખાઈ", "condition_identified": "સ્થિતિ ઓળખાઈ", "status_active": "સક્રિય સ્થિતિ", "status_ruled_out": "નકારવામાં આવેલ", "status_secondary": "દ્વિતીય સ્થિતિ", "detail_tag_active": "સક્રિય ક્લિનિકલ તારણ", "detail_tag_secondary": "ગૌણ ક્લિનિકલ તારણ", "detail_tag_ruled_out": "નકારાયેલ તારણ", "tip_active": "તબીબી સલાહ લો અને ડૉક્ટર પાસે તપાસ કરાવો.", "tip_ruled_out": "ઇતિહાસમાં આ સ્થિતિ નકારવામાં આવી છે; તાત્કાલિક સારવાર જરૂરી નથી.", "tip_secondary": "લક્ષણોનું નિરીક્ષણ કરો અને નિષ્ણાત સાથે રિપોર્ટ્સ તપાસો.", "file_extracting": "દસ્તાવેજમાંથી લખાણ મેળવી રહ્યું છે...", "file_success": "સફળતાપૂર્વક મેળવ્યું અને તપાસ્યું", "file_error": "ફાઇલ વાંચવામાં નિષ્ફળ", "copy_success": "કૉપિ થઈ ગયું!", "analyzing_btn": "BioBERT તપાસી રહ્યું છે...", "btn_analyzed": "તપાસ પૂર્ણ", "terms": "શબ્દો", "term": "શબ્દ", "nav_check_text": "લખાણ તપાસો", "nav_medical_dictionary": "તબીબી શબ્દકોશ", "nav_saved_results": "સાચવેલા પરિણામો", "nav_help_guide": "મદદ અને માર્ગદર્શિકા", "menu_new_note": "નવી દર્દી નોંધ", "menu_load_onco": "કેન્સર કેસ લોડ કરો", "menu_load_neuro": "ન્યુરોલોજી કેસ લોડ કરો", "menu_print": "રિપોર્ટ પ્રિન્ટ કરો (PDF)", "menu_dict": "ICD-10 શબ્દકોશ જુઓ", "menu_telemetry": "ન્યુરલ એન્જિન ડાયગ્નોસ્ટિક્સ", "modal_dict_title": "ક્લિનિકલ મેડિકલ શબ્દકોશ", "modal_dict_subtitle": "પ્રમાણિત ICD-10 કોડ શોધો અને નોંધમાં ઉમેરો.", "modal_dict_search_ph": "રોગ અથવા ICD-10 કોડ શોધો...", "cat_all": "બધા વિભાગો", "cat_onco": "ઓન્કોલોજી (કેન્સર)", "cat_cardio": "કાર્ડિયોલોજી (હૃદય)", "cat_pulmo": "પલ્મોનોલોજી (ફેફસાં)", "cat_neuro": "ન્યુરોલોજી", "cat_endo": "એન્ડોક્રાઇન", "cat_symptoms": "લક્ષણો", "btn_insert_note": "નોંધમાં ઉમેરો", "btn_copy_code": "કોડ કૉપિ કરો", "btn_listen_explanation": "સરળ સમજૂતી સાંભળો", "btn_listen_sub": "પસંદ કરેલી ભારતીય ભાષામાં દર્દી માટે સમજૂતી સાંભળો", "btn_stop_speech": "ઑડિઓ બંધ કરો", "footer_brand_sub": "આરોગ્ય માહિતીને સરળ બનાવવી", "footer_privacy": "ગોપનીયતા અને સુરક્ષા", "footer_patient_guide": "દર્દી માર્ગદર્શિકા", "footer_disclaimer": "તબીબી અસ્વીકરણ", "modal_saved_title": "સાચવેલી દર્દી નોંધો", "modal_saved_subtitle": "અગાઉ વિશ્લેષિત કરેલ કેસોનું સંચાલન કરો.", "label_stored_encounters": "સાચવેલા રેકોર્ડ્સ", "btn_clear_all_notes": "બધું સાફ કરો", "btn_load_case": "કેસ ખોલો", "modal_help_title": "BioSpan AI માર્ગદર્શિકા", "modal_help_subtitle": "BioBERT મોડેલ કાર્યપદ્ધતિ.", "modal_telemetry_title": "સિસ્ટમ ટેલિમેટ્રી", "modal_telemetry_subtitle": "મોડેલ અને મેમરી વપરાશ.", "rec_badge": "તબીબી ભલામણો અને આગલા પગલાં", "rec_title": "સંદર્ભ-આધારિત ભલામણો અને સારસંભાળ માર્ગદર્શન", "rec_desc": "દર્દીના રિપોર્ટના આધારે આપમેળે તૈયાર કરાયેલ વ્યાવહારિક તબીબી સલાહ, ભલામણ કરેલ પરીક્ષણો અને સાવચેતીઓ.", "rec_trigger_label": "વર્તમાન રિપોર્ટ સંદર્ભ:", "btn_listen_recommendations": "ભલામણો સાંભળો", "btn_copy_recommendations": "કાર્ય યોજના કૉપિ કરો", "rec_card_immediate": "ત્વરિત પગલાં (હવે શું કરવું)", "rec_card_diagnostic": "ભલામણ કરેલ પરીક્ષણો (આગળ શું કરી શકાય)", "rec_card_medication": "સારસંભાળ સંચાલન અને સલામતી સાવચેતીઓ", "rec_card_monitoring": "દર્દીનું નિરીક્ષણ અને જોખમ ચેતવણીઓ (Red Flags)", "rec_disclaimer_title": "તબીબી સલાહકાર સૂચના", "rec_disclaimer_body": "BioSpan ના સૂચનો ICD-10 માર્ગદર્શિકા પર આધારિત સહાયક તબીબી સંકેતો છે. હંમેશા ડૉક્ટરના નિર્ણય સાથે પુષ્ટિ કરો.", "findings_select_label": "ઓળખાયેલ રોગ પસંદ કરો", "findings_toggle_title": "પેનલ ખોલો / બંધ કરો", "all_findings": "બધા ઓળખાયેલ તારણો", "no_findings": "કોઈ રોગ મળ્યો નથી"}, "kn": {"hero_badge": "ದೈನಂದಿನ ಆರೋಗ್ಯ ಭಾಷೆ • ಸರಳ ಭಾಷೆ", "hero_title": "ಕೆಲವೇ ಸೆಕೆಂಡುಗಳಲ್ಲಿ ವೈದ್ಯಕೀಯ ಪದಗಳು ಮತ್ತು ರೋಗಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಿ.", "hero_desc": "ಯಾವುದೇ ವೈದ್ಯರ ವರದಿ ಅಥವಾ ರೋಗಿಯ ಸಾರಾಂಶವನ್ನು ಇಲ್ಲಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ. BioSpan ಸುಲಭ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸುತ್ತದೆ.", "card_detection_title": "ತಕ್ಷಣದ ಪತ್ತೆಹಚ್ಚುವಿಕೆ", "card_detection_desc": "ಪೇಸ್ಟ್ ಮಾಡಿದ ತಕ್ಷಣವೇ ರೋಗ ಲಕ್ಷಣಗಳನ್ನು ಗುರುತಿಸುತ್ತದೆ.", "card_plain_title": "ಸರಳ ಕನ್ನಡ ವಿವರಣೆ", "card_plain_desc": "ಗೊಂದಲವಿಲ್ಲದ ಸ್ಪಷ್ಟ ಮತ್ತು ಸರಳ ವೈದ್ಯಕೀಯ ವಿವರಣೆ.", "card_privacy_title": "100% ಖಾಸಗಿ & ಸುರಕ್ಷಿತ", "card_privacy_desc": "ನಿಮ್ಮ ವೈದ್ಯಕೀಯ ಮಾಹಿತಿ ಸಂಪೂರ್ಣ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ.", "heading_medical_note": "ನಿಮ್ಮ ವೈದ್ಯಕೀಯ ಟಿಪ್ಪಣಿ", "btn_upload_report": "PDF / Word ಅಪ್‌ಲೋಡ್ ಮಾಡಿ", "btn_sample_note": "ಮಾದರಿ ಟಿಪ್ಪಣಿ ಪ್ರಯತ್ನಿಸಿ", "input_label": "ನಿಮ್ಮ ವೈದ್ಯಕೀಯ ಪಠ್ಯವನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ ಅಥವಾ ಪೇಸ್ಟ್ ಮಾಡಿ:", "input_placeholder": "ಡಿಸ್ಚಾರ್ಜ್ ಸಾರಾಂಶ ಅಥವಾ ಲ್ಯಾಬ್ ವರದಿಯನ್ನು ಇಲ್ಲಿ ಪೇಸ್ಟ್ ಮಾಡಿ ಅಥವಾ PDF/Word ಫೈಲ್ ಡ್ರಾಪ್ ಮಾಡಿ...", "sample_prefix": "ತ್ವರಿತ ಉದಾಹರಣೆಗಳು:", "sample_lung": "ಮಾದರಿ 1: ಶ್ವಾಸಕೋಶದ ಸ್ಥಿತಿ", "sample_diabetes": "ಮಾದರಿ 2: ಮಧುಮೇಹ ತಪಾಸಣೆ", "sample_heart": "ಮಾದರಿ 3: ಹೃದಯದ ಆರೋಗ್ಯ", "btn_check_text": "ವೈದ್ಯಕೀಯ ಪಠ್ಯವನ್ನು ವಿಶ್ಲೇಷಿಸಿ", "heading_findings": "BioSpan ಕಂಡುಕೊಂಡ ಫಲಿತಾಂಶಗಳು", "findings_help": "ಸರಳ ವಿವರಣೆಯನ್ನು ನೋಡಲು ಹೈಲೈಟ್ ಮಾಡಿದ ಪದದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ:", "label_plain_meaning": "ಸರಳ ವಿವರಣೆ:", "btn_save_note": "ಟಿಪ್ಪಣಿಗಳಲ್ಲಿ ಉಳಿಸಿ", "btn_look_up_dictionary": "ಶಬ್ದಕೋಶದಲ್ಲಿ ಹುಡುಕಿ", "btn_copy_text": "ಪಠ್ಯವನ್ನು ನಕಲಿಸಿ", "label_summary_overview": "ರೋಗಿ ಮತ್ತು ವೈದ್ಯರ ಸಾರಾಂಶ", "summary_heading": "ಸರಳ ಭಾಷೆಯ ಸಾರಾಂಶ", "btn_copy_findings": "ಫಲಿತಾಂಶಗಳನ್ನು ನಕಲಿಸಿ", "btn_download_pdf": "PDF ಸಾರಾಂಶವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ", "th_mention": "ಟಿಪ್ಪಣಿಯಲ್ಲಿನ ಉಲ್ಲೇಖ", "th_meaning": "ಸಾಮಾನ್ಯ ಪದಗಳಲ್ಲಿ ಇದರ ಅರ್ಥ", "th_status": "ಸ್ಥಿತಿ", "th_next_steps": "ಸಲಹೆಗಳು ಮತ್ತು ಮುಂದಿನ ಹಂತಗಳು", "status_ready": "ನೆರವಾಗಲು ಸಿದ್ಧವಾಗಿದೆ", "conditions_identified": "ಸ್ಥಿತಿಗಳು ಪತ್ತೆಯಾಗಿವೆ", "condition_identified": "ಸ್ಥಿತಿ ಪತ್ತೆಯಾಗಿದೆ", "status_active": "ಸಕ್ರಿಯ ಸ್ಥಿತಿ", "status_ruled_out": "ತಳ್ಳಿಹಾಕಲಾಗಿದೆ", "status_secondary": "ದ್ವಿತೀಯಕ ಸ್ಥಿತಿ", "detail_tag_active": "ಸಕ್ರಿಯ ಕ್ಲಿನಿಕಲ್ ಫಲಿತಾಂಶ", "detail_tag_secondary": "ದ್ವಿತೀಯಕ ಕ್ಲಿನಿಕಲ್ ಫಲಿತಾಂಶ", "detail_tag_ruled_out": "ತಳ್ಳಿಹಾಕಲಾದ ಉಲ್ಲೇಖ", "tip_active": "ವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ತಪಾಸಣೆ ಮಾಡಿಸಿಕೊಳ್ಳಿ.", "tip_ruled_out": "ಇತಿಹಾಸದಲ್ಲಿ ಈ ಸ್ಥಿತಿಯನ್ನು ತಳ್ಳಿಹಾಕಲಾಗಿದೆ; ತಕ್ಷಣದ ಚಿಕಿತ್ಸೆ ಅಗತ್ಯವಿಲ್ಲ.", "tip_secondary": "ಲಕ್ಷಣಗಳನ್ನು ಗಮನಿಸಿ ಮತ್ತು ತಜ್ಞರೊಂದಿಗೆ ಲ್ಯಾಬ್ ವರದಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.", "file_extracting": "ದಾಖಲೆಯಿಂದ ಪಠ್ಯವನ್ನು ಹೊರತೆಗೆಯಲಾಗುತ್ತಿದೆ...", "file_success": "ಯಶಸ್ವಿಯಾಗಿ ವಿಶ್ಲೇಷಿಸಲಾಗಿದೆ", "file_error": "ಫೈಲ್ ಓದುವಲ್ಲಿ ದೋಷ", "copy_success": "ನಕಲಿಸಲಾಗಿದೆ!", "analyzing_btn": "BioBERT ವಿಶ್ಲೇಷಿಸುತ್ತಿದೆ...", "btn_analyzed": "ವಿಶ್ಲೇಷಿಸಲಾಗಿದೆ", "terms": "ಪದಗಳು", "term": "ಪದ", "nav_check_text": "ಪಠ್ಯ ಪರಿಶೀಲಿಸಿ", "nav_medical_dictionary": "ವೈದ್ಯಕೀಯ ಶಬ್ದಕೋಶ", "nav_saved_results": "ಉಳಿಸಿದ ಫಲಿತಾಂಶಗಳು", "nav_help_guide": "ಸಹಾಯ ಮತ್ತು ಮಾರ್ಗದರ್ಶಿ", "menu_new_note": "ಹೊಸ ರೋಗಿ ಟಿಪ್ಪಣಿ", "menu_load_onco": "ಕ್ಯಾನ್ಸರ್ ಕೇಸ್ ಲೋಡ್ ಮಾಡಿ", "menu_load_neuro": "ನರವಿಜ್ಞಾನ ಕೇಸ್ ಲೋಡ್ ಮಾಡಿ", "menu_print": "ವರದಿ ಮುದ್ರಿಸಿ (PDF)", "menu_dict": "ICD-10 ಶಬ್ದಕೋಶ ನೋಡಿ", "menu_telemetry": "ನ್ಯೂರಲ್ ಎಂಜಿನ್ ರೋಗನಿರ್ಣಯ", "modal_dict_title": "ವೈದ್ಯಕೀಯ ಶಬ್ದಕೋಶ", "modal_dict_subtitle": "ICD-10 ರೋಗ ಸಂಕೇತಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಟಿಪ್ಪಣಿಗೆ ಸೇರಿಸಿ.", "modal_dict_search_ph": "ರೋಗ ಅಥವಾ ಕೋಡ್ ಹುಡುಕಿ...", "cat_all": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು", "cat_onco": "ಆಂಕೊಲಾಜಿ (ಕ್ಯಾನ್ಸರ್)", "cat_cardio": "ಕಾರ್ಡಿಯಾಲಜಿ (ಹೃದಯ)", "cat_pulmo": "ಪಲ್ಮನಾಲಜಿ (ಶ್ವಾಸಕೋಶ)", "cat_neuro": "ನ್ಯೂರಾಲಜಿ (ನರ)", "cat_endo": "ಎಂಡೋಕ್ರೈನ್", "cat_symptoms": "ರೋಗಲಕ್ಷಣಗಳು", "btn_insert_note": "ಟಿಪ್ಪಣಿಗೆ ಸೇರಿಸಿ", "btn_copy_code": "ಕೋಡ್ ನಕಲಿಸಿ", "btn_listen_explanation": "ವಿವರಣೆ ಆಲಿಸಿ", "btn_listen_sub": "ಆಯ್ಕೆಮಾಡಿದ ಭಾರತೀಯ ಭಾಷೆಯಲ್ಲಿ ರೋಗಿಯ ವಿವರಣೆಯನ್ನು ಆಲಿಸಿ", "btn_stop_speech": "ಆಡಿಯೋ ನಿಲ್ಲಿಸಿ", "footer_brand_sub": "ಆರೋಗ್ಯ ಮಾಹಿತಿಯನ್ನು ಸರಳಗೊಳಿಸುವುದು", "footer_privacy": "ಗೌಪ್ಯತೆ ಮತ್ತು ಸುರಕ್ಷತೆ", "footer_patient_guide": "ರೋಗಿ ಮಾರ್ಗದರ್ಶಿ", "footer_disclaimer": "ವೈದ್ಯಕೀಯ ಹಕ್ಕುತ್ಯಾಗ", "modal_saved_title": "ಉಳಿಸಿದ ರೋಗಿ ಸಮಾಲೋಚನೆಗಳು", "modal_saved_subtitle": "ಹಿಂದಿನ ಪ್ರಕರಣಗಳನ್ನು ನಿರ್ವಹಿಸಿ.", "label_stored_encounters": "ಉಳಿಸಿದ ದಾಖಲೆಗಳು", "btn_clear_all_notes": "ಎಲ್ಲವನ್ನೂ ಅಳಿಸಿ", "btn_load_case": "ಕೇಸ್ ತೆರೆಯಿರಿ", "modal_help_title": "BioSpan AI ಮಾರ್ಗದರ್ಶಿ", "modal_help_subtitle": "BioBERT ಮಾದರಿಯ ವಿವರಣೆ.", "modal_telemetry_title": "ಸಿಸ್ಟಮ್ ಟೆಲಿಮೆಟ್ರಿ", "modal_telemetry_subtitle": "ಮೆಮೊರಿ ಮತ್ತು ಮಾದರಿ ಸ್ಥಿತಿ.", "rec_badge": "ವೈದ್ಯಕೀಯ ಸಲಹೆಗಳು & ಮುಂದಿನ ಕ್ರಮಗಳು", "rec_title": "ಸಂದರ್ಭೋಚಿತ ಶಿಫಾರಸುಗಳು & ಆರೈಕೆ ಮಾರ್ಗದರ್ಶನ", "rec_desc": "ರೋಗಿಯ ವರದಿಯ ಆಧಾರದ ಮೇಲೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ರಚಿಸಲಾದ ವೈದ್ಯಕೀಯ ಸಲಹೆಗಳು, ಪರೀಕ್ಷೆಗಳು ಮತ್ತು ಮುನ್ನೆಚ್ಚರಿಕೆಗಳು.", "rec_trigger_label": "ಪ್ರಸ್ತುತ ವರದಿಯ ಸಂದರ್ಭ:", "btn_listen_recommendations": "ಸಲಹೆಗಳನ್ನು ಆಲಿಸಿ", "btn_copy_recommendations": "ಕ್ರಿಯಾ ಯೋಜನೆಯನ್ನು ನಕಲಿಸಿ", "rec_card_immediate": "ತಕ್ಷಣದ ಕ್ರಮಗಳು (ಈಗ ಏನು ಮಾಡಬೇಕು)", "rec_card_diagnostic": "ಶಿಫಾರಸು ಮಾಡಿದ ಪರೀಕ್ಷೆಗಳು (ಮುಂದೆ ಏನು ಮಾಡಬಹುದು)", "rec_card_medication": "ಆರೈಕೆ ನಿರ್ವಹಣೆ & ಸುರಕ್ಷತಾ ಮುನ್ನೆಚ್ಚರಿಕೆಗಳು", "rec_card_monitoring": "ರೋಗಿಯ ಮೇಲ್ವಿಚಾರಣೆ & ಅಪಾಯದ ಚಿಹ್ನೆಗಳು (Red Flags)", "rec_disclaimer_title": "ವೈದ್ಯಕೀಯ ಸಲಹಾ ಸೂಚನೆ", "rec_disclaimer_body": "BioSpan ಸಲಹೆಗಳು ICD-10 ಮಾರ್ಗಸೂಚಿಗಳ ಆಧಾರದ ಮೇಲೆ ಸಹಾಯಕ ವೈದ್ಯಕೀಯ ಸೂಚನೆಗಳಾಗಿವೆ. ಯಾವಾಗಲೂ ವೈದ್ಯರ ನಿರ್ಧಾರದೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.", "findings_select_label": "ಗುರುತಿಸಲಾದ ಕಾಯಿಲೆ ಆಯ್ಕೆಮಾಡಿ", "findings_toggle_title": "ಪ್ಯಾನೆಲ್ ತೆರೆಯಿರಿ / ಮುಚ್ಚಿ", "all_findings": "ಗುರುತಿಸಲಾದ ಎಲ್ಲಾ ಫಲಿತಾಂಶಗಳು", "no_findings": "ಯಾವುದೇ ಕಾಯಿಲೆ ಕಂಡುಬಂದಿಲ್ಲ"}, "ml": {"hero_badge": "ദൈനംദിന ആരോഗ്യ ഭാഷ • ലളിതമായ ഭാഷ", "hero_title": "സെക്കൻഡുകൾക്കുള്ളിൽ മെഡിക്കൽ പദങ്ങളും രോഗങ്ങളും കണ്ടെത്തുക.", "hero_desc": "ഏതെങ്കിലും ഡോക്ടറുടെ കുറിപ്പോ മെഡിക്കൽ റിപ്പോർട്ടോ അപ്‌ലോഡ് ചെയ്യുക. BioSpan രോഗങ്ങളെ ലളിതമായി വിശദീകരിക്കുന്നു.", "card_detection_title": "തത്സമയ കണ്ടെത്തൽ", "card_detection_desc": "റിപ്പോർട്ട് നൽകിയ ഉടൻ തന്നെ രോഗങ്ങളും ലക്ഷണങ്ങളും തിരിച്ചറിയുന്നു.", "card_plain_title": "ലളിതമായ മലയാള വിശദീകരണം", "card_plain_desc": "സങ്കീർണ്ണമായ പദങ്ങളില്ലാതെ വ്യക്തമായ വിശദീകരണം.", "card_privacy_title": "100% സുരക്ഷിതവും രഹസ്യവും", "card_privacy_desc": "നിങ്ങളുടെ വിവരങ്ങൾ തികച്ചും സ്വകാര്യമായി സൂക്ഷിക്കുന്നു.", "heading_medical_note": "നിങ്ങളുടെ മെഡിക്കൽ കുറിപ്പ്", "btn_upload_report": "PDF / Word അപ്‌ലോഡ് ചെയ്യുക", "btn_sample_note": "മാതൃകാ കുറിപ്പ് നോക്കുക", "input_label": "നിങ്ങളുടെ മെഡിക്കൽ കുറിപ്പ് ഇവിടെ പേസ്റ്റ് ചെയ്യുക:", "input_placeholder": "ഡിസ്ചാർജ് കുറിപ്പോ ലാബ് റിപ്പോർട്ടോ പേസ്റ്റ് ചെയ്യുക അല്ലെങ്കിൽ PDF/Word ഫയൽ നൽകുക...", "sample_prefix": "ഉദാഹരണങ്ങൾ:", "sample_lung": "മാതൃക 1: ശ്വാസകോശ രോഗം", "sample_diabetes": "മാതൃക 2: പ്രമേഹ പരിശോധന", "sample_heart": "മാതൃക 3: ഹൃദയാരോഗ്യം", "btn_check_text": "മെഡിക്കൽ ടെക്സ്റ്റ് പരിശോധിക്കുക", "heading_findings": "BioSpan കണ്ടെത്തിയ വിവരങ്ങൾ", "findings_help": "ലളിതമായ വിശദീകരണം കാണാൻ പദത്തിൽ ക്ലിക്ക് ചെയ്യുക:", "label_plain_meaning": "ലളിതമായ അർത്ഥം:", "btn_save_note": "കുറിപ്പുകളിൽ സൂക്ഷിക്കുക", "btn_look_up_dictionary": "ഡിക്ഷണറിയിൽ നോക്കുക", "btn_copy_text": "പകർപ്പുക", "label_summary_overview": "രോഗിക്കും ഡോക്ടർക്കുമുള്ള അവലോകനം", "summary_heading": "ലളിതമായ ഭാഷാ സംഗ്രഹം", "btn_copy_findings": "ഫലങ്ങൾ കോപ്പി ചെയ്യുക", "btn_download_pdf": "PDF സംഗ്രഹം ഡൗൺലോഡ് ചെയ്യുക", "th_mention": "കുറിപ്പിലെ പദം", "th_meaning": "ലളിതമായ അർത്ഥം", "th_status": "സ്ഥിതി", "th_next_steps": "സഹായ നിർദ്ദേശങ്ങൾ", "status_ready": "സഹായത്തിന് സജ്ജം", "conditions_identified": "രോഗങ്ങൾ കണ്ടെത്തി", "condition_identified": "രോഗം കണ്ടെത്തി", "status_active": "സജീവ രോഗാവസ്ഥ", "status_ruled_out": "തള്ളിക്കളഞ്ഞത്", "status_secondary": "ദ്വിതീയ രോഗാവസ്ഥ", "detail_tag_active": "സജീവ ക്ലിനിക്കൽ കണ്ടെത്തൽ", "detail_tag_secondary": "ദ്വിതീയ ക്ലിനിക്കൽ കണ്ടെത്തൽ", "detail_tag_ruled_out": "ഒഴിവാക്കപ്പെട്ട കണ്ടെത്തൽ", "tip_active": "ഡോക്ടറുമായി കൺസൾട്ട് ചെയ്ത് തുടർപരിശോധന നടത്തുക.", "tip_ruled_out": "ഈ രോഗം സ്ഥിരീകരിച്ചിട്ടില്ല; അടിയന്തര ചികിത്സ ആവശ്യമില്ല.", "tip_secondary": "ലക്ഷണങ്ങൾ നിരീക്ഷിക്കുകയും ലാബ് റിപ്പോർട്ടുകൾ പരിശോധിക്കുകയും ചെയ്യുക.", "file_extracting": "ഫയലിൽ നിന്ന് ഉള്ളടക്കം എടുക്കുന്നു...", "file_success": "വിജയകരമായി വിശകലനം ചെയ്തു", "file_error": "ഫയൽ വായിക്കാൻ കഴിഞ്ഞില്ല", "copy_success": "കോപ്പി ചെയ്തു!", "analyzing_btn": "BioBERT പരിശോധിക്കുന്നു...", "btn_analyzed": "പരിശോധിച്ചു", "terms": "പദങ്ങൾ", "term": "പദം", "nav_check_text": "ടെക്സ്റ്റ് പരിശോധിക്കുക", "nav_medical_dictionary": "മെഡിക്കൽ നിഘണ്ടു", "nav_saved_results": "സംരക്ഷിച്ച ഫലങ്ങൾ", "nav_help_guide": "സഹായവും വഴികാട്ടിയും", "menu_new_note": "പുതിയ രോഗി കുറിപ്പ്", "menu_load_onco": "ഓങ്കോളജി കേസ് ലോഡ് ചെയ്യുക", "menu_load_neuro": "ന്യൂറോളജി കേസ് ലോഡ് ചെയ്യുക", "menu_print": "റിപ്പോർട്ട് പ്രിന്റ് ചെയ്യുക (PDF)", "menu_dict": "ICD-10 നിഘണ്ടു കാണുക", "menu_telemetry": "ന്യൂറൽ എൻജിൻ ഡയഗ്നോസ്റ്റിക്സ്", "modal_dict_title": "ക്ലിനിക്കൽ മെഡിക്കൽ നിഘണ്ടു", "modal_dict_subtitle": "ICD-10 രോഗ കോഡുകൾ കണ്ടെത്തി കുറിപ്പിൽ ചേർക്കുക.", "modal_dict_search_ph": "രോഗം അല്ലെങ്കിൽ കോഡ് തിരയുക...", "cat_all": "എല്ലാ വിഭാഗങ്ങളും", "cat_onco": "ഓങ്കോളജി (കാൻസർ)", "cat_cardio": "കാർഡിയോളജി (ഹൃദയം)", "cat_pulmo": "പൾമണോളജി (ശ്വാസകോശം)", "cat_neuro": "ന്യൂറോളജി", "cat_endo": "എൻഡോക്രൈൻ", "cat_symptoms": "ലക്ഷണങ്ങൾ", "btn_insert_note": "കുറിപ്പിൽ ചേർക്കുക", "btn_copy_code": "കോഡ് പകർത്തുക", "btn_listen_explanation": "വിശദീകരണം കേൾക്കുക", "btn_listen_sub": "തിരഞ്ഞെടുത്ത ഇന്ത്യൻ ഭാഷയിൽ രോഗിക്കുള്ള വിവരണം കേൾക്കുക", "btn_stop_speech": "ശബ്ദം നിർത്തുക", "footer_brand_sub": "ആരോഗ്യ വിവരങ്ങൾ ലളിതമാക്കുന്നു", "footer_privacy": "സ്വകാര്യതയും സുരക്ഷയും", "footer_patient_guide": "രോഗി വഴികാട്ടി", "footer_disclaimer": "മെഡിക്കൽ നിരാകരണം", "modal_saved_title": "സംരക്ഷിച്ച കൺസൾട്ടേഷനുകൾ", "modal_saved_subtitle": "മുൻകാല കേസുകൾ കൈകാര്യം ചെയ്യുക.", "label_stored_encounters": "സംരക്ഷിച്ച രേഖകൾ", "btn_clear_all_notes": "എല്ലാം നീക്കം ചെയ്യുക", "btn_load_case": "തുറക്കുക", "modal_help_title": "BioSpan AI വഴികാട്ടി", "modal_help_subtitle": "BioBERT മാതൃകയുടെ പ്രവർത്തനം.", "modal_telemetry_title": "സിസ്റ്റം ടെലിമെട്രി", "modal_telemetry_subtitle": "മെമ്മറിയും മോഡൽ വിവരങ്ങളും.", "rec_badge": "ക്ലിനിക്കൽ നിർദ്ദേശങ്ങളും അടുത്ത ഘട്ടങ്ങളും", "rec_title": "സാഹചര്യത്തിനനുസൃതമായ നിർദ്ദേശങ്ങളും പരിചരണവും", "rec_desc": "രോഗിയുടെ റിപ്പോർട്ടിനെ അടിസ്ഥാനമാക്കി സ്വയമേവ തയ്യാറാക്കിയ ക്ലിനിക്കൽ ഉപദേശങ്ങളും പരിശോധനകളും മുൻകരുതലുകളും.", "rec_trigger_label": "നിലവിലെ റിപ്പോർട്ട് സാഹചര്യം:", "btn_listen_recommendations": "നിർദ്ദേശങ്ങൾ കേൾക്കുക", "btn_copy_recommendations": "കർമ്മ പദ്ധതി പകർത്തുക", "rec_card_immediate": "ഉടൻ ചെയ്യേണ്ട കാര്യങ്ങൾ", "rec_card_diagnostic": "ശുപാർശ ചെയ്യുന്ന പരിശോധനകൾ (അடுத்து എന്ത് ചെയ്യാം)", "rec_card_medication": "പരിചരണ മാനേജ്‌മെന്റും സുരക്ഷാ മുൻകരുതലുകളും", "rec_card_monitoring": "രോഗി നിരീക്ഷണവും അപകട മുന്നറിയിപ്പുകളും (Red Flags)", "rec_disclaimer_title": "മെഡിക്കൽ ഉപദേശ അറിയിപ്പ്", "rec_disclaimer_body": "BioSpan നിർദ്ദേശങ്ങൾ ICD-10 മാർഗ്ഗനിർദ്ദേശങ്ങളെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. എല്ലായ്പ്പോഴും ഡോക്ടറുടെ തീരുമാനവുമായി ഒത്തുനോക്കുക.", "findings_select_label": "കണ്ടെത്തിയ രോഗം തിരഞ്ഞെടുക്കുക", "findings_toggle_title": "പാനൽ തുറക്കുക / അടയ്ക്കുക", "all_findings": "കണ്ടെത്തിയ എല്ലാ രോഗങ്ങളും", "no_findings": "രോഗങ്ങളൊന്നും കണ്ടെത്തിയില്ല"}, "pa": {"hero_badge": "ਰੋਜ਼ਾਨਾ ਸਿਹਤ ਭਾਸ਼ਾ • ਆਸਾਨ ਭਾਸ਼ਾ", "hero_title": "ਸਕਿੰਟਾਂ ਵਿੱਚ ਡਾਕਟਰੀ ਸ਼ਬਦ ਅਤੇ ਬਿਮਾਰੀਆਂ ਲੱਭੋ।", "hero_desc": "ਕਿਸੇ ਵੀ ਡਾਕਟਰ ਦੀ ਪਰਚੀ ਜਾਂ ਮੈਡੀਕਲ ਰਿਪੋਰਟ ਨੂੰ ਅਪਲੋਡ ਕਰੋ। BioSpan ਬਿਮਾਰੀਆਂ ਦੀ ਸੌਖੀ ਭਾਸ਼ਾ ਵਿੱਚ ਪਛਾਣ ਕਰਦਾ ਹੈ।", "card_detection_title": "ਤੁਰੰਤ ਪਛਾਣ", "card_detection_desc": "ਪੇਸਟ ਕਰਦੇ ਹੀ ਬਿਮਾਰੀਆਂ ਅਤੇ ਲੱਛਣਾਂ ਦੀ ਪਛਾਣ।", "card_plain_title": "ਆਸਾਨ ਪੰਜਾਬੀ ਵਿੱਚ ਵਿਆਖਿਆ", "card_plain_desc": "ਗੁੰਝਲਦਾਰ ਮੈਡੀਕਲ ਸ਼ਬਦਾਂ ਤੋਂ ਬਿਨਾਂ ਸਪਸ਼ਟ ਵਿਆਖਿਆ।", "card_privacy_title": "100% ਨਿੱਜੀ ਅਤੇ ਸੁਰੱਖਿਅਤ", "card_privacy_desc": "ਤੁਹਾਡਾ ਡੇਟਾ ਪੂਰੀ ਤਰ੍ਹਾਂ ਸੁਰੱਖਿਅਤ ਅਤੇ ਗੁਪਤ ਰਹਿੰਦਾ ਹੈ।", "heading_medical_note": "ਤੁਹਾਡਾ ਮੈਡੀਕਲ ਨੋਟ", "btn_upload_report": "PDF / Word ਅੱਪਲੋਡ ਕਰੋ", "btn_sample_note": "ਨਮੂਨਾ ਨੋਟ ਦੇਖੋ", "input_label": "ਇੱਥੇ ਆਪਣਾ ਮੈਡੀਕਲ ਟੈਕਸਟ ਦਰਜ ਕਰੋ ਜਾਂ ਪੇਸਟ ਕਰੋ:", "input_placeholder": "ਡਿਸਚਾਰਜ ਨੋਟ ਜਾਂ ਲੈਬ ਰਿਪੋਰਟ ਇੱਥੇ ਪੇਸਟ ਕਰੋ ਜਾਂ PDF/Word ਫਾਈਲ ਡ੍ਰੌਪ ਕਰੋ...", "sample_prefix": "ਉਦਾਹਰਣਾਂ:", "sample_lung": "ਨਮੂਨਾ 1: ਫੇਫੜਿਆਂ ਦੀ ਸਥਿਤੀ", "sample_diabetes": "ਨਮੂਨਾ 2: ਸ਼ੂਗਰ ਜਾਂਚ", "sample_heart": "ਨਮੂਨਾ 3: ਦਿਲ ਦੀ ਸਿਹਤ", "btn_check_text": "ਮੈਡੀਕਲ ਟੈਕਸਟ ਦੀ ਜਾਂਚ ਕਰੋ", "heading_findings": "BioSpan ਦੁਆਰਾ ਲੱਭੇ ਗਏ ਨਤੀਜੇ", "findings_help": "ਸੌਖੀ ਵਿਆਖਿਆ ਦੇਖਣ ਲਈ ਸ਼ਬਦ 'ਤੇ ਕਲਿੱਕ ਕਰੋ:", "label_plain_meaning": "ਸੌਖੇ ਸ਼ਬਦਾਂ ਵਿੱਚ ਅਰਥ:", "btn_save_note": "ਨੋਟਸ ਵਿੱਚ ਸੇਵ ਕਰੋ", "btn_look_up_dictionary": "ਡਿਕਸ਼ਨਰੀ ਵਿੱਚ ਲੱਭੋ", "btn_copy_text": "ਕਾਪੀ ਕਰੋ", "label_summary_overview": "ਮਰੀਜ਼ ਅਤੇ ਡਾਕਟਰ ਲਈ ਸੰਖੇਪ", "summary_heading": "ਸੌਖੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸੰਖੇਪ", "btn_copy_findings": "ਨਤੀਜੇ ਕਾਪੀ ਕਰੋ", "btn_download_pdf": "PDF ਸੰਖੇਪ ਡਾਊਨਲੋਡ ਕਰੋ", "th_mention": "ਨੋਟ ਵਿੱਚ ਜ਼ਿਕਰ", "th_meaning": "ਆਮ ਸ਼ਬਦਾਂ ਵਿੱਚ ਇਸਦਾ ਮਤਲਬ", "th_status": "ਸਥਿਤੀ", "th_next_steps": "ਸਲਾਹ ਅਤੇ ਅਗਲੇ ਕਦਮ", "status_ready": "ਮਦਦ ਲਈ ਤਿਆਰ", "conditions_identified": "ਬਿਮਾਰੀਆਂ ਲੱਭੀਆਂ ਗਈਆਂ", "condition_identified": "ਬਿਮਾਰੀ ਲੱਭੀ ਗਈ", "status_active": "ਐਕਟਿਵ ਸਥਿਤੀ", "status_ruled_out": "ਰੱਦ ਕੀਤਾ ਗਿਆ", "status_secondary": "ਦੂਜੀ ਸਥਿਤੀ", "detail_tag_active": "ਐਕਟਿਵ ਕਲੀਨਿਕਲ ਨਤੀਜਾ", "detail_tag_secondary": "ਸੈਕੰਡਰੀ ਕਲੀਨਿਕਲ ਨਤੀਜਾ", "detail_tag_ruled_out": "ਰੱਦ ਕੀਤਾ ਗਿਆ ਜ਼ਿਕਰ", "tip_active": "ਡਾਕਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ ਅਤੇ ਅਗਲੀ ਜਾਂਚ ਕਰਵਾਓ।", "tip_ruled_out": "ਇਤਿਹਾਸ ਵਿੱਚ ਇਹ ਸਥਿਤੀ ਰੱਦ ਕੀਤੀ ਗਈ ਹੈ।", "tip_secondary": "ਲੱਛਣਾਂ 'ਤੇ ਨਜ਼ਰ ਰੱਖੋ ਅਤੇ ਮਾਹਿਰ ਨਾਲ ਰਿਪੋਰਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।", "file_extracting": "ਫਾਈਲ ਵਿੱਚੋਂ ਟੈਕਸਟ ਕੱਢਿਆ ਜਾ ਰਿਹਾ ਹੈ...", "file_success": "ਸਫਲਤਾਪੂਰਵਕ ਜਾਂਚ ਕੀਤੀ ਗਈ", "file_error": "ਫਾਈਲ ਪੜ੍ਹਨ ਵਿੱਚ ਅਸਫਲ", "copy_success": "ਕਾਪੀ ਹੋ ਗਿਆ!", "analyzing_btn": "BioBERT ਜਾਂਚ ਕਰ ਰਿਹਾ ਹੈ...", "btn_analyzed": "ਜਾਂਚ ਹੋ ਗਈ", "terms": "ਸ਼ਬਦ", "term": "ਸ਼ਬਦ", "nav_check_text": "ਟੈਕਸਟ ਜਾਂਚੋ", "nav_medical_dictionary": "ਮੈਡੀਕਲ ਡਿਕਸ਼ਨਰੀ", "nav_saved_results": "ਸੇਵ ਕੀਤੇ ਨਤੀਜੇ", "nav_help_guide": "ਮਦਦ ਅਤੇ ਗਾਈਡ", "menu_new_note": "ਨਵਾਂ ਮਰੀਜ਼ ਨੋਟ", "menu_load_onco": "ਕੈਂਸਰ ਕੇਸ ਲੋਡ ਕਰੋ", "menu_load_neuro": "ਨਿਊਰੋਲੋਜੀ ਕੇਸ ਲੋਡ ਕਰੋ", "menu_print": "ਰਿਪੋਰਟ ਪ੍ਰਿੰਟ ਕਰੋ (PDF)", "menu_dict": "ICD-10 ਡਿਕਸ਼ਨਰੀ ਦੇਖੋ", "menu_telemetry": "ਨਿਊਰਲ ਇੰਜਣ ਡਾਇਗਨੌਸਟਿਕਸ", "modal_dict_title": "ਕਲੀਨਿਕਲ ਮੈਡੀਕਲ ਡਿਕਸ਼ਨਰੀ", "modal_dict_subtitle": "ICD-10 ਕੋਡ ਲੱਭੋ ਅਤੇ ਆਪਣੇ ਨੋਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।", "modal_dict_search_ph": "ਬਿਮਾਰੀ ਦਾ ਨਾਮ ਜਾਂ ਕੋਡ ਲੱਭੋ...", "cat_all": "ਸਾਰੇ ਵਿਭਾਗ", "cat_onco": "ਆਨਕੋਲੋਜੀ (ਕੈਂਸਰ)", "cat_cardio": "ਕਾਰਡੀਓਲੋਜੀ (ਦਿਲ)", "cat_pulmo": "ਪਲਮੋਨੋਲੋਜੀ (ਫੇਫੜੇ)", "cat_neuro": "ਨਿਊਰੋਲੋਜੀ", "cat_endo": "ਐਂਡੋਕ੍ਰਾਈਨ", "cat_symptoms": "ਲੱਛਣ", "btn_insert_note": "ਨੋਟ ਵਿੱਚ ਜੋੜੋ", "btn_copy_code": "ਕੋਡ ਕਾਪੀ ਕਰੋ", "btn_listen_explanation": "ਵਿਆਖਿਆ ਸੁਣੋ", "btn_listen_sub": "ਚੁਣੀ ਹੋਈ ਭਾਰਤੀ ਭਾਸ਼ਾ ਵਿੱਚ ਮਰੀਜ਼ ਦੀ ਵਿਆਖਿਆ ਸੁਣੋ", "btn_stop_speech": "ਆਡੀਓ ਰੋਕੋ", "footer_brand_sub": "ਸਿਹਤ ਜਾਣਕਾਰੀ ਨੂੰ ਆਸਾਨ ਬਣਾਉਣਾ", "footer_privacy": "ਗੁਪਤਤਾ ਅਤੇ ਸੁਰੱਖਿਆ", "footer_patient_guide": "ਮਰੀਜ਼ ਗਾਈਡ", "footer_disclaimer": "ਮੈਡੀਕਲ ਬੇਦਾਅਵਾ", "modal_saved_title": "ਸੇਵ ਕੀਤੇ ਮਰੀਜ਼ ਨੋਟਸ", "modal_saved_subtitle": "ਪਹਿਲਾਂ ਵਿਸ਼ਲੇਸ਼ਣ ਕੀਤੇ ਕੇਸਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।", "label_stored_encounters": "ਸੇਵ ਕੀਤੇ ਰਿਕਾਰਡ", "btn_clear_all_notes": "ਸਭ ਸਾਫ਼ ਕਰੋ", "btn_load_case": "ਕੇਸ ਖੋਲ੍ਹੋ", "modal_help_title": "BioSpan AI ਗਾਈਡ", "modal_help_subtitle": "BioBERT ਮਾਡਲ ਕਾਰਜਪ੍ਰਣਾਲੀ।", "modal_telemetry_title": "ਸਿਸਟਮ ਟੈਲੀਮੈਟਰੀ", "modal_telemetry_subtitle": "ਮੈਮੋਰੀ ਅਤੇ ਮਾਡਲ ਸਥਿਤੀ।", "rec_badge": "ਕਲੀਨਿਕਲ ਸੁਝਾਅ ਅਤੇ ਅਗਲੇ ਕਦਮ", "rec_title": "ਸੰਦਰਭ-ਅਧਾਰਤ ਸਿਫਾਰਸ਼ਾਂ ਅਤੇ ਦੇਖਭਾਲ ਮਾਰਗਦਰਸ਼ਨ", "rec_desc": "ਮਰੀਜ਼ ਦੀ ਰਿਪੋਰਟ ਦੇ ਆਧਾਰ 'ਤੇ ਤਿਆਰ ਕੀਤੀ ਗਈ ਕਲੀਨਿਕਲ ਸਲਾਹ, ਜਾਂਚਾਂ ਅਤੇ ਸਾਵਧਾਨੀਆਂ।", "rec_trigger_label": "ਮੌਜੂਦਾ ਰਿਪੋਰਟ ਸੰਦਰਭ:", "btn_listen_recommendations": "ਸੁਝਾਅ ਸੁਣੋ", "btn_copy_recommendations": "ਕਾਰਜ ਯੋਜਨਾ ਕਾਪੀ ਕਰੋ", "rec_card_immediate": "ਤੁਰੰਤ ਕਦਮ (ਹੁਣ ਕੀ ਕਰਨਾ ਹੈ)", "rec_card_diagnostic": "ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਜਾਂਚਾਂ (ਅੱਗੇ ਕੀ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ)", "rec_card_medication": "ਦੇਖਭਾਲ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸੁਰੱਖਿਆ ਸਾਵਧਾਨੀਆਂ", "rec_card_monitoring": "ਮਰੀਜ਼ ਦੀ ਨਿਗਰਾਨੀ ਅਤੇ ਖ਼ਤਰੇ ਦੇ ਚਿੰਨ੍ਹ (Red Flags)", "rec_disclaimer_title": "ਡਾਕਟਰੀ ਸਲਾਹਕਾਰ ਨੋਟਿਸ", "rec_disclaimer_body": "BioSpan ਦੇ ਸੁਝਾਅ ICD-10 ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ 'ਤੇ ਆਧਾਰਿਤ ਸਹਾਇਕ ਕਲੀਨਿਕਲ ਸੰਕੇਤ ਹਨ।", "findings_select_label": "ਪਛਾਣੀ ਗਈ ਬਿਮਾਰੀ ਚੁਣੋ", "findings_toggle_title": "ਪੈਨਲ ਖੋਲ੍ਹੋ / ਬੰਦ ਕਰੋ", "all_findings": "ਸਾਰੇ ਪਛਾਣੇ ਗਏ ਨਤੀਜੇ", "no_findings": "ਕੋਈ ਬਿਮਾਰੀ ਨਹੀਂ ਮਿਲੀ"}, "or": {"hero_badge": "ଦୈନନ୍ଦିନ ସ୍ୱାସ୍ଥ୍ୟ ଭାଷା • ସରଳ ଭାଷା", "hero_title": "କିଛି ସେକେଣ୍ଡରେ ଚିକିତ୍ସା ଶବ୍ଦ ଏବଂ ରୋଗ ଚିହ୍ନଟ କରନ୍ତୁ।", "hero_desc": "ଡାକ୍ତରଙ୍କ ପ୍ରେସକ୍ରିପସନ କିମ୍ବା ରିପୋର୍ଟ ଅପଲୋଡ କରନ୍ତୁ। BioSpan ରୋଗ ଓ ଲକ୍ଷଣଗୁଡ଼ିକୁ ସରଳ ଭାଷାରେ ବୁଝାଏ।", "card_detection_title": "ତୁରନ୍ତ ଚିହ୍ନଟ", "card_detection_desc": "ପେଷ୍ଟ କରିବା ମାତ୍ରେ ରୋଗ ଓ ଲକ୍ଷଣ ଚିହ୍ନଟ ହୁଏ।", "card_plain_title": "ସରଳ ଓଡ଼ିଆରେ ବ୍ୟାଖ୍ୟା", "card_plain_desc": "କଠିନ ଚିକିତ୍ସା ଶବ୍ଦ ବିନା ସ୍ପଷ୍ଟ ଓ ସହଜ ବ୍ୟାଖ୍ୟା।", "card_privacy_title": "୧୦୦% ବ୍ୟକ୍ତିଗତ ଓ ସୁରକ୍ଷିତ", "card_privacy_desc": "ଆପଣଙ୍କ ତଥ୍ୟ ସମ୍ପୂର୍ଣ୍ଣ ଗୋପନୀୟ ରହିଥାଏ।", "heading_medical_note": "ଆପଣଙ୍କ ମେଡିକାଲ ନୋଟ", "btn_upload_report": "PDF / Word ଅପଲୋଡ କରନ୍ତୁ", "btn_sample_note": "ନମୁନା ନୋଟ ଦେଖନ୍ତୁ", "input_label": "ଏଠାରେ ଆପଣଙ୍କ ରିପୋର୍ଟ ପେଷ୍ଟ କରନ୍ତୁ କିମ୍ବା ଲେଖନ୍ତୁ:", "input_placeholder": "ପ୍ରେସକ୍ରିପସନ ବା ରିପୋର୍ଟ ଏଠାରେ ପେଷ୍ଟ କରନ୍ତୁ କିମ୍ବା PDF/Word ଫାଇଲ ଦିଅନ୍ତୁ...", "sample_prefix": "ଉଦାହରଣ:", "sample_lung": "ନମୁନା ୧: ଫୁସଫୁସ ସମସ୍ୟା", "sample_diabetes": "ନମୁନା ୨: ମଧୁମେହ ପରୀକ୍ଷା", "sample_heart": "ନମୁନା ୩: ହୃଦୟ ସ୍ୱାସ୍ଥ୍ୟ", "btn_check_text": "ଚିକିତ୍ସା ପାଠ୍ୟ ବିଶ୍ଳେଷଣ କରନ୍ତୁ", "heading_findings": "BioSpan ଦ୍ୱାରା ଚିହ୍ନଟ ତଥ୍ୟ", "findings_help": "ସରଳ ବ୍ୟାଖ୍ୟା ଦେଖିବା ପାଇଁ ଶବ୍ଦ ଉପରେ କ୍ଲିକ କରନ୍ତୁ:", "label_plain_meaning": "ସାଧାରଣ ଶବ୍ଦରେ ଅର୍ଥ:", "btn_save_note": "ନୋଟରେ ସାଇତି ରଖନ୍ତୁ", "btn_look_up_dictionary": "ଅଭିଧାନରେ ଖୋଜନ୍ତୁ", "btn_copy_text": "କପି କରନ୍ତୁ", "label_summary_overview": "ରୋଗୀ ଓ ଡାକ୍ତରଙ୍କ ପାଇଁ ସାରାଂଶ", "summary_heading": "ସରଳ ଭାଷାରେ ସାରାଂଶ", "btn_copy_findings": "ଫଳାଫଳ କପି କରନ୍ତୁ", "btn_download_pdf": "PDF ସାରାଂଶ ଡାଉନଲୋଡ କରନ୍ତୁ", "th_mention": "ନୋଟରେ ଉଲ୍ଲେଖ", "th_meaning": "ସାଧାରଣ ଶବ୍ଦରେ ଏହାର ଅର୍ଥ", "th_status": "ସ୍ଥିତି", "th_next_steps": "ପରାମର୍ଶ ଓ ପରବର୍ତ୍ତୀ ପଦକ୍ଷେପ", "status_ready": "ସାହାଯ୍ୟ ପାଇଁ ପ୍ରସ୍ତୁତ", "conditions_identified": "ରୋଗ ଚିହ୍ନଟ ହୋଇଛି", "condition_identified": "ରୋଗ ଚିହ୍ନଟ ହୋଇଛି", "status_active": "ସକ୍ରିୟ ସ୍ଥିତି", "status_ruled_out": "ବାତିଲ / ନାହିଁ", "status_secondary": "ଦ୍ୱିତୀୟକ ସ୍ଥିତି", "detail_tag_active": "ସକ୍ରିୟ କ୍ଲିନିକାଲ ତଥ୍ୟ", "detail_tag_secondary": "ଦ୍ୱିତୀୟକ କ୍ଲିନିକାଲ ତଥ୍ୟ", "detail_tag_ruled_out": "ବାତିଲ କରାଯାଇଥିବା ତଥ୍ୟ", "tip_active": "ଡାକ୍ତରଙ୍କ ପରାମର୍ଶ ନିଅନ୍ତୁ ଏବଂ ଯାଞ୍ଚ କରନ୍ତୁ।", "tip_ruled_out": "ପୂର୍ବ ଇତିହାସରେ ଏହି ରୋଗ ନାହିଁ; ତୁରନ୍ତ ଚିକିତ୍ସା ଦରକାର ନାହିଁ।", "tip_secondary": "ଲକ୍ଷଣ ଉପରେ ନଜର ରଖନ୍ତୁ ଏବଂ ବିଶେଷଜ୍ଞଙ୍କ ସହ ଆଲୋଚନା କରନ୍ତୁ।", "file_extracting": "ଫାଇଲରୁ ପାଠ୍ୟ ସଂଗ୍ରହ କରାଯାଉଛି...", "file_success": "ସଫଳତାର ସହ ବିଶ୍ଳେଷଣ କରାଗଲା", "file_error": "ଫାଇଲ ପଢିବାରେ ତ୍ରୁଟି", "copy_success": "କପି ହୋଇଗଲା!", "analyzing_btn": "BioBERT ବିଶ୍ଳେଷଣ କରୁଛି...", "btn_analyzed": "ବିଶ୍ଳେଷିତ", "terms": "ଶବ୍ଦ", "term": "ଶବ୍ଦ", "nav_check_text": "ପାଠ୍ୟ ଯାଞ୍ଚ", "nav_medical_dictionary": "ଡାକ୍ତରୀ ଅଭିଧାନ", "nav_saved_results": "ସାଇତିତ ଫଳାଫଳ", "nav_help_guide": "ସହାୟତା ଓ ମାର୍ଗଦର୍ଶିକା", "menu_new_note": "ନୂତନ ରୋଗୀ ନୋଟ", "menu_load_onco": "କର୍କଟ କେସ ଲୋଡ କରନ୍ତୁ", "menu_load_neuro": "ସ୍ନାୟୁ କେସ ଲୋଡ କରନ୍ତୁ", "menu_print": "ରିପୋର୍ଟ ପ୍ରିଣ୍ଟ କରନ୍ତୁ (PDF)", "menu_dict": "ICD-10 ଅଭିଧାନ ଦେଖନ୍ତୁ", "menu_telemetry": "ନ୍ୟୁରାଲ ଇଞ୍ଜିନ ନିଦାନ", "modal_dict_title": "ଚିକିତ୍ସା ଅଭିଧାନ", "modal_dict_subtitle": "ICD-10 କୋଡ ଖୋଜନ୍ତୁ ଏବଂ ନୋଟରେ ଯୋଡ଼ନ୍ତୁ।", "modal_dict_search_ph": "ରୋଗ ନାମ ବା କୋଡ ଖୋଜନ୍ତୁ...", "cat_all": "ସମସ୍ତ ବିଭାଗ", "cat_onco": "କର୍କଟ ବିଭାଗ", "cat_cardio": "ହୃଦରୋଗ", "cat_pulmo": "ଫୁସଫୁସ ରୋଗ", "cat_neuro": "ସ୍ନାୟୁରୋଗ", "cat_endo": "ଏଣ୍ଡୋକ୍ରାଇନ", "cat_symptoms": "ଲକ୍ଷଣସମୂହ", "btn_insert_note": "ନୋଟରେ ଯୋଡ଼ନ୍ତୁ", "btn_copy_code": "କୋଡ କପି କରନ୍ତୁ", "btn_listen_explanation": "ବ୍ୟାଖ୍ୟା ଶୁଣନ୍ତୁ", "btn_listen_sub": "ମନୋନୀତ ଭାରତୀୟ ଭାଷାରେ ରୋଗୀ ବ୍ୟାଖ୍ୟା ଶୁଣନ୍ତୁ", "btn_stop_speech": "ଅଡିଓ ବନ୍ଦ କରନ୍ତୁ", "footer_brand_sub": "ସ୍ୱାସ୍ଥ୍ୟ ତଥ୍ୟକୁ ସରଳ କରିବା", "footer_privacy": "ଗୋପନୀୟତା ଓ ସୁରକ୍ଷା", "footer_patient_guide": "ରୋଗୀ ମାର୍ଗଦର୍ଶିକା", "footer_disclaimer": "ଚିକିତ୍ସା ଅସ୍ୱୀକାର", "modal_saved_title": "ସାଇତିତ ରୋଗୀ ପରାମର୍ଶ", "modal_saved_subtitle": "ପୂର୍ବରୁ ବିଶ୍ଳେଷଣ ହୋଇଥିବା କେସଗୁଡିକ ପରିଚାଳନା କରନ୍ତୁ।", "label_stored_encounters": "ସାଇତିତ ରେକର୍ଡ", "btn_clear_all_notes": "ସବୁ ସଫା କରନ୍ତୁ", "btn_load_case": "କେସ ଖୋଲନ୍ତୁ", "modal_help_title": "BioSpan AI ମାର୍ଗଦର୍ଶିକା", "modal_help_subtitle": "BioBERT ମଡେଲ କାର୍ଯ୍ୟପ୍ରଣାଳୀ।", "modal_telemetry_title": "ସିଷ୍ଟମ ଟେଲିମେଟ୍ରି", "modal_telemetry_subtitle": "ମେମୋରୀ ଓ ମଡେଲ ସ୍ଥିତି।", "rec_badge": "କ୍ଲିନିକାଲ୍ ପରାମର୍ଶ ଏବଂ ପରବର୍ତ୍ତୀ ପଦକ୍ଷେପ", "rec_title": "ପ୍ରାସଙ୍ଗିକ ସୁପାରିଶ ଏବଂ ଯତ୍ନ ମାର୍ଗଦର୍ଶିକା", "rec_desc": "ରୋଗୀଙ୍କ ରିପୋର୍ଟ ଆଧାରରେ ପ୍ରସ୍ତୁତ କ୍ଲିନିକାଲ୍ ପରାମର୍ଶ, ପରୀକ୍ଷା ଏବଂ ସାବଧାନତା।", "rec_trigger_label": "ବର୍ତ୍ତମାନର ରିପୋର୍ଟ ପ୍ରସଙ୍ଗ:", "btn_listen_recommendations": "ପରାମର୍ଶ ଶୁଣନ୍ତୁ", "btn_copy_recommendations": "କାର୍ଯ୍ୟ ଯୋଜନା କପି କରନ୍ତୁ", "rec_card_immediate": "ତୁରନ୍ତ ପଦକ୍ଷେପ (ବର୍ତ୍ତମାନ କ’ଣ କରିବାକୁ ହେବ)", "rec_card_diagnostic": "ସୁପାରିଶ କରାଯାଇଥିବା ପରୀକ୍ଷା (ପରବର୍ତ୍ତୀ ସମୟରେ କ’ଣ କରାଯାଇପାରିବ)", "rec_card_medication": "ଯତ୍ନ ପରିଚାଳନା ଏବଂ ସୁରକ୍ଷା ସାବଧାନତା", "rec_card_monitoring": "ରୋଗୀ ତଦାରଖ ଏବଂ ବିପଦ ସଙ୍କେତ (Red Flags)", "rec_disclaimer_title": "ଚିକିତ୍ସା ପରାମର୍ଶଦାତା ସୂଚନା", "rec_disclaimer_body": "BioSpan ର ପରାମର୍ଶଗୁଡ଼ିକ ICD-10 ମାର୍ଗଦର୍ଶିକା ଉପରେ ଆଧାରିତ ସହାୟକ କ୍ଲିନିକାଲ୍ ସୂଚକ ଅଟେ।", "findings_select_label": "ଚିହ୍ନଟ ହୋଇଥିବା ରୋଗ ବାଛନ୍ତୁ", "findings_toggle_title": "ପ୍ୟାନେଲ୍ ଖୋଲନ୍ତୁ / ବନ୍ଦ କରନ୍ତୁ", "all_findings": "ସମସ୍ତ ଚିହ୍ନଟ ହୋଇଥିବା ନିଷ୍କର୍ଷ", "no_findings": "କୌଣସି ରୋଗ ଚିହ୍ନଟ ହୋଇନାହିଁ"}, "as": {"hero_badge": "দৈনন্দিন স্বাস্থ্য ভাষা • সহজ ভাষা", "hero_title": "কেইছেকেণ্ডতে চিকিৎসাৰ শব্দ আৰু ৰোগ চিনাক্ত কৰক।", "hero_desc": "যিকোনো ডাক্তৰৰ প্রেস্ক্রিপশ্বন বা ৰিপৰ্ট আপলোড কৰক। BioSpan-এ সহজ ভাষাত ৰোগ আৰু লক্ষণ ব্যাখ্যা কৰে।", "card_detection_title": "তাৎক্ষণিক চিনাক্তকৰণ", "card_detection_desc": "পেষ্ট কৰাৰ লগে লগে ৰোগ আৰু লক্ষণসমূহ ধৰা পেলায়।", "card_plain_title": "সহজ অসমীয়াত ব্যাখ্যা", "card_plain_desc": "জটিল চিকিৎসা শব্দৰ অবিহনে স্পষ্ট আৰু সহজ ব্যাখ্যা।", "card_privacy_title": "১০০% ব্যক্তিগত আৰু সুৰক্ষিত", "card_privacy_desc": "আপোনাৰ তথ্য সম্পূৰ্ণৰূপে গোপনীয় হৈ থাকে।", "heading_medical_note": "আপোনাৰ চিকিৎসাৰ টোকা", "btn_upload_report": "PDF / Word আপলোড কৰক", "btn_sample_note": "নমুনা টোকা চাওক", "input_label": "ইয়াত আপোনাৰ চিকিৎসা টোকা বা ৰিপৰ্ট পেষ্ট কৰক:", "input_placeholder": "প্রেস্ক্রিপশ্বন বা লেব ৰিপৰ্ট ইয়াত পেষ্ট কৰক বা PDF/Word ফাইল দিয়ক...", "sample_prefix": "উদাহৰণ:", "sample_lung": "নমুনা ১: হাওঁফাওঁৰ অৱস্থা", "sample_diabetes": "নমুনা ২: ডায়েবেটিছ পৰীক্ষা", "sample_heart": "নমুনা ৩: হৃদযন্ত্ৰৰ স্বাস্থ্য", "btn_check_text": "চিকিৎসাৰ পাঠ্য বিশ্লেষণ কৰক", "heading_findings": "BioSpan-এ চিনাক্ত কৰা তথ্য", "findings_help": "সহজ ব্যাখ্যা চাবলৈ চিহ্নিত শব্দত ক্লিক কৰক:", "label_plain_meaning": "সহজ ভাষাত অৰ্থ:", "btn_save_note": "টোকা সংৰক্ষণ কৰক", "btn_look_up_dictionary": "অভিধানত চাওক", "btn_copy_text": "কপি কৰক", "label_summary_overview": "ৰোগী আৰু চিকিৎসকৰ বাবে সাৰাংশ", "summary_heading": "সহজ ভাষাৰ সাৰাংশ", "btn_copy_findings": "ফলাফল কপি কৰক", "btn_download_pdf": "PDF সাৰাংশ ডাউনলোড কৰক", "th_mention": "টোকাৰ উল্লেখ", "th_meaning": "সহজ ভাষাত ইয়াৰ অৰ্থ", "th_status": "অৱস্থা", "th_next_steps": "পৰামৰ্শ আৰু পৰৱৰ্তী পদক্ষেপ", "status_ready": "সহায় কৰিবলৈ সাজু", "conditions_identified": "ৰোগ চিনাক্ত কৰা হৈছে", "condition_identified": "ৰোগ চিনাক্ত কৰা হৈছে", "status_active": "সক্ৰিয় অৱস্থা", "status_ruled_out": "বাতিল কৰা হৈছে", "status_secondary": "গৌণ অৱস্থা", "detail_tag_active": "সক্ৰিয় ক্লিনিক্যাল ফলাফল", "detail_tag_secondary": "গৌণ ক্লিনিক্যাল ফলাফল", "detail_tag_ruled_out": "বাতিল কৰা উল্লেখ", "tip_active": "চিকিৎসকৰ পৰামৰ্শ লওক আৰু ফলো-আপ কৰক।", "tip_ruled_out": "চিকিৎসাৰ অতীত ইতিহাসত এই ৰোগ বাতিল কৰা হৈছে।", "tip_secondary": "লক্ষণসমূহ নিৰীক্ষণ কৰক আৰু বিশেষজ্ঞৰ সৈতে আলোচনা কৰক।", "file_extracting": "নথিৰ পৰা পাঠ্য লোৱা হৈছে...", "file_success": "সফলভাৱে বিশ্লেষণ কৰা হ'ল", "file_error": "ফাইল পঢ়াত বিফল", "copy_success": "কপি কৰা হ'ল!", "analyzing_btn": "BioBERT-এ বিশ্লেষণ কৰি আছে...", "btn_analyzed": "বিশ্লেষিত", "terms": "শব্দ", "term": "শব্দ", "nav_check_text": "পাঠ্য পৰীক্ষা", "nav_medical_dictionary": "চিকিৎসা অভিধান", "nav_saved_results": "সংৰক্ষিত ফলাফল", "nav_help_guide": "সহায় আৰু নিৰ্দেশিকা", "menu_new_note": "নতুন ৰোগীৰ টোকা", "menu_load_onco": "কৰ্কট কেচ লোড কৰক", "menu_load_neuro": "স্নায়ু কেচ লোড কৰক", "menu_print": "ৰিপৰ্ট প্ৰিণ্ট কৰক (PDF)", "menu_dict": "ICD-10 অভিধান চাওক", "menu_telemetry": "নিউৰেল ইঞ্জিন ডায়াগনষ্টিক", "modal_dict_title": "ক্লিনিক্যাল চিকিৎসা অভিধান", "modal_dict_subtitle": "ICD-10 ক'ড বিচাৰক আৰু টোকাত যোগ কৰক।", "modal_dict_search_ph": "ৰোগৰ নাম বা ক'ড বিচাৰক...", "cat_all": "সকলো বিভাগ", "cat_onco": "অনক'লজি (কৰ্কট)", "cat_cardio": "কাৰ্ডিঅ'লজি (হৃদৰোগ)", "cat_pulmo": "পালম'ন'লজি (হাওঁফাওঁ)", "cat_neuro": "নিউৰ'লজি (স্নায়ু)", "cat_endo": "এণ্ড'ক্ৰাইন", "cat_symptoms": "লক্ষণসমূহ", "btn_insert_note": "টোকাত যোগ কৰক", "btn_copy_code": "ক'ড কপি কৰক", "btn_listen_explanation": "ব্যাখ্যা শুনক", "btn_listen_sub": "নিৰ্বাচিত ভাৰতীয় ভাষাত ৰোগীৰ ব্যাখ্যা শুনক", "btn_stop_speech": "অডিঅ' বন্ধ কৰক", "footer_brand_sub": "স্বাস্থ্য তথ্য সহজ কৰা", "footer_privacy": "গোপনীয়তা আৰু সুৰক্ষা", "footer_patient_guide": "ৰোগীৰ নিৰ্দেশিকা", "footer_disclaimer": "চিকিৎসাৰ অস্বীকাৰ", "modal_saved_title": "সংৰক্ষিত ৰোগীৰ টোকা", "modal_saved_subtitle": "পূৰ্বৰ পৰীক্ষা কৰা কেচসমূহ পৰিচালনা কৰক।", "label_stored_encounters": "সংৰক্ষিত ৰেকৰ্ড", "btn_clear_all_notes": "সকলো মচক", "btn_load_case": "কেচ খোলক", "modal_help_title": "BioSpan AI নিৰ্দেশিকা", "modal_help_subtitle": "BioBERT মডেলৰ কাৰ্যপ্ৰণালী।", "modal_telemetry_title": "ছিষ্টেম টেলিমেট্ৰি", "modal_telemetry_subtitle": "মেমৰি আৰু মডেল অৱস্থা।", "rec_badge": "ক্লিনিকেল পৰামৰ্শ আৰু পৰৱৰ্তী পদক্ষেপ", "rec_title": "প্ৰাসংগিক পৰামৰ্শ আৰু যত্ন নিৰ্দেশনা", "rec_desc": "ৰোগীৰ প্ৰতিবেদনৰ ভিত্তিত প্ৰস্তুত কৰা ক্লিনিকেল পৰামৰ্শ, পৰীক্ষা আৰু সাৱধানতা।", "rec_trigger_label": "বৰ্তমান প্ৰতিবেদন প্ৰসংগ:", "btn_listen_recommendations": "পৰামৰ্শ শুনক", "btn_copy_recommendations": "কাৰ্য পৰিকল্পনা কপি কৰক", "rec_card_immediate": "জৰুৰী পদক্ষেপ (এতিয়া কি কৰিব লাগিব)", "rec_card_diagnostic": "পৰামৰ্শিত পৰীক্ষা (পৰৱৰ্তী সময়ত কি কৰিব পাৰি)", "rec_card_medication": "যত্ন ব্যৱস্থাপনা আৰু সুৰক্ষা সাৱধানতা", "rec_card_monitoring": "ৰোগীৰ নিৰীক্ষণ আৰু বিপদৰ সংকেত (Red Flags)", "rec_disclaimer_title": "চিকিৎসা পৰামৰ্শদাতা জাননী", "rec_disclaimer_body": "BioSpan ৰ পৰামৰ্শসমূহ ICD-10 নিৰ্দেশনাৰ ওপৰত আধাৰিত সহায়ক ক্লিনিকেল সংকেত।", "findings_select_label": "চিনাক্ত কৰা ৰোগ বাছক", "findings_toggle_title": "পেনেল খোলক / বন্ধ কৰক", "all_findings": "সকলো চিনাক্ত কৰা ফলাফল", "no_findings": "কোনো ৰোগ চিনাক্ত হোৱা নাই"}, "ur": {"hero_badge": "روزمرہ صحت کی زبان • آسان اردو", "hero_title": "سیکنڈوں میں طبی اصطلاحات اور بیماریوں کو تلاش کریں۔", "hero_desc": "کسی بھی ڈاکٹر کا نسخہ یا میڈیکل رپورٹ چسپاں یا اپ لوڈ کریں۔ BioSpan بیماریوں کی آسان فہم وضاحت کرتا ہے۔", "card_detection_title": "فوری شناخت", "card_detection_desc": "رپورٹ ڈالتے ہی بیماریوں اور علامات کی فوری تشخیص۔", "card_plain_title": "آسان فہم اردو وضاحت", "card_plain_desc": "پیچیدہ طبی اصطلاحات کے بغیر بالکل واضح الفاظ۔", "card_privacy_title": "100% نجی اور محفوظ", "card_privacy_desc": "آپ کی تفصیلات مکمل طور پر محفوظ اور خفیہ رہتی ہیں۔", "heading_medical_note": "آپ کا میڈیکل نوٹ", "btn_upload_report": "PDF / Word اپ لوڈ کریں", "btn_sample_note": "نمونہ نوٹ دیکھیں", "input_label": "اپنا میڈیکل نوٹ یہاں لکھیں یا چسپاں کریں:", "input_placeholder": "ڈسچارج سمری یا لیب رپورٹ یہاں چسپاں کریں یا PDF/Word فائل ڈالیں...", "sample_prefix": "مثالیں:", "sample_lung": "نمونہ 1: پھیپھڑوں کی حالت", "sample_diabetes": "نمونہ 2: ذیابیطس کا معائنہ", "sample_heart": "نمونہ 3: دل کی صحت", "btn_check_text": "طبی متن کی جانچ کریں", "heading_findings": "BioSpan کے دریافت کردہ نتائج", "findings_help": "آسان وضاحت دیکھنے کے لیے نمایاں لفظ پر کلک کریں:", "label_plain_meaning": "آسان الفاظ میں مطلب:", "btn_save_note": "نوٹس میں محفوظ کریں", "btn_look_up_dictionary": "ڈکشنری میں دیکھیں", "btn_copy_text": "متن کاپی کریں", "label_summary_overview": "مریض اور معالج کا جائزہ", "summary_heading": "آسان زبان کا خلاصہ", "btn_copy_findings": "نتائج کاپی کریں", "btn_download_pdf": "PDF خلاصہ ڈاؤن لوڈ کریں", "th_mention": "رپورٹ میں ذکر", "th_meaning": "آسان الفاظ میں اس کا مطلب", "th_status": "حالت", "th_next_steps": "مشورے اور اگلے اقدامات", "status_ready": "مدد کے لیے تیار", "conditions_identified": "حالات کی شناخت ہوئی", "condition_identified": "حالت کی شناخت ہوئی", "status_active": "فعال حالت", "status_ruled_out": "مسترد / منفی", "status_secondary": "ثانوی حالت", "detail_tag_active": "فعال طبی دریافت", "detail_tag_secondary": "ثانوی طبی دریافت", "detail_tag_ruled_out": "مسترد شدہ ذکر", "tip_active": "معالج سے فوری معائنہ کروائیں اور مشورہ لیں۔", "tip_ruled_out": "تاریخ میں یہ بیماری خارج کی گئی ہے، فوری اقدام کی ضرورت نہیں۔", "tip_secondary": "علامات پر نظر رکھیں اور ماہر ڈاکٹر سے لیب رپورٹس چیک کروائیں۔", "file_extracting": "فائل سے متن نکالا جا رہا ہے...", "file_success": "کامیابی سے تجزیہ مکمل ہوا", "file_error": "فائل پڑھنے میں ناکامی", "copy_success": "کاپی ہو گیا!", "analyzing_btn": "BioBERT تجزیہ کر رہا ہے...", "btn_analyzed": "تجزیہ مکمل", "terms": "الفاظ", "term": "لفظ", "nav_check_text": "متن کی جانچ", "nav_medical_dictionary": "طبی لغت", "nav_saved_results": "محفوظ شدہ نتائج", "nav_help_guide": "مدد اور رہنمائی", "menu_new_note": "نیا مریض نسخہ / نوٹ", "menu_load_onco": "کینسر کا کیس لوڈ کریں", "menu_load_neuro": "نیورولوجی کیس لوڈ کریں", "menu_print": "طبی رپورٹ پرنٹ کریں (PDF)", "menu_dict": "ICD-10 لغت دیکھیں", "menu_telemetry": "نیورل انجن ڈائیگنوسٹکس", "modal_dict_title": "کلینیکل میڈیکل ڈکشنری", "modal_dict_subtitle": "ICD-10 کوڈز تلاش کریں اور براہ راست اپنے نوٹ میں شامل کریں۔", "modal_dict_search_ph": "بیماری کا نام یا ICD-10 کوڈ تلاش کریں...", "cat_all": "تمام شعبہ جات", "cat_onco": "آنکولوجی (کینسر)", "cat_cardio": "کارڈیالوجی (امراض قلب)", "cat_pulmo": "پلمونولوجی (پھیپھڑے)", "cat_neuro": "نیورولوجی (اعصابی امراض)", "cat_endo": "اینڈوکرائن (ہارمونز)", "cat_symptoms": "علامات و اشارے", "btn_insert_note": "نوٹ میں شامل کریں", "btn_copy_code": "کوڈ کاپی کریں", "btn_listen_explanation": "آسان وضاحت سنیں", "btn_listen_sub": "منتخب کردہ زبان میں مریض کی وضاحت بلند آواز میں سنیں", "btn_stop_speech": "آواز بند کریں", "footer_brand_sub": "صحت کی معلومات کو آسان اور قابل فہم بنانا", "footer_privacy": "رازداری اور حفاظت", "footer_patient_guide": "مریض کی رہنمائی", "footer_disclaimer": "طبی دستبرداری", "modal_saved_title": "محفوظ شدہ مریضوں کے مشورے", "modal_saved_subtitle": "پہلے سے تجزیہ شدہ ریکارڈز کا نظم کریں۔", "label_stored_encounters": "محفوظ شدہ ریکارڈز", "btn_clear_all_notes": "تمام نوٹ حذف کریں", "btn_load_case": "کیس لوڈ کریں", "modal_help_title": "BioSpan AI رہنمائی", "modal_help_subtitle": "BioBERT ماڈل اور سب ورڈ الائنمنٹ کا طریقہ کار۔", "modal_telemetry_title": "سسٹم ٹیلی میٹری", "modal_telemetry_subtitle": "ماڈل پیلی میٹرز اور میموری کی حیثیت۔", "rec_badge": "طبی تجاویز اور اگلے اقدامات", "rec_title": "سیاق و سباق کے مطابق تجاویز اور نگہداشت کی رہنمائی", "rec_desc": "مریض کی رپورٹ کی بنیاد پر خودکار طریقے سے تیار کردہ طبی مشورے، تجویز کردہ ٹیسٹ اور احتیاطی تدابیر۔", "rec_trigger_label": "موجودہ رپورٹ کا سیاق:", "btn_listen_recommendations": "تجاویز سنیں", "btn_copy_recommendations": "ایکشن پلان کاپی کریں", "rec_card_immediate": "فوری اقدامات (اب کیا کرنا ہے)", "rec_card_diagnostic": "تجویز کردہ ٹیسٹ (آگے کیا کیا جا سکتا ہے)", "rec_card_medication": "دیکھ بھال کا انتظام اور حفاظتی تدابیر", "rec_card_monitoring": "مریض کی نگرانی اور خطرے کی علامات (Red Flags)", "rec_disclaimer_title": "طبی مشاورتی نوٹس", "rec_disclaimer_body": "BioSpan کی تجاویز ICD-10 رہنما اصولوں پر مبنی معاون طبی اشارے ہیں۔ ہمیشہ معالج کے فیصلے سے تصدیق کریں۔", "findings_select_label": "شناخت شدہ بیماری منتخب کریں", "findings_toggle_title": "پینل کھولیں / بند کریں", "all_findings": "تمام شناخت شدہ نتائج", "no_findings": "کوئی بیماری نہیں ملی"}};
+
+    let currentLanguage = localStorage.getItem('biospan_language') || 'en';
+    const translationCache = {};
+    let lastRenderRawText = "";
+    let lastRenderData = null;
+    let latestPlanText = "";
+
+    function t(key, fallback = '') {
+      if (I18N[currentLanguage] && I18N[currentLanguage][key]) {
+        return I18N[currentLanguage][key];
+      }
+      if (I18N['en'] && I18N['en'][key]) {
+        return I18N['en'][key];
+      }
+      return fallback || key;
+    }
+
+    async function getTranslatedClinicalText(text, targetLang) {
+      if (!text || targetLang === 'en') return text;
+      const cacheKey = targetLang + '::' + text;
+      if (translationCache[cacheKey]) return translationCache[cacheKey];
+
+      try {
+        const res = await fetch('/api/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: text, target_lang: targetLang })
+        });
+        if (res.ok) {
+          const d = await res.json();
+          if (d.translated_text) {
+            translationCache[cacheKey] = d.translated_text;
+            return d.translated_text;
+          }
+        }
+      } catch (e) {
+        console.warn("Translation proxy fallback:", e);
+      }
+      return text;
+    }
+
+    const btnLanguageSelector = document.getElementById('btn-language-selector');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const languageOptions = document.getElementById('language-options');
+    const currentLangLabel = document.getElementById('current-lang-label');
+
+    function renderLanguageDropdown() {
+      if (!languageOptions) return;
+      languageOptions.innerHTML = '';
+      INDIAN_LANGUAGES.forEach(lang => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${lang.code === currentLanguage ? 'bg-primary-fixed text-on-primary-fixed-variant font-bold' : 'hover:bg-surface-container text-on-surface'}`;
+        btn.innerHTML = `
+          <span>${lang.native}</span>
+          <span class="text-[11px] text-outline font-mono">${lang.name}</span>
+        `;
+        btn.addEventListener('click', () => {
+          applyLanguage(lang.code);
+          if (languageDropdown) languageDropdown.classList.add('hidden');
+        });
+        languageOptions.appendChild(btn);
+      });
+    }
+
+    function applyLanguage(langCode) {
+      currentLanguage = langCode;
+      localStorage.setItem('biospan_language', langCode);
+      const langObj = INDIAN_LANGUAGES.find(l => l.code === langCode) || INDIAN_LANGUAGES[0];
+      if (currentLangLabel) {
+        currentLangLabel.textContent = langObj.native;
+      }
+
+      // 1. Update all static UI elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key) {
+          const val = t(key);
+          if (val) el.textContent = val;
+        }
+      });
+
+      // 2. Update all placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (key) {
+          const val = t(key);
+          if (val) el.placeholder = val;
+        }
+      });
+
+      // 3. Update titles
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (key) {
+          const val = t(key);
+          if (val) el.title = val;
+        }
+      });
+
+      renderLanguageDropdown();
+
+      // 4. Re-render active findings narrative and table in the chosen language
+      if (lastRenderData && lastRenderRawText) {
+        renderFindings(lastRenderRawText, lastRenderData);
+      }
+
+      // 5. If dictionary modal is open, refresh its contents in the new language
+      const dictModal = document.getElementById('dictionary-modal');
+      if (dictModal && !dictModal.classList.contains('hidden')) {
+        const modalTitle = document.getElementById('modal-title');
+        if (modalTitle && modalTitle.textContent.includes(t('modal_dict_title', 'Dictionary'))) {
+          const searchInput = document.getElementById('modal-search');
+          const q = searchInput ? searchInput.value.trim() : '';
+          openMedicalDictionary(q, currentCategoryFilter);
+        }
+      }
+    }
+
+    if (btnLanguageSelector && languageDropdown) {
+      btnLanguageSelector.addEventListener('click', (e) => {
+        e.stopPropagation();
+        languageDropdown.classList.toggle('hidden');
+      });
+      document.addEventListener('click', (e) => {
+        if (!languageDropdown.contains(e.target) && e.target !== btnLanguageSelector) {
+          languageDropdown.classList.add('hidden');
+        }
+      });
+    }
+
+    // ==========================================
+    // COLLAPSIBLE FINDINGS & QUICK JUMP DROPDOWN
+    // ==========================================
+    const btnToggleFindings = document.getElementById('btn-toggle-findings-collapse');
+    const findingsCollapseArrow = document.getElementById('findings-collapse-arrow');
+    const findingsCollapsibleBody = document.getElementById('findings-collapsible-body');
+
+    if (btnToggleFindings && findingsCollapsibleBody && findingsCollapseArrow) {
+      btnToggleFindings.addEventListener('click', () => {
+        const isHidden = findingsCollapsibleBody.classList.contains('hidden');
+        if (isHidden) {
+          findingsCollapsibleBody.classList.remove('hidden');
+          findingsCollapseArrow.classList.remove('-rotate-90');
+        } else {
+          findingsCollapsibleBody.classList.add('hidden');
+          findingsCollapseArrow.classList.add('-rotate-90');
+        }
+      });
+    }
+
+    const btnFindingsSelect = document.getElementById('btn-findings-dropdown-select');
+    const findingsSelectMenu = document.getElementById('findings-dropdown-menu');
+    const findingsQuickSelectArrow = document.getElementById('findings-quick-select-arrow');
+    const findingsActiveLabel = document.getElementById('findings-dropdown-active-label');
+
+    if (btnFindingsSelect && findingsSelectMenu) {
+      btnFindingsSelect.addEventListener('click', (e) => {
+        e.stopPropagation();
+        findingsSelectMenu.classList.toggle('hidden');
+        if (findingsQuickSelectArrow) {
+          findingsQuickSelectArrow.classList.toggle('rotate-180');
+        }
+      });
+      document.addEventListener('click', (e) => {
+        if (!findingsSelectMenu.contains(e.target) && e.target !== btnFindingsSelect) {
+          findingsSelectMenu.classList.add('hidden');
+          if (findingsQuickSelectArrow) {
+            findingsQuickSelectArrow.classList.remove('rotate-180');
+          }
+        }
+      });
+    }
+
+    function updateFindingsDropdown(entities) {
+      if (!findingsSelectMenu) return;
+      findingsSelectMenu.innerHTML = '';
+      if (!entities || entities.length === 0) {
+        findingsSelectMenu.innerHTML = `<div class="px-3 py-2 text-xs text-on-surface-variant text-center">${t('no_findings', 'No conditions identified')}</div>`;
+        if (findingsActiveLabel) findingsActiveLabel.textContent = t('findings_select_label', 'Jump to Finding');
+        return;
+      }
+
+      // Overview item
+      const overviewBtn = document.createElement('button');
+      overviewBtn.type = 'button';
+      overviewBtn.className = 'w-full text-left px-3 py-1.5 rounded-xl hover:bg-surface-container text-xs flex items-center justify-between text-on-surface font-semibold transition-colors cursor-pointer border-b border-outline-variant/20 mb-1';
+      overviewBtn.innerHTML = `<span>${t('all_findings', 'All Identified Findings')}</span><span class="text-[10px] font-mono text-primary font-bold">(${entities.length})</span>`;
+      overviewBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        findingsSelectMenu.classList.add('hidden');
+        if (findingsQuickSelectArrow) findingsQuickSelectArrow.classList.remove('rotate-180');
+        if (findingsActiveLabel) findingsActiveLabel.textContent = t('findings_select_label', 'Jump to Finding');
+        if (findingsCollapsibleBody && findingsCollapsibleBody.classList.contains('hidden')) {
+          findingsCollapsibleBody.classList.remove('hidden');
+          if (findingsCollapseArrow) findingsCollapseArrow.classList.remove('-rotate-90');
+        }
+        if (entities.length > 0) selectEntity(entities[0]);
+      });
+      findingsSelectMenu.appendChild(overviewBtn);
+
+      entities.forEach((ent, idx) => {
+        const itemBtn = document.createElement('button');
+        itemBtn.type = 'button';
+        itemBtn.className = 'w-full text-left px-3 py-2 rounded-xl hover:bg-surface-container text-xs flex items-center justify-between gap-2 transition-colors cursor-pointer';
+        const icdCode = (ent.icd10 && ent.icd10.code) || 'R69';
+        const isRuledOut = ent._isRuledOut || false;
+        const isSecondary = ent._isSecondary || false;
+        let badgeText = isRuledOut ? t('status_ruled_out', 'Ruled out') : (isSecondary ? t('status_secondary', 'Secondary') : t('status_active', 'Active'));
+        let badgeClass = isRuledOut ? 'bg-surface-container text-on-surface-variant' : (isSecondary ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-primary-fixed text-on-primary-fixed-variant');
+
+        itemBtn.innerHTML = `
+          <div class="truncate font-semibold text-on-surface">${escapeHtml(ent.entity_text)}</div>
+          <div class="flex items-center gap-1 shrink-0">
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">${icdCode}</span>
+            <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ${badgeClass}">${badgeText}</span>
+          </div>
+        `;
+        itemBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          findingsSelectMenu.classList.add('hidden');
+          if (findingsQuickSelectArrow) findingsQuickSelectArrow.classList.remove('rotate-180');
+          if (findingsCollapsibleBody && findingsCollapsibleBody.classList.contains('hidden')) {
+            findingsCollapsibleBody.classList.remove('hidden');
+            if (findingsCollapseArrow) findingsCollapseArrow.classList.remove('-rotate-90');
+          }
+          selectEntity(ent);
+          if (findingsActiveLabel) {
+            findingsActiveLabel.textContent = ent.entity_text.length > 18 ? ent.entity_text.substring(0, 16) + '..' : ent.entity_text;
+          }
+        });
+        findingsSelectMenu.appendChild(itemBtn);
+      });
+    }
+
+    // ========================================================
+    // DYNAMIC CLINICAL RECOMMENDATIONS & CARE GUIDANCE ENGINE
+    // (Generates recommendations on the basis of context)
+    // ========================================================
+    function updateClinicalRecommendations(rawText, entities) {
+      const container = document.getElementById('recommendation-cards-container');
+      const contextSummaryEl = document.getElementById('rec-context-summary');
+      const timestampEl = document.getElementById('rec-timestamp');
+      if (!container) return;
+
+      const lower = (rawText || '').toLowerCase();
+      const allEnts = entities || [];
+      const activeEnts = allEnts.filter(e => !e._isRuledOut && !e.is_ruled_out);
+      const ruledOutEnts = allEnts.filter(e => e._isRuledOut || e.is_ruled_out);
+
+      // Context detection
+      const hasOncology = activeEnts.some(e => {
+        const code = (e.icd10 && e.icd10.code) || '';
+        const cat = (e.icd10 && e.icd10.category) || '';
+        const txt = (e.entity_text || '').toLowerCase();
+        return code.startsWith('C') || cat.includes('malignant') || txt.includes('cancer') || txt.includes('carcinoma') || txt.includes('tumour') || txt.includes('tumor') || txt.includes('leukaem') || txt.includes('leukem') || txt.includes('lymphoma') || txt.includes('melanoma');
+      }) || lower.includes('cancer') || lower.includes('carcinoma') || lower.includes('malignan') || lower.includes('tumour') || lower.includes('tumor');
+
+      const hasCardiac = activeEnts.some(e => {
+        const code = (e.icd10 && e.icd10.code) || '';
+        const cat = (e.icd10 && e.icd10.category) || '';
+        const txt = (e.entity_text || '').toLowerCase();
+        return code.startsWith('I2') || code.startsWith('I4') || code.startsWith('I5') || cat.includes('circulatory') || txt.includes('infarction') || txt.includes('angina') || txt.includes('coronary') || txt.includes('arrhythmia') || txt.includes('tachycardia') || txt.includes('myocardial');
+      }) || lower.includes('infarction') || lower.includes('angina') || lower.includes('chest pain') || lower.includes('troponin') || lower.includes('palpitation');
+
+      const hasPulmonaryHypertension = activeEnts.some(e => {
+        const txt = (e.entity_text || '').toLowerCase();
+        return txt.includes('pulmonary hypertension') || txt.includes('cor pulmonale') || (e.icd10 && e.icd10.code === 'I27.20');
+      }) || lower.includes('pulmonary hypertension');
+
+      const hasDiabetes = activeEnts.some(e => {
+        const code = (e.icd10 && e.icd10.code) || '';
+        const cat = (e.icd10 && e.icd10.category) || '';
+        const txt = (e.entity_text || '').toLowerCase();
+        return code.startsWith('E10') || code.startsWith('E11') || code.startsWith('E13') || code.startsWith('E14') || cat.includes('endocrine') || txt.includes('diabetes') || txt.includes('ketoacidosis') || txt.includes('neuropathy');
+      }) || lower.includes('diabetes') || lower.includes('hyperglycemia') || lower.includes('neuropathy') || lower.includes('hba1c');
+
+      const hasNeuroRare = activeEnts.some(e => {
+        const code = (e.icd10 && e.icd10.code) || '';
+        const txt = (e.entity_text || '').toLowerCase();
+        return code.startsWith('G') || txt.includes('ataxia') || txt.includes('telangiectasia') || txt.includes('stroke') || txt.includes('seizure') || txt.includes('epilepsy');
+      }) || lower.includes('ataxia') || lower.includes('telangiectasia') || lower.includes('stroke') || lower.includes('seizure');
+
+      // Build context label
+      let summaryText = "";
+      if (activeEnts.length > 0) {
+        summaryText = activeEnts.map(e => e.entity_text).join(' • ');
+      } else if (allEnts.length > 0) {
+        summaryText = allEnts.map(e => e.entity_text).join(' • ');
+      } else {
+        summaryText = rawText.length > 45 ? rawText.substring(0, 42) + '...' : rawText;
+      }
+      if (ruledOutEnts.length > 0) {
+        summaryText += " (" + t('status_ruled_out', 'Ruled out') + ": " + ruledOutEnts.map(r => r.entity_text).join(', ') + ")";
+      }
+      if (contextSummaryEl) contextSummaryEl.textContent = summaryText;
+      if (timestampEl) timestampEl.textContent = "Generated just now • BioBERT sequence analysis";
+
+      // Build dynamic recommendations
+      let card1 = { badge: "Immediate Priority", badgeClass: "bg-primary-fixed text-primary", title: t('rec_card_immediate', 'Immediate Actions (What To Do Now)'), icon: "bolt", items: [] };
+      let card2 = { badge: "Diagnostic Workup", badgeClass: "bg-secondary-fixed text-secondary", title: t('rec_card_diagnostic', 'Recommended Investigations (What Can Be Done Next)'), icon: "biotech", items: [] };
+      let card3 = { badge: "Care & Safety", badgeClass: "bg-surface-container text-on-secondary-container", title: t('rec_card_medication', 'Care Management & Safety Precautions'), icon: "shield", items: [] };
+      let card4 = { badge: "Patient Guidance", badgeClass: "bg-error-container/40 text-error", title: t('rec_card_monitoring', 'Patient Follow-up & Red Flags'), icon: "warning", items: [] };
+
+      if (hasOncology) {
+        card1.items.push("Expedite urgent Multidisciplinary Tumor Board (MDT) consult for staging review.");
+        card1.items.push("Assess baseline ECOG Performance Status and evaluate for airway compromise or hemoptysis.");
+        card2.items.push("High-resolution contrast-enhanced chest CT or whole-body PET-CT scan.");
+        card2.items.push("Core needle tissue biopsy with EGFR, ALK, ROS1, and PD-L1 molecular profiling.");
+        card2.items.push("Baseline pulmonary function tests (Spirometry & DLCO).");
+        card3.items.push("Review targeted tyrosine kinase inhibitor (TKI) or systemic immuno-chemotherapy eligibility.");
+        card3.items.push("Initiate proactive symptom management for cough, dyspnea, and nutritional support.");
+        card4.items.push("Immediate alert: Report sudden hemoptysis (>50 mL), acute dyspnea, or Horner's syndrome.");
+        card4.items.push("Schedule formal oncology follow-up within 5-7 business days with histology.");
+      }
+
+      if (hasPulmonaryHypertension) {
+        card1.items.push("Monitor continuous pulse oximetry (SpO2); assess for jugular distension and pedal edema.");
+        card1.items.push("Maintain careful fluid balance; avoid sudden volume overload to protect RV function.");
+        card2.items.push("Transthoracic Echocardiogram (TTE) to measure estimated pulmonary artery systolic pressure (PASP).");
+        card2.items.push("Gold-standard Right Heart Catheterization (RHC) for pulmonary vascular resistance.");
+        card3.items.push("Avoid non-selective beta-blockers without specialized pulmonary hypertension oversight.");
+        card3.items.push("Initiate tailored loop diuretic therapy if peripheral fluid congestion is evident.");
+        card4.items.push("Red flag warning: Instruct patient to seek emergency care for exertional syncope or chest pressure.");
+        card4.items.push("Schedule pulmonology review within 10 to 14 days.");
+      }
+
+      if (hasCardiac) {
+        card1.items.push("Stat 12-lead ECG, continuous hemodynamic telemetry, and serial high-sensitivity troponin.");
+        card1.items.push("Administer chewable aspirin 300 mg and supplemental oxygen if SpO2 < 90%.");
+        card2.items.push("Transthoracic Echocardiogram to assess left ventricular ejection fraction and regional wall motion.");
+        card2.items.push("Comprehensive fasting lipid profile, NT-proBNP, serum creatinine, and electrolytes.");
+        card3.items.push("Titrate guideline-directed cardioprotective medical therapy (statin, ACEi/ARB, beta-blocker).");
+        card3.items.push("Contraindication check: Avoid NSAIDs due to renal and cardiovascular exacerbation risks.");
+        card4.items.push("Emergency red flag: Immediate 108/911 call if crushing substernal chest pain or cold diaphoresis develops.");
+        card4.items.push("Cardiology outpatient consult within 7 to 10 days.");
+      }
+
+      if (hasDiabetes) {
+        card1.items.push("Stat capillary blood glucose test and urine dipstick for ketones to exclude DKA.");
+        card1.items.push("Perform complete visual bilateral foot inspection for calluses or micro-ulcerations.");
+        card2.items.push("Order Glycated Hemoglobin (HbA1c) to assess 90-day glycemic control (target < 7.0%).");
+        card2.items.push("Spot urine albumin-to-creatinine ratio (uACR) and eGFR for nephropathy screening.");
+        card2.items.push("Annual dilated fundoscopic retinal examination and 10-g monofilament test.");
+        card3.items.push("Metformin safety verification: Confirm eGFR > 30 mL/min before continuing dose.");
+        card3.items.push("Targeted nutritional counseling: personalized low-glycemic Mediterranean meal plan.");
+        card4.items.push("Counsel patient on hypoglycemia signs; reinforce 'Rule of 15' fast-acting glucose.");
+        card4.items.push("Endocrinology / diabetes educator follow-up within 2 weeks.");
+      }
+
+      if (hasNeuroRare) {
+        card1.items.push("Focused neurological exam: cranial nerves, cerebellar ataxia gait testing, and Romberg sign.");
+        card1.items.push("Evaluate aspiration risk and swallowing safety before oral medications.");
+        card2.items.push("Brain MRI with cerebellar volumetric analysis and diffusion-weighted sequences.");
+        card2.items.push("Genetic panel (e.g. ATM mutation sequencing), serum Alpha-Fetoprotein (AFP), and IgG/IgA levels.");
+        card3.items.push("Referral to physical therapy for fall prevention, balance training, and adaptive mobility.");
+        card3.items.push("Surveillance for recurrent sinopulmonary bacterial infections due to immunodeficiency.");
+        card4.items.push("Urgent return for progressive gait failure, high fevers, or recurrent choking episodes.");
+        card4.items.push("Specialized neuro-genetics clinic follow-up within 3 weeks.");
+      }
+
+      // If generic or ruled out mentions
+      if (ruledOutEnts.length > 0) {
+        const rNames = ruledOutEnts.map(r => r.entity_text).join(', ');
+        card1.items.push(`Document ruled-out status (${rNames}) in chart to prevent unnecessary invasive procedures.`);
+      }
+
+      if (card1.items.length === 0) {
+        card1.items.push("Perform complete baseline vitals triage (BP, pulse, SpO2, respiratory rate, temperature).");
+        card1.items.push("Reconcile current medication list against known drug allergies.");
+        card2.items.push("Complete Blood Count (CBC) with differential, Comprehensive Metabolic Panel (CMP), and urinalysis.");
+        card2.items.push("Consider targeted imaging (Chest X-ray or Ultrasound) based on localized symptoms.");
+        card3.items.push("Provide tailored supportive care: adequate oral hydration, rest, and avoidance of nephrotoxic OTC agents.");
+        card3.items.push("Review age-appropriate preventative health guidelines and vaccination status.");
+        card4.items.push("Instruct patient to seek urgent evaluation if high fever, worsening shortness of breath, or intense pain develops.");
+        card4.items.push("Routine primary care follow-up within 7 to 14 days.");
+      }
+
+      // Build text for copying
+      latestPlanText = `BIOSPAN CLINICAL RECOMMENDATIONS & CARE GUIDANCE\n`;
+      latestPlanText += `Report Context: ${summaryText}\n`;
+      latestPlanText += `Date: ${new Date().toLocaleDateString()}\n\n`;
+      latestPlanText += `1. IMMEDIATE ACTIONS (WHAT TO DO NOW):\n` + card1.items.map(i => ` • ${i}`).join('\n') + `\n\n`;
+      latestPlanText += `2. RECOMMENDED INVESTIGATIONS (WHAT CAN BE DONE NEXT):\n` + card2.items.map(i => ` • ${i}`).join('\n') + `\n\n`;
+      latestPlanText += `3. CARE MANAGEMENT & SAFETY PRECAUTIONS:\n` + card3.items.map(i => ` • ${i}`).join('\n') + `\n\n`;
+      latestPlanText += `4. PATIENT GUIDANCE & RED FLAGS:\n` + card4.items.map(i => ` • ${i}`).join('\n');
+
+      // Render cards
+      const cards = [card1, card2, card3, card4];
+      container.innerHTML = '';
+      cards.forEach((c, cIdx) => {
+        const cardEl = document.createElement('div');
+        cardEl.className = "bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-all";
+        
+        let itemsHtml = c.items.map((it, itIdx) => {
+          const itemId = `rec-item-${cIdx}-${itIdx}`;
+          return `
+            <li class="flex items-start gap-2 text-xs text-on-surface-variant leading-relaxed">
+              <span class="material-symbols-outlined text-[14px] text-primary shrink-0 mt-0.5">check_circle</span>
+              <span id="${itemId}">${escapeHtml(it)}</span>
+            </li>
+          `;
+        }).join('');
+
+        cardEl.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded-md ${c.badgeClass} text-[11px] font-bold uppercase tracking-wider">${c.badge}</span>
+              <span class="material-symbols-outlined text-base text-on-surface-variant">${c.icon}</span>
+            </div>
+            <h3 class="font-headline text-base font-semibold text-on-surface mb-2.5 leading-snug">${c.title}</h3>
+            <ul class="space-y-2 mt-2">
+              ${itemsHtml}
+            </ul>
+          </div>
+        `;
+        container.appendChild(cardEl);
+
+        // Async translate item bullets if language is not English
+        if (currentLanguage !== 'en') {
+          c.items.forEach((it, itIdx) => {
+            const itemId = `rec-item-${cIdx}-${itIdx}`;
+            getTranslatedClinicalText(it, currentLanguage).then(trans => {
+              const el = document.getElementById(itemId);
+              if (el) el.textContent = trans;
+            });
+          });
+        }
+      });
+    }
+
+    // Copy recommendations action
+    const btnCopyRec = document.getElementById('btn-copy-recommendations');
+    const btnCopyRecLabel = document.getElementById('btn-copy-rec-label');
+    if (btnCopyRec) {
+      btnCopyRec.addEventListener('click', () => {
+        if (!latestPlanText) return;
+        navigator.clipboard.writeText(latestPlanText).then(() => {
+          const orig = btnCopyRecLabel ? btnCopyRecLabel.textContent : '';
+          if (btnCopyRecLabel) btnCopyRecLabel.textContent = t('copy_success', 'Copied to clipboard!');
+          setTimeout(() => {
+            if (btnCopyRecLabel) btnCopyRecLabel.textContent = orig;
+          }, 2000);
+        }).catch(() => {
+          alert("Copied to clipboard!");
+        });
+      });
+    }
+
+    // Speak recommendations audio
+    let recUtterance = null;
+    let isSpeakingRec = false;
+    const btnSpeakRec = document.getElementById('btn-speak-recommendations');
+    const btnSpeakRecLabel = document.getElementById('btn-speak-rec-label');
+
+    function speakRecommendations() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported in this browser.");
+        return;
+      }
+      if (isSpeakingRec) {
+        window.speechSynthesis.cancel();
+        isSpeakingRec = false;
+        if (btnSpeakRecLabel) btnSpeakRecLabel.textContent = t('btn_listen_recommendations', 'Listen to Recommendations');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const textToSpeak = latestPlanText || (noteInput ? noteInput.value : '');
+      recUtterance = new SpeechSynthesisUtterance(textToSpeak);
+      const langObj = INDIAN_LANGUAGES.find(l => l.code === currentLanguage) || INDIAN_LANGUAGES[0];
+      recUtterance.lang = langObj.voice_lang || 'en-IN';
+      recUtterance.rate = 0.95;
+
+      if (btnSpeakRecLabel) btnSpeakRecLabel.textContent = "Speaking... (Click to stop)";
+      isSpeakingRec = true;
+
+      recUtterance.onend = () => {
+        isSpeakingRec = false;
+        if (btnSpeakRecLabel) btnSpeakRecLabel.textContent = t('btn_listen_recommendations', 'Listen to Recommendations');
+      };
+      recUtterance.onerror = () => {
+        isSpeakingRec = false;
+        if (btnSpeakRecLabel) btnSpeakRecLabel.textContent = t('btn_listen_recommendations', 'Listen to Recommendations');
+      };
+
+      window.speechSynthesis.speak(recUtterance);
+    }
+
+    if (btnSpeakRec) {
+      btnSpeakRec.addEventListener('click', speakRecommendations);
+    }
+
+    // ==========================================
+    // DOCUMENT UPLOAD (PDF, DOCX, DOC, TXT)
+    // ==========================================
+    const reportFileInput = document.getElementById('report-file-input');
+    const fileUploadIndicator = document.getElementById('file-upload-indicator');
+    const fileUploadName = document.getElementById('file-upload-name');
+    const fileUploadSize = document.getElementById('file-upload-size');
+    const fileUploadStatus = document.getElementById('file-upload-status');
+
+    async function handleFileUpload(file) {
+      if (!file) return;
+      const allowedExts = ['.pdf', '.docx', '.doc', '.txt', '.text'];
+      const ext = '.' + file.name.split('.').pop().toLowerCase();
+      if (!allowedExts.includes(ext)) {
+        alert("Please upload a PDF or Word document (.pdf, .docx, .doc, or .txt).");
+        return;
+      }
+
+      if (fileUploadIndicator) {
+        fileUploadIndicator.classList.remove('hidden');
+        if (fileUploadName) fileUploadName.textContent = file.name;
+        if (fileUploadSize) {
+          const sz = file.size < 1024 ? (file.size + ' B') : (file.size / 1024 < 1024 ? (file.size / 1024).toFixed(1) + ' KB' : (file.size / (1024 * 1024)).toFixed(1) + ' MB');
+          fileUploadSize.textContent = `(${sz})`;
+        }
+        if (fileUploadStatus) {
+          fileUploadStatus.innerHTML = '<span class="inline-flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-xs animate-spin">sync</span> ' + t('file_extracting', 'Extracting & analyzing...') + '</span>';
+        }
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('/api/upload-document', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        if (data.status === 'success') {
+          const docText = data.text || data.extracted_text || "";
+          const ents = data.entities || (data.prediction && data.prediction.entities) || [];
+          if (noteInput) {
+            noteInput.value = docText;
+            updateWordCount();
+          }
+          activeEntities = ents;
+          const mergedData = Object.assign({}, data, data.prediction || {}, { entities: ents });
+          renderFindings(docText, mergedData);
+          if (fileUploadStatus) {
+            fileUploadStatus.innerHTML = '<span class="inline-flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-xs">check_circle</span> ' + t('file_success', 'Extracted & Analyzed') + ' (' + ents.length + ')</span>';
+          }
+        } else {
+          alert("File extraction failed: " + (data.detail || data.message || "Unknown error"));
+          if (fileUploadStatus) {
+            fileUploadStatus.innerHTML = '<span class="text-error">' + t('file_error', 'Extraction failed') + '</span>';
+          }
+        }
+      } catch (err) {
+        console.error("Upload error:", err);
+        alert("Failed to connect to backend upload endpoint.");
+        if (fileUploadStatus) {
+          fileUploadStatus.innerHTML = '<span class="text-error">' + t('file_error', 'Upload error') + '</span>';
+        }
+      }
+    }
+
+    if (reportFileInput) {
+      reportFileInput.addEventListener('change', function (e) {
+        if (this.files && this.files[0]) {
+          handleFileUpload(this.files[0]);
+        }
+      });
+    }
+
+    const noteInput = document.getElementById('medical-note-input');
+    const wordCounter = document.getElementById('word-counter');
+    const checkBtn = document.getElementById('check-btn');
+    const sampleFillBtn = document.getElementById('btn-sample-fill');
+    const presetBtns = document.querySelectorAll('.sample-preset-btn');
+    const findingsCount = document.getElementById('findings-count');
+    const highlightedNoteBox = document.getElementById('highlighted-note-box');
+    const detailTitle = document.getElementById('detail-title');
+    const detailTag = document.getElementById('detail-tag');
+    const detailCode = document.getElementById('detail-code');
+    const detailDesc = document.getElementById('detail-desc');
+    const findingsTableBody = document.getElementById('findings-table-body');
+
+    // Drag-and-drop support on note input
+    if (noteInput) {
+      ['dragenter', 'dragover'].forEach(eventName => {
+        noteInput.addEventListener(eventName, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          noteInput.classList.add('ring-2', 'ring-primary', 'bg-primary-fixed/20');
+        }, false);
+      });
+
+      ['dragleave', 'dragend'].forEach(eventName => {
+        noteInput.addEventListener(eventName, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          noteInput.classList.remove('ring-2', 'ring-primary', 'bg-primary-fixed/20');
+        }, false);
+      });
+
+      noteInput.addEventListener('drop', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        noteInput.classList.remove('ring-2', 'ring-primary', 'bg-primary-fixed/20');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleFileUpload(e.dataTransfer.files[0]);
+        }
+      }, false);
+    }
+
+    // Authentic samples from peer-reviewed clinical cases & NCBI Disease Corpus
+    const sampleTexts = {
+      lung: "The patient is a 64-year-old presenting with chronic cough, shortness of breath, and fatigue. Diagnostic tests confirmed non-small cell lung cancer with mild secondary pulmonary hypertension. No history of acute myocardial infarction (heart attack).",
+      diabetes: "Follow-up for 58yo with type 2 diabetes mellitus and peripheral neuropathy. Serum creatinine within baseline. Diabetic ketoacidosis is ruled out today.",
+      heart: "Patient admitted for sudden angina pectoris and palpitations. ECG shows sinus tachycardia. Prior history of coronary artery disease, with no recent acute myocardial infarction.",
+      ncbi: "Clustering of missense mutations in the ataxia - telangiectasia gene in a sporadic T - cell leukaemia ."
+    };
+
+    let activeEntities = [];
+
+    function updateWordCount() {
+      if (!noteInput || !wordCounter) return;
+      const text = noteInput.value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      const paragraphs = text ? text.split(/\n+/).filter(Boolean).length : 0;
+      wordCounter.textContent = words + " words • " + (paragraphs || 1) + " paragraph" + (paragraphs > 1 ? "s" : "");
+    }
+
+    if (noteInput) {
+      noteInput.addEventListener('input', updateWordCount);
+      updateWordCount();
+    }
+
+    if (sampleFillBtn) {
+      sampleFillBtn.addEventListener('click', function () {
+        noteInput.value = sampleTexts.lung;
+        updateWordCount();
+        executeBioSpanInference();
+      });
+    }
+
+    presetBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const key = this.getAttribute('data-sample');
+        if (sampleTexts[key]) {
+          noteInput.value = sampleTexts[key];
+          updateWordCount();
+          executeBioSpanInference();
+        }
+      });
+    });
+
+    // Execute real BioSpan AI Inference via backend API
+    async function executeBioSpanInference() {
+      if (!noteInput) return;
+      const text = noteInput.value.trim();
+      if (!text) return;
+
+      const originalBtnHtml = checkBtn ? checkBtn.innerHTML : '';
+      if (checkBtn) {
+        checkBtn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">sync</span><span>' + t('analyzing_btn', 'Analyzing with BioBERT...') + '</span>';
+        checkBtn.disabled = true;
+      }
+
+      try {
+        const response = await fetch('/api/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: text })
+        });
+        const data = await response.json();
+        activeEntities = data.entities || [];
+        renderFindings(text, data);
+      } catch (err) {
+        console.warn("Backend inference fallback: ", err);
+      } finally {
+        if (checkBtn) {
+          checkBtn.innerHTML = '<span class="material-symbols-outlined text-lg">check</span><span>' + t('btn_analyzed', 'Analyzed') + ' (' + activeEntities.length + ' ' + (activeEntities.length === 1 ? t('term', 'Term') : t('terms', 'Terms')) + ')</span>';
+          checkBtn.disabled = false;
+          setTimeout(() => { checkBtn.innerHTML = originalBtnHtml; }, 2000);
+        }
+      }
+    }
+
+    if (checkBtn) {
+      checkBtn.addEventListener('click', executeBioSpanInference);
+    }
+
+    function renderFindings(rawText, data) {
+      rawText = rawText || "";
+      data = data || {};
+      lastRenderRawText = rawText;
+      lastRenderData = data;
+      const entities = data.entities || (data.prediction && data.prediction.entities) || [];
+      if (findingsCount) {
+        findingsCount.textContent = entities.length + " " + (entities.length === 1 ? t('condition_identified', 'Condition Identified') : t('conditions_identified', 'Conditions Identified'));
+      }
+
+      // 1. Build Highlighted Narrative
+      if (highlightedNoteBox) {
+        if (entities.length === 0) {
+          highlightedNoteBox.textContent = rawText;
+        } else {
+          let html = "";
+          let lastIdx = 0;
+          const lowerText = rawText.toLowerCase();
+
+          // Sort entities by occurrence in text
+          const sorted = [...entities].sort((a, b) => {
+            return lowerText.indexOf(a.entity_text.toLowerCase()) - lowerText.indexOf(b.entity_text.toLowerCase());
+          });
+
+          sorted.forEach((ent, idx) => {
+            const entText = ent.entity_text;
+            const pos = lowerText.indexOf(entText.toLowerCase(), lastIdx);
+            if (pos !== -1) {
+              html += escapeHtml(rawText.substring(lastIdx, pos));
+              const originalSpan = rawText.substring(pos, pos + entText.length);
+              
+              const prefix = rawText.substring(Math.max(0, pos - 45), pos).toLowerCase();
+              const isRuledOut = (ent.is_ruled_out === true) || prefix.includes('no history of') || prefix.includes('denies') || prefix.includes('ruled out') || prefix.includes('without');
+              const isSecondary = (idx > 0 && !isRuledOut);
+
+              ent._isRuledOut = isRuledOut;
+              ent._isSecondary = isSecondary;
+
+              if (isRuledOut) {
+                const tagLabel = t('status_ruled_out', 'Ruled out');
+                html += `
+                  <button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-medium shadow-xs hover:bg-surface-dim transition-all cursor-pointer text-left" data-entity-idx="${idx}" type="button">
+                    <span class="line-through decoration-outline text-on-surface-variant font-semibold">${escapeHtml(originalSpan)}</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-outline">${tagLabel}</span>
+                  </button>
+                `;
+              } else if (idx === 0) {
+                html += `
+                  <button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-medium shadow-xs hover:bg-primary-container transition-all cursor-pointer text-left" data-entity-idx="${idx}" type="button">
+                    <span class="underline decoration-primary decoration-1 underline-offset-2 font-semibold">${escapeHtml(originalSpan)}</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary">${t('status_active', 'Condition')}</span>
+                  </button>
+                `;
+              } else {
+                const tagLabel = t('status_secondary', 'Secondary');
+                html += `
+                  <button class="term-tag group inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 rounded-lg bg-surface-container text-on-secondary-container font-medium shadow-xs hover:bg-surface-container-high transition-all cursor-pointer text-left" data-entity-idx="${idx}" type="button">
+                    <span class="underline decoration-secondary decoration-1 underline-offset-2 font-semibold">${escapeHtml(originalSpan)}</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-container-lowest text-secondary">${tagLabel}</span>
+                  </button>
+                `;
+              }
+
+              lastIdx = pos + entText.length;
+            }
+          });
+          html += escapeHtml(rawText.substring(lastIdx));
+          highlightedNoteBox.innerHTML = html;
+
+          highlightedNoteBox.querySelectorAll('.term-tag').forEach(tagBtn => {
+            tagBtn.addEventListener('click', function () {
+              const entIdx = parseInt(this.getAttribute('data-entity-idx'), 10);
+              if (sorted[entIdx]) {
+                selectEntity(sorted[entIdx]);
+              }
+            });
+          });
+        }
+      }
+
+      // 2. Select first entity into detail card
+      if (entities.length > 0) {
+        selectEntity(entities[0]);
+      }
+
+      // 3. Update findings dropdown menu
+      updateFindingsDropdown(entities);
+
+      // 4. Update Dynamic Clinical Recommendations
+      updateClinicalRecommendations(rawText, entities);
+
+      // 5. Populate Structured Table
+      if (findingsTableBody) {
+        findingsTableBody.innerHTML = '';
+        if (entities.length === 0) {
+          findingsTableBody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-xs text-on-surface-variant">No medical conditions or disease spans found in this text.</td></tr>';
+        } else {
+          entities.forEach((ent, idx) => {
+            const icd = ent.icd10 || {};
+            const isRuledOut = ent._isRuledOut || false;
+            const isSecondary = ent._isSecondary || (idx > 0 && !isRuledOut);
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-surface-container-low/40 transition-colors cursor-pointer";
+
+            let dotClass = 'bg-primary';
+            let titleHtml = `<span>${escapeHtml(ent.entity_text)}</span>`;
+            let statusLabel = t('status_active', 'Active condition');
+            let tipsLabel = t('tip_active', 'Schedule clinical follow-up; review with attending physician.');
+            let statusHtml = `
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed-variant">
+                <span class="material-symbols-outlined text-xs">priority_high</span> ${statusLabel}
+              </span>
+            `;
+
+            if (isRuledOut) {
+              dotClass = 'bg-outline';
+              titleHtml = `<span class="line-through decoration-outline text-outline">${escapeHtml(ent.entity_text)}</span>`;
+              statusLabel = t('status_ruled_out', 'Ruled out');
+              tipsLabel = t('tip_ruled_out', 'Condition ruled out in clinical history; no immediate intervention indicated.');
+              statusHtml = `
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+                  <span class="material-symbols-outlined text-xs">check_circle</span> ${statusLabel}
+                </span>
+              `;
+            } else if (isSecondary) {
+              dotClass = 'bg-primary-container';
+              statusLabel = t('status_secondary', 'Secondary condition');
+              tipsLabel = t('tip_secondary', 'Monitor clinical signs; review relevant diagnostic labs with specialist.');
+              statusHtml = `
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">
+                  <span class="material-symbols-outlined text-xs">info</span> ${statusLabel}
+                </span>
+              `;
+            }
+
+            const meaningCellId = `meaning-cell-${idx}`;
+            const rawMeaning = icd.clinical_notes || icd.category || 'Clinical entity identified via BioBERT.';
+
+            tr.innerHTML = `
+              <td class="py-4 px-4 font-semibold text-on-surface">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full ${dotClass}"></span>
+                  ${titleHtml}
+                </div>
+              </td>
+              <td class="py-4 px-4 text-on-surface-variant max-w-xs leading-snug">
+                <span id="${meaningCellId}">${escapeHtml(rawMeaning)}</span>
+              </td>
+              <td class="py-4 px-4">
+                ${statusHtml}
+              </td>
+              <td class="py-4 px-4 text-xs text-on-surface-variant">
+                ${escapeHtml(tipsLabel)}
+              </td>
+            `;
+
+            // Translate meaning cell asynchronously if non-English
+            if (currentLanguage !== 'en') {
+              getTranslatedClinicalText(rawMeaning, currentLanguage).then(trans => {
+                const el = document.getElementById(meaningCellId);
+                if (el) el.textContent = trans;
+              });
+            }
+
+            tr.addEventListener('click', () => selectEntity(ent));
+            findingsTableBody.appendChild(tr);
+          });
+        }
+      }
+    }
+
+    function selectEntity(ent) {
+      if (!ent) return;
+      const icd = ent.icd10 || {};
+      const isRuledOut = ent._isRuledOut || false;
+      const isSecondary = ent._isSecondary || false;
+
+      if (detailTitle) detailTitle.textContent = ent.entity_text;
+      
+      if (detailTag) {
+        if (isRuledOut) detailTag.textContent = t('detail_tag_ruled_out', "Ruled Out / Negative Mention");
+        else if (isSecondary) detailTag.textContent = t('detail_tag_secondary', "Secondary Clinical Finding");
+        else detailTag.textContent = t('detail_tag_active', "Active Clinical Finding");
+      }
+
+      if (detailCode) {
+        const code = icd.code || "R69";
+        detailCode.textContent = "ICD-10: " + code + (isRuledOut ? " (" + t('status_ruled_out', 'Ruled Out') + ")" : "");
+      }
+
+      if (detailDesc) {
+        const rawDesc = isRuledOut 
+          ? ((icd.clinical_notes ? icd.clinical_notes + " " : "") + "Clinician specifically confirmed that this condition was ruled out or absent.")
+          : (icd.clinical_notes || icd.category || "Clinical entity recognized with exact span boundaries.");
+        
+        detailDesc.textContent = rawDesc;
+        if (currentLanguage !== 'en') {
+          getTranslatedClinicalText(rawDesc, currentLanguage).then(trans => {
+            if (detailTitle && detailTitle.textContent === ent.entity_text) {
+              detailDesc.textContent = trans;
+            }
+          });
+        }
+      }
+
+      const card = document.getElementById('term-detail-card');
+      if (card) {
+        card.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => { card.classList.remove('ring-2', 'ring-primary'); }, 350);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // ==========================================
+    // MODAL DICTIONARY, SAVED RESULTS & TELEMETRY
+    // ==========================================
+    let currentCategoryFilter = 'all';
+
+    window.closeModal = function () {
+      const modal = document.getElementById('dictionary-modal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.loadSavedNote = function (idx) {
+      const saved = getSavedNotes();
+      if (saved[idx] && noteInput) {
+        noteInput.value = saved[idx].text;
+        updateWordCount();
+        executeBioSpanInference();
+        window.closeModal();
+      }
+    };
+
+    window.deleteSavedNote = function (idx) {
+      let saved = getSavedNotes();
+      saved.splice(idx, 1);
+      localStorage.setItem('biospan_saved_encounters', JSON.stringify(saved));
+      openSavedResultsModal();
+    };
+
+    function getSavedNotes() {
+      try {
+        return JSON.parse(localStorage.getItem('biospan_saved_encounters') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCurrentNote() {
+      if (!noteInput) return;
+      const text = noteInput.value.trim();
+      if (!text) return;
+      const saved = getSavedNotes();
+      saved.unshift({
+        id: Date.now(),
+        date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+        text: text,
+        findingsCount: activeEntities.length
+      });
+      localStorage.setItem('biospan_saved_encounters', JSON.stringify(saved.slice(0, 20)));
+      alert("Consultation note saved to local EHR encounters!");
+    }
+
+    const btnSaveNote = document.getElementById('btn-save-note');
+    if (btnSaveNote) btnSaveNote.addEventListener('click', saveCurrentNote);
+
+    const btnCopyTerm = document.getElementById('btn-copy-term');
+    if (btnCopyTerm) {
+      btnCopyTerm.addEventListener('click', () => {
+        if (detailTitle) {
+          navigator.clipboard.writeText(detailTitle.textContent);
+          alert("Copied: " + detailTitle.textContent);
+        }
+      });
+    }
+
+    const btnCopyAll = document.getElementById('btn-copy-all');
+    if (btnCopyAll) {
+      btnCopyAll.addEventListener('click', () => {
+        if (activeEntities.length === 0) {
+          alert("No entities to copy.");
+          return;
+        }
+        const lines = activeEntities.map(e => `${e.entity_text} [ICD-10: ${e.icd10 ? e.icd10.code : 'R69'}] - ${e.icd10 ? e.icd10.clinical_notes : ''}`);
+        navigator.clipboard.writeText(lines.join('\n'));
+        alert(t('copy_success', "Findings copied to clipboard!"));
+      });
+    }
+
+    const btnDownloadPdf = document.getElementById('btn-download-pdf');
+    if (btnDownloadPdf) {
+      btnDownloadPdf.addEventListener('click', () => {
+        window.print();
+      });
+    }
+
+    // Medical Dictionary Modal integration
+    async function openMedicalDictionary(query = '', category = 'all') {
+      const modal = document.getElementById('dictionary-modal');
+      const title = document.getElementById('modal-title');
+      const subtitle = document.getElementById('modal-subtitle');
+      const searchWrapper = document.getElementById('modal-search-wrapper');
+      const content = document.getElementById('modal-content');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+      if (title) title.textContent = t('modal_dict_title', 'Clinical Medical Dictionary');
+      if (subtitle) subtitle.textContent = t('modal_dict_subtitle', 'Browse ICD-10 standardized diagnostic codes and insert into active clinical note.');
+      if (searchWrapper) searchWrapper.classList.remove('hidden');
+
+      content.innerHTML = '<div class="py-12 text-center text-sm text-on-surface-variant flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-primary">sync</span> Loading medical dictionary...</div>';
+
+      try {
+        let url = '/api/ontology';
+        const params = new URLSearchParams();
+        if (query) params.append('q', query);
+        if (category && category !== 'all') params.append('category', category);
+        const qs = params.toString();
+        if (qs) url += '?' + qs;
+
+        const res = await fetch(url);
+        const data = await res.json();
+        const results = Array.isArray(data) ? data : (data.matches || data.results || []);
+        renderModalDictionary(results);
+      } catch (e) {
+        console.error("Dictionary load error:", e);
+        content.innerHTML = '<div class="py-8 text-center text-sm text-error">Failed to load medical dictionary. Please ensure server is running.</div>';
+      }
+    }
+
+    function renderModalDictionary(list) {
+      const content = document.getElementById('modal-content');
+      if (!content) return;
+      content.innerHTML = '';
+
+      if (!list || list.length === 0) {
+        content.innerHTML = '<div class="py-8 text-center text-sm text-on-surface-variant">No matching conditions or ICD-10 codes found.</div>';
+        return;
+      }
+
+      list.forEach((item, idx) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = "p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+        const cCode = item.code || 'R69';
+        const cName = item.name || item.condition || 'Clinical Condition';
+        const cCat = item.category || 'Clinical Specialty';
+        const cNotes = item.plain_english || item.clinical_notes || 'Standard diagnostic entity.';
+        const notesId = `dict-notes-${idx}`;
+
+        itemEl.innerHTML = `
+          <div class="flex-grow">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 rounded-md bg-primary-fixed text-primary text-xs font-mono font-bold">${escapeHtml(cCode)}</span>
+              <h4 class="font-headline text-base font-semibold text-on-surface">${escapeHtml(cName)}</h4>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant">${escapeHtml(cCat)}</span>
+            </div>
+            <p class="text-xs text-on-surface-variant leading-relaxed" id="${notesId}">${escapeHtml(cNotes)}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button class="px-3 py-1.5 rounded-xl bg-primary text-on-primary text-xs font-semibold hover:opacity-95 transition-all flex items-center gap-1 cursor-pointer" onclick="insertDictionaryTerm('${escapeHtml(cName)}', '${escapeHtml(cCode)}')">
+              <span class="material-symbols-outlined text-sm">add</span>
+              <span>${t('btn_insert_note', 'Insert into note')}</span>
+            </button>
+            <button class="px-2.5 py-1.5 rounded-xl bg-surface-container-highest hover:bg-surface-dim text-xs font-mono text-on-surface-variant transition-all cursor-pointer" onclick="copyDictCode('${escapeHtml(cCode)}')" title="Copy Code">
+              <span class="material-symbols-outlined text-sm">content_copy</span>
+            </button>
+          </div>
+        `;
+        content.appendChild(itemEl);
+
+        if (currentLanguage !== 'en') {
+          getTranslatedClinicalText(cNotes, currentLanguage).then(trans => {
+            const el = document.getElementById(notesId);
+            if (el) el.textContent = trans;
+          });
+        }
+      });
+    }
+
+    window.insertDictionaryTerm = function(name, code) {
+      if (!noteInput) return;
+      const current = noteInput.value.trim();
+      const addition = ` Patient has documented history of ${name} (ICD-10: ${code}).`;
+      noteInput.value = current ? (current + addition) : addition.trim();
+      updateWordCount();
+      executeBioSpanInference();
+      window.closeModal();
+    };
+
+    window.copyDictCode = function(code) {
+      navigator.clipboard.writeText(code);
+      alert("Copied code: " + code);
+    };
+
+    // Dictionary search and category filter event bindings
+    const modalSearchInput = document.getElementById('modal-search');
+    let dictSearchTimeout = null;
+    if (modalSearchInput) {
+      modalSearchInput.addEventListener('input', function() {
+        clearTimeout(dictSearchTimeout);
+        dictSearchTimeout = setTimeout(() => {
+          openMedicalDictionary(this.value.trim(), currentCategoryFilter);
+        }, 250);
+      });
+    }
+
+    document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.cat-filter-btn').forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        this.classList.add('bg-primary', 'text-on-primary');
+        currentCategoryFilter = this.getAttribute('data-category') || 'all';
+        const q = modalSearchInput ? modalSearchInput.value.trim() : '';
+        openMedicalDictionary(q, currentCategoryFilter);
+      });
+    });
+
+    // Wire Medical Dictionary Triggers
+    const btnOpenDict = document.getElementById('btn-open-dictionary');
+    if (btnOpenDict) btnOpenDict.addEventListener('click', () => openMedicalDictionary());
+
+    const navMedicalDict = document.getElementById('nav-medical-dictionary');
+    if (navMedicalDict) navMedicalDict.addEventListener('click', (e) => {
+      e.preventDefault();
+      openMedicalDictionary();
+    });
+
+    const menuDict = document.getElementById('menu-dict');
+    if (menuDict) menuDict.addEventListener('click', () => openMedicalDictionary());
+
+    // Saved Encounters Modal
+    function openSavedResultsModal() {
+      const modal = document.getElementById('dictionary-modal');
+      const title = document.getElementById('modal-title');
+      const subtitle = document.getElementById('modal-subtitle');
+      const searchWrapper = document.getElementById('modal-search-wrapper');
+      const content = document.getElementById('modal-content');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+      if (title) title.textContent = t('modal_saved_title', 'Saved Patient Consultations & EHR Spans');
+      if (subtitle) subtitle.textContent = t('modal_saved_subtitle', 'Manage previously analyzed patient encounters and instantly reload them into the workspace.');
+      if (searchWrapper) searchWrapper.classList.add('hidden');
+
+      const saved = getSavedNotes();
+      content.innerHTML = '';
+
+      if (saved.length === 0) {
+        content.innerHTML = `
+          <div class="py-12 text-center text-on-surface-variant">
+            <span class="material-symbols-outlined text-4xl text-outline mb-2">bookmark_border</span>
+            <p class="text-sm font-semibold">No saved consultations yet.</p>
+            <p class="text-xs text-outline mt-1">Click "Save to notes" in the workspace to store analyzed patient reports.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const headerBar = document.createElement('div');
+      headerBar.className = "flex items-center justify-between pb-3 border-b border-outline-variant/20 mb-3 text-xs";
+      headerBar.innerHTML = `
+        <span class="font-semibold text-on-surface-variant">${saved.length} ${t('label_stored_encounters', 'stored encounters')}</span>
+        <button onclick="clearAllSavedNotes()" class="text-error hover:underline font-semibold cursor-pointer">${t('btn_clear_all_notes', 'Clear all notes')}</button>
+      `;
+      content.appendChild(headerBar);
+
+      saved.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = "p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+        card.innerHTML = `
+          <div class="flex-grow">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-mono font-semibold text-primary">${escapeHtml(item.date)}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant">${item.findingsCount} findings</span>
+            </div>
+            <p class="text-xs text-on-surface-variant line-clamp-2">${escapeHtml(item.text)}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="loadSavedNote(${idx})" class="px-3 py-1.5 rounded-xl bg-primary text-on-primary text-xs font-semibold hover:opacity-95 transition-all flex items-center gap-1 cursor-pointer">
+              <span class="material-symbols-outlined text-sm">open_in_new</span>
+              <span>${t('btn_load_case', 'Load Case')}</span>
+            </button>
+            <button onclick="deleteSavedNote(${idx})" class="p-1.5 rounded-xl hover:bg-error-container/30 text-error transition-colors cursor-pointer" title="Delete note">
+              <span class="material-symbols-outlined text-sm">delete</span>
+            </button>
+          </div>
+        `;
+        content.appendChild(card);
+      });
+    }
+
+    window.clearAllSavedNotes = function() {
+      if (confirm("Are you sure you want to clear all saved consultation notes?")) {
+        localStorage.removeItem('biospan_saved_encounters');
+        openSavedResultsModal();
+      }
+    };
+
+    const navSavedResults = document.getElementById('nav-saved-results');
+    if (navSavedResults) navSavedResults.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSavedResultsModal();
+    });
+
+    // Help & Architecture Modal
+    function openHelpGuideModal() {
+      const modal = document.getElementById('dictionary-modal');
+      const title = document.getElementById('modal-title');
+      const subtitle = document.getElementById('modal-subtitle');
+      const searchWrapper = document.getElementById('modal-search-wrapper');
+      const content = document.getElementById('modal-content');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+      if (title) title.textContent = t('modal_help_title', 'BioSpan AI Clinical Architecture & User Guide');
+      if (subtitle) subtitle.textContent = t('modal_help_subtitle', 'How our BioBERT neural model, First-Subword Alignment, and Deterministic BIO-Sanitizer work together.');
+      if (searchWrapper) searchWrapper.classList.add('hidden');
+
+      content.innerHTML = `
+        <div class="space-y-4 text-xs text-on-surface-variant leading-relaxed">
+          <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+            <h4 class="font-headline text-sm font-semibold text-on-surface mb-1 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base text-primary">memory</span>
+              1. BioBERT Semantic Representation
+            </h4>
+            <p>Our sequence labeling neural pipeline leverages BioBERT weights pre-trained on millions of PubMed biomedical abstracts. Unlike standard BERT, BioBERT retains deep domain semantics for complex biomedical multi-word expressions like "non-small cell lung cancer" and "acute myocardial infarction".</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+            <h4 class="font-headline text-sm font-semibold text-on-surface mb-1 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base text-secondary">tune</span>
+              2. First-Subword Mathematical Alignment
+            </h4>
+            <p>Biomedical tokens frequently fragment into multiple WordPiece subwords (e.g., "ataxia" -> "at", "##ax", "##ia"). BioSpan AI mathematically aligns gradient loss strictly to the first subword while marking continuation subwords with -100 (ignore_index), guaranteeing uniform 1.0x gradient pull.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+            <h4 class="font-headline text-sm font-semibold text-on-surface mb-1 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base text-primary">cleaning_services</span>
+              3. Deterministic BIO-Sanitizer
+            </h4>
+            <p>Raw neural token classifications can occasionally produce invalid state transitions (such as an orphaned I-Disease without a preceding B-Disease). The BioSpan state machine interceptor deterministically repairs these boundaries into coherent clinical spans.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    const navHelpGuide = document.getElementById('nav-help-guide');
+    if (navHelpGuide) navHelpGuide.addEventListener('click', (e) => {
+      e.preventDefault();
+      openHelpGuideModal();
+    });
+
+    // Telemetry Diagnostics Modal
+    async function openTelemetryModal() {
+      const modal = document.getElementById('dictionary-modal');
+      const title = document.getElementById('modal-title');
+      const subtitle = document.getElementById('modal-subtitle');
+      const searchWrapper = document.getElementById('modal-search-wrapper');
+      const content = document.getElementById('modal-content');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+      if (title) title.textContent = t('modal_telemetry_title', 'BioBERT Neural Engine Diagnostics & Telemetry');
+      if (subtitle) subtitle.textContent = t('modal_telemetry_subtitle', 'Live system inspection showing model weights, hardware device, tokenizer vocabulary, and memory utilization.');
+      if (searchWrapper) searchWrapper.classList.add('hidden');
+
+      content.innerHTML = '<div class="py-8 text-center text-xs text-on-surface-variant flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-primary">sync</span> Querying system health...</div>';
+
+      try {
+        const res = await fetch('/health');
+        const data = await res.json();
+        content.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+              <span class="text-outline uppercase font-bold text-[10px] block">Model Pipeline</span>
+              <span class="font-mono font-bold text-on-surface text-sm mt-0.5 block">${data.model_name || 'BioBERT NER (PyTorch)'}</span>
+              <span class="text-[11px] text-primary mt-1 block">Contextual Biomedical Transformer</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+              <span class="text-outline uppercase font-bold text-[10px] block">Inference Device</span>
+              <span class="font-mono font-bold text-on-surface text-sm mt-0.5 block">${data.device || 'CPU (PyTorch)'}</span>
+              <span class="text-[11px] text-secondary mt-1 block">Deterministic inference engine</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+              <span class="text-outline uppercase font-bold text-[10px] block">ICD-10 Ontology Base</span>
+              <span class="font-mono font-bold text-on-surface text-sm mt-0.5 block">${data.ontology_conditions_count || '70+'} Verified Entities</span>
+              <span class="text-[11px] text-on-surface-variant mt-1 block">Standardized clinical classifications</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+              <span class="text-outline uppercase font-bold text-[10px] block">Server Status</span>
+              <span class="font-mono font-bold text-green-700 text-sm mt-0.5 block flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-600"></span> Online & Operational</span>
+              <span class="text-[11px] text-on-surface-variant mt-1 block">Port 8000 (FastAPI daemon)</span>
+            </div>
+          </div>
+        `;
+      } catch (e) {
+        content.innerHTML = '<div class="py-6 text-center text-xs text-error">Unable to query telemetry endpoint.</div>';
+      }
+    }
+
+    const btnTelemetry = document.getElementById('btn-system-telemetry');
+    if (btnTelemetry) btnTelemetry.addEventListener('click', openTelemetryModal);
+    const menuTelemetry = document.getElementById('menu-telemetry');
+    if (menuTelemetry) menuTelemetry.addEventListener('click', openTelemetryModal);
+
+    // Clinician Menu Dropdown
+    const btnClinicianMenu = document.getElementById('btn-clinician-menu');
+    const clinicianDropdown = document.getElementById('clinician-dropdown');
+    if (btnClinicianMenu && clinicianDropdown) {
+      btnClinicianMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clinicianDropdown.classList.toggle('hidden');
+      });
+      document.addEventListener('click', (e) => {
+        if (!clinicianDropdown.contains(e.target) && e.target !== btnClinicianMenu) {
+          clinicianDropdown.classList.add('hidden');
+        }
+      });
+    }
+
+    const menuNewNote = document.getElementById('menu-new-note');
+    if (menuNewNote) menuNewNote.addEventListener('click', () => {
+      if (noteInput) {
+        noteInput.value = '';
+        updateWordCount();
+        if (highlightedNoteBox) highlightedNoteBox.textContent = 'Enter or upload clinical text to begin analysis.';
+        if (findingsCount) findingsCount.textContent = '0 Conditions Identified';
+        if (findingsTableBody) findingsTableBody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-xs text-on-surface-variant">No notes entered yet.</td></tr>';
+        updateClinicalRecommendations('', []);
+        if (clinicianDropdown) clinicianDropdown.classList.add('hidden');
+      }
+    });
+
+    const menuLoadOnco = document.getElementById('menu-load-onco');
+    if (menuLoadOnco) menuLoadOnco.addEventListener('click', () => {
+      if (noteInput) {
+        noteInput.value = sampleTexts.lung;
+        updateWordCount();
+        executeBioSpanInference();
+        if (clinicianDropdown) clinicianDropdown.classList.add('hidden');
+      }
+    });
+
+    const menuLoadNeuro = document.getElementById('menu-load-neuro');
+    if (menuLoadNeuro) menuLoadNeuro.addEventListener('click', () => {
+      if (noteInput) {
+        noteInput.value = sampleTexts.ncbi;
+        updateWordCount();
+        executeBioSpanInference();
+        if (clinicianDropdown) clinicianDropdown.classList.add('hidden');
+      }
+    });
+
+    const menuPrint = document.getElementById('menu-print');
+    if (menuPrint) menuPrint.addEventListener('click', () => {
+      window.print();
+      if (clinicianDropdown) clinicianDropdown.classList.add('hidden');
+    });
+
+    // Initialize Multilingual System and default predictions
+    applyLanguage(currentLanguage);
+    if (noteInput && noteInput.value.trim()) {
+      executeBioSpanInference();
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-low py-12 mt-16 shadow-[0_-1px_6px_rgba(58,48,42,0.02)]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <span class="font-headline text-xl font-semibold text-on-surface">BioSpan AI</span>
+      <span class="text-xs text-on-surface-variant font-label">• <span data-i18n="footer_brand_sub">Making health information approachable &amp; clear</span></span>
+    </div>
+    <div class="flex items-center gap-8 text-xs font-label text-on-surface-variant">
+      <a class="hover:text-primary transition-colors cursor-pointer" data-path="privacy-notice" href="#" data-i18n="footer_privacy">Privacy &amp; Safety</a>
+      <a class="hover:text-primary transition-colors cursor-pointer" data-path="help-and-guide" href="#" data-i18n="footer_patient_guide">Patient Guide</a>
+      <a class="hover:text-primary transition-colors cursor-pointer" data-path="medical-disclaimer" href="#" data-i18n="footer_disclaimer">Medical Disclaimer</a>
+    </div>
+  </div>
+</footer></body></html>
